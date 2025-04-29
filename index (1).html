@@ -1,90 +1,145 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Peta Merchant Medan</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-  <style>
-    #map {
-      height: 100vh;
-      width: 100%;
-    }
-    .info-box {
-      font-size: 14px;
-      line-height: 1.4;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battlezone Acquisition 2025</title>
+
+    <!-- Link Fonts Orbitron Cyberpunk -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Link CSS External -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="map"></div>
 
-<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-<script>
-  const map = L.map('map').setView([3.58912, 98.67677], 15); // Titik pusat: Mandiri Balai Kota Medan
+    <!-- Background -->
+    <div class="background"></div>
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
+    <!-- Header -->
+    <header class="header">
+        <h1>🏆 Battlezone Acquisition 2025</h1>
+        <div id="countdown" class="countdown">Loading countdown...</div>
+    </header>
 
-  const merchants = [
-    {
-      nama: "Pojok Kesawan",
-      alamat: "Jl. Balaikota No.101D",
-      rating: "4.2",
-      jam: "",
-      telp: "",
-      link: "https://www.google.com/maps/place/Pojok+kesawan"
-    },
-    {
-      nama: "Medan Kota",
-      alamat: "Lapangan Merdeka",
-      rating: "3.8",
-      jam: "",
-      telp: "",
-      link: "https://www.google.com/maps/place/Medan+kota"
-    },
-    {
-      nama: "Titik Temu Cafe - Medan",
-      alamat: "Jl. Pos No.1",
-      rating: "4.8",
-      jam: "Closes 10.00 pm",
-      telp: "0821-6278-0173",
-      link: "https://www.google.com/maps/place/Titik+Temu+Cafe"
-    },
-    {
-      nama: "Cafe DuDu",
-      alamat: "Graha Red and White, Jalan Putri Hijau",
-      rating: "4.8",
-      jam: "·",
-      telp: "0813-7504-1863",
-      link: "https://www.google.com/maps/place/Cafe+DuDu"
-    },
-    {
-      nama: "Kedai Kopi Kesawan",
-      alamat: "Jl. Mesjid No.140",
-      rating: "4.2",
-      jam: "",
-      telp: "",
-      link: "https://www.google.com/maps/place/Kedai+Kopi+Kesawan"
-    }
-  ];
-
-  merchants.forEach((m, i) => {
-    const marker = L.marker([3.58912 + (i * 0.001), 98.67677 + (i * 0.001)]) // dummy lat/lon berbeda sedikit biar ga numpuk
-      .addTo(map)
-      .bindPopup(`
-        <div class='info-box'>
-          <strong>${m.nama}</strong><br/>
-          ${m.alamat}<br/>
-          Rating: ${m.rating}<br/>
-          Jam buka: ${m.jam}<br/>
-          Telp: ${m.telp || 'N/A'}<br/>
-          <a href='${m.link}' target='_blank'>Lihat di Google Maps</a>
+    <!-- Leaderboard Section -->
+    <section class="leaderboard-section">
+        <h2>🏅 Leaderboard Tim</h2>
+        <div class="leaderboard">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Tim</th>
+                        <th>Total Poin</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    <!-- Data leaderboard tim akan di-inject di sini -->
+                </tbody>
+            </table>
         </div>
-      `);
-  });
-</script>
+    </section>
+
+    <!-- Reward Section -->
+    <section class="reward-section">
+        <h2>🎁 Daftar Hadiah</h2>
+        <div class="reward-grid">
+            <div class="reward-item">
+                <img src="assets/gold-medal.png" alt="Gold Medal" class="reward-img">
+                <img src="assets/gift.png" alt="Gift Box" class="reward-img-small">
+                <p>🥇 Gold Medal + Cash Rp300.000</p>
+            </div>
+            <div class="reward-item">
+                <img src="assets/silver-medal.png" alt="Silver Medal" class="reward-img">
+                <p>🥈 Silver Medal</p>
+            </div>
+            <div class="reward-item">
+                <img src="assets/bronze-medal.png" alt="Bronze Medal" class="reward-img">
+                <p>🥉 Bronze Medal</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detail Akuisisi Section -->
+    <section class="detail-section">
+        <h2>📋 Detail Akuisisi Anggota</h2>
+
+        <div class="accordion">
+
+            <!-- Tim Alpha -->
+            <div class="accordion-item">
+                <button class="accordion-button">🎯 Tim Alpha</button>
+                <div class="accordion-content">
+                    <ul>
+                        <li><strong>Thomas</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Erwin</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Dewi</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Nita</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Dinda</strong> - (Detail akuisisi muncul nanti)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tim Bravo -->
+            <div class="accordion-item">
+                <button class="accordion-button">🎯 Tim Bravo</button>
+                <div class="accordion-content">
+                    <ul>
+                        <li><strong>Dilla</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Putri</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Zefanya</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Rere</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Hambali</strong> - (Detail akuisisi muncul nanti)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tim Charlie -->
+            <div class="accordion-item">
+                <button class="accordion-button">🎯 Tim Charlie</button>
+                <div class="accordion-content">
+                    <ul>
+                        <li><strong>Frans</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Yeremi</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Nabila</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Fadilla</strong> - (Detail akuisisi muncul nanti)</li>
+                        <li><strong>Dini</strong> - (Detail akuisisi muncul nanti)</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Script External -->
+    <script src="accordion.js"></script>
+    <script>
+        // Countdown Timer Script
+        function countdownTimer() {
+            const countdownElement = document.getElementById('countdown');
+            const now = new Date();
+            let target = new Date(now.getFullYear(), now.getMonth() + 1, 1, 8, 0, 0); // Tanggal 1 bulan depan jam 08:00
+
+            if (now.getDate() === 1 && now.getHours() >= 8) {
+                target = new Date(now.getFullYear(), now.getMonth() + 2, 1, 8, 0, 0);
+            }
+
+            const distance = target - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `Reset dalam: ${days}h ${hours}j ${minutes}m ${seconds}s`;
+
+            if (distance < 0) {
+                countdownElement.innerHTML = "Leaderboard disembunyikan. Hasil diumumkan hari Senin!";
+            }
+        }
+
+        setInterval(countdownTimer, 1000);
+    </script>
+
 </body>
 </html>
