@@ -97,7 +97,7 @@
     });
 
     async function fetchLeaderboard() {
-      const res = await fetch('https://opensheet.elk.sh/2PACX-1vRR_PPlXBejuO6FQUasJySGye4nTJ-8W8278RKxEDhbIUwc6U6oL0cJmDfA9Uuv-rKgXZ1oHC4uBbYo/LeaderboardTim');
+      const res = await fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/LeaderboardTim');
       const data = await res.json();
       const tbody = document.getElementById('leaderboard-body');
       tbody.innerHTML = '';
@@ -108,7 +108,7 @@
     fetchLeaderboard();
 
     async function fetchDetailAnggota() {
-      const res = await fetch('https://opensheet.elk.sh/2PACX-1vRR_PPlXBejuO6FQUasJySGye4nTJ-8W8278RKxEDhbIUwc6U6oL0cJmDfA9Uuv-rKgXZ1oHC4uBbYo/DetailAnggota');
+      const res = await fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/DetailAnggota');
       const data = await res.json();
       document.querySelectorAll('.accordion-item').forEach(item => {
         const tim = item.querySelector('.accordion-button').textContent.replace('🎯 ', '').trim();
