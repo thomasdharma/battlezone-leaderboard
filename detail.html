@@ -34,7 +34,7 @@
         members.forEach(a => {
           let isi = '';
           ['Livin','Giro','EDC','Tabungan Now','Kopra','Visit Point','Tabungan Bisnis'].forEach(p => {
-            if (a[p] && parseInt(a[p]) > 0) isi += `<span>${p}: ${a[p]}</span>`;
+            if (a[p] && parseInt(a[p]) > 0) isi += `<p>${p}: ${a[p]}</p>`;
           });
           const update = a['Last Update'] || 'Belum update';
           const total = a['Total Poin Anggota'] || '0';
@@ -55,4 +55,3 @@
   </script>
 </body>
 </html>
-
