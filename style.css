@@ -82,18 +82,21 @@ body {
   justify-content: center;
   gap: 16px;
   margin-top: 30px;
+  flex-wrap: wrap;
 }
 
+.menu-buttons .menu-btn,
 .menu-buttons button {
-  background-color: rgba(0, 255, 255, 0.2);
+  background-color: rgba(0, 255, 255, 0.1);
   color: #fff;
   font-family: 'Orbitron', sans-serif;
   border: 2px solid #00ffff;
-  border-radius: 10px;
-  padding: 10px 20px;
+  border-radius: 14px;
+  padding: 12px 24px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   transition: background 0.3s;
+  text-decoration: none;
 }
 
 .menu-buttons .wide-button {
@@ -101,8 +104,9 @@ body {
   font-size: 15px;
 }
 
+.menu-buttons .menu-btn:hover,
 .menu-buttons button:hover {
-  background-color: rgba(0, 255, 255, 0.4);
+  background-color: rgba(0, 255, 255, 0.3);
 }
 
 .leaderboard table {
@@ -133,11 +137,6 @@ body {
 .reward-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 30px;
-}
-
-.reward-centered {
   justify-content: center;
   gap: 30px;
 }
@@ -171,20 +170,8 @@ body {
   font-weight: bold;
 }
 
-.reward-item p {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #fff;
-  text-shadow: 0 0 3px #000;
-}
-
 .reward-img {
   width: 80px;
-  height: auto;
-}
-
-.reward-img-big {
-  width: 100px;
   height: auto;
 }
 
@@ -193,110 +180,46 @@ body {
   height: auto;
 }
 
-.reward-img-small {
-  width: 30px;
-  height: auto;
-  margin-top: 8px;
-}
-
-.accordion {
-  width: 90%;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.accordion-item {
-  background: rgba(255,255,255,0.05);
-  border-radius: 10px;
-  margin-bottom: 12px;
-  overflow: hidden;
-}
-
-.accordion-button {
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 80px;
+  left: 0;
+  top: 0;
   width: 100%;
-  padding: 15px;
-  background: none;
-  border: none;
-  text-align: left;
-  color: #00ffff;
-  font-size: 20px;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background-color: rgba(20, 20, 40, 0.95);
+  margin: auto;
+  padding: 30px;
+  border: 2px solid #00ffff;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,255,255,0.2);
+  position: relative;
+  text-align: center;
+}
+
+.close {
+  color: #fff;
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.accordion-button:hover {
-  background-color: rgba(0, 255, 255, 0.1);
-}
-
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease;
-  padding: 0 15px;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.accordion-content ul {
-  list-style: none;
-  padding: 10px 0;
-}
-
-.accordion-content li {
-  padding: 6px 0;
-  font-size: 16px;
-}
-
-/* Individual Card Layout */
-#individual-cards {
-  margin-top: 40px;
-}
-
-.team-header {
-  font-size: 22px;
-  color: #00ffff;
-  text-align: left;
-  margin: 30px 0 15px 5%;
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-  padding: 0 5%;
-}
-
-.anggota-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 16px;
-  text-align: left;
-  box-shadow: 0 0 10px rgba(0,255,255,0.1);
-  backdrop-filter: blur(6px);
-}
-
-.anggota-card h4 {
-  font-size: 17px;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.card-body {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 12px;
-  font-size: 14px;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.card-body span {
-  display: block;
-}
-
-.card-foot {
-  font-size: 13px;
-  color: #ccc;
-  font-style: italic;
+.close:hover,
+.close:focus {
+  color: #f00;
 }
 
 @media (max-width: 768px) {
@@ -305,15 +228,11 @@ body {
     align-items: center;
   }
 
-  .leaderboard table, .accordion {
+  .leaderboard table {
     width: 100%;
   }
 
   .header h1 {
     font-size: 28px;
-  }
-
-  .card-grid {
-    grid-template-columns: 1fr;
   }
 }
