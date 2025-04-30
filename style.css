@@ -50,10 +50,59 @@ body {
   text-align: center;
 }
 
-.leaderboard-section h2, .reward-section h2, .detail-section h2 {
-  font-size: 26px;
-  color: #ff00ff;
-  margin-bottom: 25px;
+#last-merchant {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 15px rgba(0,255,255,0.2);
+  backdrop-filter: blur(5px);
+  text-align: left;
+}
+
+#last-merchant h3 {
+  color: #00ffff;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+#last-merchant p {
+  font-size: 14px;
+  color: #fff;
+  margin: 4px 0;
+}
+
+.menu-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.menu-buttons button {
+  background-color: rgba(0, 255, 255, 0.2);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  border: 2px solid #00ffff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.menu-buttons .wide-button {
+  padding: 12px 30px;
+  font-size: 15px;
+}
+
+.menu-buttons button:hover {
+  background-color: rgba(0, 255, 255, 0.4);
 }
 
 .leaderboard table {
@@ -109,6 +158,19 @@ body {
   border: 2px solid rgba(255, 215, 0, 0.3);
 }
 
+.reward-combo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.plus-sign {
+  font-size: 18px;
+  color: #fff;
+  font-weight: bold;
+}
+
 .reward-item p {
   margin-top: 10px;
   font-size: 16px;
@@ -123,6 +185,11 @@ body {
 
 .reward-img-big {
   width: 100px;
+  height: auto;
+}
+
+.reward-img-combo {
+  width: 55px;
   height: auto;
 }
 
@@ -178,6 +245,60 @@ body {
   font-size: 16px;
 }
 
+/* Individual Card Layout */
+#individual-cards {
+  margin-top: 40px;
+}
+
+.team-header {
+  font-size: 22px;
+  color: #00ffff;
+  text-align: left;
+  margin: 30px 0 15px 5%;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 0 5%;
+}
+
+.anggota-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(0,255,255,0.1);
+  backdrop-filter: blur(6px);
+}
+
+.anggota-card h4 {
+  font-size: 17px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.card-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.card-body span {
+  display: block;
+}
+
+.card-foot {
+  font-size: 13px;
+  color: #ccc;
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
   .reward-grid {
     flex-direction: column;
@@ -190,5 +311,9 @@ body {
 
   .header h1 {
     font-size: 28px;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
   }
 }
