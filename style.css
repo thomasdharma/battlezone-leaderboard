@@ -222,8 +222,52 @@ body {
   color: #f00;
 }
 
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.anggota-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 15px;
+  width: 220px;
+  box-shadow: 0 0 10px rgba(0,255,255,0.2);
+  backdrop-filter: blur(6px);
+  text-align: left;
+}
+
+.anggota-card h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #00ffff;
+}
+
+.card-body p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.card-foot {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #fff;
+}
+
+.team-header {
+  font-size: 20px;
+  color: #fff;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 4px #ff00ff;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
-  .reward-grid {
+  .reward-grid, .card-grid {
     flex-direction: column;
     align-items: center;
   }
