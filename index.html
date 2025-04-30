@@ -72,7 +72,8 @@
     window.addEventListener("DOMContentLoaded", function () {
       const countdown = document.getElementById("countdown");
       const now = new Date();
-      const target = new Date(now.getFullYear(), now.getMonth() + 1, 1, 8, 0, 0);
+      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0); // akhir bulan ini
+      const target = new Date(lastDay.getFullYear(), lastDay.getMonth(), lastDay.getDate(), 8, 0, 0);
       const timer = setInterval(() => {
         const now = new Date();
         const dist = target - now;
