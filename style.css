@@ -1,43 +1,183 @@
-.card-grid {
+/* === Reset & Global === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: #0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
+  color: #fff;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
+
+/* === Layout === */
+.header {
+  padding: 20px;
+  text-align: center;
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff;
+}
+
+.countdown {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #ff0;
+}
+
+.leaderboard-section, .detail-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.leaderboard th, .leaderboard td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 14px;
+}
+
+.leaderboard th {
+  background-color: rgba(0, 255, 255, 0.1);
+  color: #0ff;
+}
+
+.menu-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.menu-btn, .menu-buttons button {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #0ff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-decoration: none;
+}
+
+.menu-btn:hover, .menu-buttons button:hover {
+  background: rgba(0,255,255,0.2);
+}
+
+/* === Modal === */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  overflow-y: auto;
+}
+.modal-content {
+  background: #111;
+  margin: 50px auto;
+  padding: 20px;
+  border: 2px solid #0ff;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+  position: relative;
+}
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.reward-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
   margin-top: 20px;
 }
+.reward-item {
+  text-align: center;
+}
+.reward-img {
+  width: 70px;
+}
+.reward-winner .reward-img-combo {
+  width: 50px;
+}
+.reward-combo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
 
+/* === Detail Page === */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
 .anggota-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 15px;
-  width: 220px;
-  box-shadow: 0 0 10px rgba(0,255,255,0.2);
-  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
   text-align: left;
 }
-
 .anggota-card h4 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #00ffff;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #0ff;
 }
-
 .card-body p {
-  margin: 4px 0;
-  font-size: 14px;
-}
-
-.card-foot {
-  margin-top: 12px;
   font-size: 13px;
+  margin: 2px 0;
+}
+.card-foot {
+  font-size: 12px;
+  color: #ccc;
+  margin-top: 8px;
+}
+.team-header {
+  font-size: 18px;
+  margin: 24px 0 10px;
   color: #fff;
 }
 
-.team-header {
-  font-size: 20px;
-  color: #fff;
-  margin-top: 40px;
-  margin-bottom: 10px;
-  text-shadow: 0 0 4px #ff00ff;
-  text-align: center;
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 22px;
+  }
+  .menu-btn, .menu-buttons button {
+    width: 100%;
+    max-width: 300px;
+  }
+  .anggota-card {
+    width: 90%;
+  }
+  .leaderboard table {
+    font-size: 12px;
+  }
+  .modal-content {
+    width: 95%;
+  }
 }
