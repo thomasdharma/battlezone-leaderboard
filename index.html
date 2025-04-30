@@ -70,7 +70,6 @@
 
   <script>
     window.addEventListener("DOMContentLoaded", function () {
-      // Countdown
       const countdown = document.getElementById("countdown");
       const now = new Date();
       const target = new Date(now.getFullYear(), now.getMonth() + 1, 1, 8, 0, 0);
@@ -89,7 +88,6 @@
         countdown.innerHTML = `Reset dalam: ${d}h ${h}j ${m}m ${s}s`;
       }, 1000);
 
-      // Leaderboard
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/LeaderboardTim")
         .then(res => res.json())
         .then(data => {
@@ -103,7 +101,6 @@
           document.getElementById("leaderboard-body").innerHTML = '<tr><td colspan="3">Gagal memuat data</td></tr>';
         });
 
-      // Merchant terakhir
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir")
         .then(res => res.json())
         .then(data => {
