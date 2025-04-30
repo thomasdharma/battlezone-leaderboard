@@ -25,7 +25,7 @@
             <th>Total Poin</th>
           </tr>
         </thead>
-        <tbody id="leaderboard-body"></tbody>
+        <tbody id="leaderboard-body"><tr><td colspan="3">Loading...</td></tr></tbody>
       </table>
     </div>
 
@@ -37,154 +37,87 @@
     </section>
 
     <div class="menu-buttons">
-      <button onclick="document.getElementById('reward-section').scrollIntoView({ behavior: 'smooth' })">
-        🎁 Daftar Hadiah
-      </button>
-      <button class="wide-button" onclick="document.getElementById('detail-individu').scrollIntoView({ behavior: 'smooth' })">
-        🧾 Detail Pencapaian Individu
-      </button>
+      <button onclick="document.getElementById('rewardModal').style.display='block'">🎁 Daftar Hadiah</button>
+      <a href="detail.html" class="menu-btn wide-button">🧾 Detail Pencapaian Individu</a>
     </div>
   </section>
 
-  <section class="reward-section" id="reward-section">
-    <h2>🎁 Daftar Hadiah</h2>
-    <div class="reward-grid reward-centered">
-      <div class="reward-item">
-        <img src="assets/silver-medal.png" class="reward-img" alt="Silver Medal" />
-        <p>🥈 Juara 2<br>Silver Medal</p>
-      </div>
-      <div class="reward-item reward-winner">
-        <div class="reward-combo">
-          <img src="assets/gold-medal.png" class="reward-img-combo" alt="Gold Medal" />
-          <span class="plus-sign">+</span>
-          <img src="assets/gift.png" class="reward-img-combo" alt="Gift" />
+  <!-- Modal Hadiah -->
+  <div id="rewardModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="document.getElementById('rewardModal').style.display='none'">&times;</span>
+      <h2>🎁 Daftar Hadiah</h2>
+      <div class="reward-grid reward-centered">
+        <div class="reward-item">
+          <img src="assets/silver-medal.png" class="reward-img" alt="Silver Medal" />
+          <p>🥈 Juara 2<br>Silver Medal</p>
         </div>
-        <p>🥇 Juara 1<br>Gold Medal + Cash<br>Rp300.000</p>
-      </div>
-      <div class="reward-item">
-        <img src="assets/bronze-medal.png" class="reward-img" alt="Bronze Medal" />
-        <p>🥉 Juara 3<br>Bronze Medal</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="detail-section" id="detail-individu">
-    <h2>🧾 Detail Pencapaian Individu</h2>
-    <div id="individual-cards"></div>
-  </section>
-
-  <section class="detail-section">
-    <h2>📋 Detail Akuisisi Anggota</h2>
-    <div class="accordion">
-      <div class="accordion-item">
-        <button class="accordion-button">🎯 Tim Alpha</button>
-        <div class="accordion-content"><ul></ul></div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-button">🎯 Tim Bravo</button>
-        <div class="accordion-content"><ul></ul></div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-button">🎯 Tim Charlie</button>
-        <div class="accordion-content"><ul></ul></div>
+        <div class="reward-item reward-winner">
+          <div class="reward-combo">
+            <img src="assets/gold-medal.png" class="reward-img-combo" alt="Gold Medal" />
+            <span class="plus-sign">+</span>
+            <img src="assets/gift.png" class="reward-img-combo" style="width: 55px; height: auto;" alt="Gift" />
+          </div>
+          <p>🥇 Juara 1<br>Gold Medal + Cash<br>Rp300.000</p>
+        </div>
+        <div class="reward-item">
+          <img src="assets/bronze-medal.png" class="reward-img" alt="Bronze Medal" />
+          <p>🥉 Juara 3<br>Bronze Medal</p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <script>
-    function countdownTimer() {
-      const el = document.getElementById('countdown');
+    window.addEventListener("DOMContentLoaded", function () {
+      // Countdown
+      const countdown = document.getElementById("countdown");
       const now = new Date();
       const target = new Date(now.getFullYear(), now.getMonth() + 1, 1, 8, 0, 0);
-      const dist = target - now;
-      if (dist <= 0) return el.innerHTML = "Leaderboard disembunyikan. Hasil diumumkan hari Senin!";
-      const d = Math.floor(dist / (1000 * 60 * 60 * 24));
-      const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((dist % (1000 * 60)) / 1000);
-      el.innerHTML = `Reset dalam: ${d}h ${h}j ${m}m ${s}s`;
-    }
-    setInterval(countdownTimer, 1000);
+      const timer = setInterval(() => {
+        const now = new Date();
+        const dist = target - now;
+        if (dist <= 0) {
+          clearInterval(timer);
+          countdown.innerHTML = "Leaderboard disembunyikan. Hasil diumumkan hari Senin!";
+          return;
+        }
+        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((dist % (1000 * 60)) / 1000);
+        countdown.innerHTML = `Reset dalam: ${d}h ${h}j ${m}m ${s}s`;
+      }, 1000);
 
-    document.querySelectorAll('.accordion-button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.classList.toggle('active');
-        const content = btn.nextElementSibling;
-        content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
-      });
+      // Leaderboard
+      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/LeaderboardTim")
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.getElementById("leaderboard-body");
+          tbody.innerHTML = "";
+          data.forEach(row => {
+            tbody.innerHTML += `<tr><td>${row.Rank}</td><td>${row['Nama Tim']}</td><td>${row['Total Poin']}</td></tr>`;
+          });
+        })
+        .catch(() => {
+          document.getElementById("leaderboard-body").innerHTML = '<tr><td colspan="3">Gagal memuat data</td></tr>';
+        });
+
+      // Merchant terakhir
+      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir")
+        .then(res => res.json())
+        .then(data => {
+          const m = data[0];
+          document.getElementById("merchant-info").innerHTML = `
+            <p>🏪 <strong>${m.Merchant}</strong></p>
+            <p>👤 Oleh: ${m.Oleh}</p>
+            <p>📍 Produk: ${m.Produk}</p>
+            <p>🗓️ Tanggal: ${m.Tanggal}</p>`;
+        })
+        .catch(() => {
+          document.getElementById("merchant-info").innerHTML = '<p>Gagal memuat data merchant.</p>';
+        });
     });
-
-    async function fetchLeaderboard() {
-      const res = await fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/LeaderboardTim');
-      const data = await res.json();
-      const tbody = document.getElementById('leaderboard-body');
-      tbody.innerHTML = '';
-      data.forEach(row => {
-        tbody.innerHTML += `<tr><td>${row.Rank}</td><td>${row['Nama Tim']}</td><td>${row['Total Poin']}</td></tr>`;
-      });
-    }
-    fetchLeaderboard();
-
-    async function fetchDetailAnggota() {
-      const res = await fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/DetailAnggota');
-      const data = await res.json();
-      document.querySelectorAll('.accordion-item').forEach(item => {
-        const tim = item.querySelector('.accordion-button').textContent.replace('🎯 ', '').trim();
-        const ul = item.querySelector('ul');
-        ul.innerHTML = '';
-        data.filter(a => a['Nama Tim'] === tim).forEach(a => {
-          let isi = '';
-          ['Livin','Giro','EDC','Tabungan Now','Kopra','Visit Point','Tabungan Bisnis'].forEach(p => {
-            if (a[p] && parseInt(a[p]) > 0) isi += `- ${p}: ${a[p]}<br>`;
-          });
-          const update = a['Last Update'] || 'Belum update';
-          const total = a['Total Poin Anggota'] || '0';
-          ul.innerHTML += `<li><strong>${a['Nama Anggota']}</strong><br>${isi}<em>Update: ${update}</em><br><em>Total Poin: ${total}</em></li>`;
-        });
-      });
-
-      const cardWrapper = document.getElementById('individual-cards');
-      const grouped = { 'Tim Alpha': [], 'Tim Bravo': [], 'Tim Charlie': [] };
-      data.forEach(a => grouped[a['Nama Tim']].push(a));
-      for (const [team, members] of Object.entries(grouped)) {
-        const section = document.createElement('div');
-        section.innerHTML = `<h3 class=\"team-header\">${team}</h3>`;
-        const grid = document.createElement('div');
-        grid.className = 'card-grid';
-        members.forEach(a => {
-          let isi = '';
-          ['Livin','Giro','EDC','Tabungan Now','Kopra','Visit Point','Tabungan Bisnis'].forEach(p => {
-            if (a[p] && parseInt(a[p]) > 0) isi += `<span>${p}: ${a[p]}</span>`;
-          });
-          const update = a['Last Update'] || 'Belum update';
-          const total = a['Total Poin Anggota'] || '0';
-          const card = document.createElement('div');
-          card.className = 'anggota-card';
-          card.innerHTML = `
-            <h4>👤 ${a['Nama Anggota']}</h4>
-            <div class=\"card-body\">${isi}</div>
-            <p class=\"card-foot\">🗓 ${update} &nbsp; ⭐ ${total} Poin</p>
-          `;
-          grid.appendChild(card);
-        });
-        section.appendChild(grid);
-        cardWrapper.appendChild(section);
-      }
-    }
-    fetchDetailAnggota();
-
-    async function fetchLastMerchant() {
-      const res = await fetch(\"https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir\");
-      const data = await res.json();
-      const m = data[0];
-      document.getElementById(\"merchant-info\").innerHTML = `
-        <p>🏪 <strong>${m.Merchant}</strong></p>
-        <p>👤 Oleh: ${m.Oleh}</p>
-        <p>📍 Produk: ${m.Produk}</p>
-        <p>🗓️ Tanggal: ${m.Tanggal}</p>
-      `;
-    }
-    fetchLastMerchant();
   </script>
 </body>
 </html>
