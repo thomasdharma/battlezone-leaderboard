@@ -13,7 +13,7 @@
     <h1>🧾 Detail Pencapaian Individu</h1>
   </header>
 
-  <section class="detail-section" id="detail-individu">
+  <section class="detail-section">
     <div id="individual-cards"></div>
   </section>
 
@@ -33,7 +33,7 @@
 
         members.forEach(a => {
           let isi = '';
-          ['Livin Activation','Giro','EDC','OOB TabNow','Kopra','Visit Point','Tabungan Bisnis'].forEach(p => {
+          ['Livin','Giro','EDC','Tabungan Now','Kopra','Visit Point','Tabungan Bisnis'].forEach(p => {
             if (a[p] && parseInt(a[p]) > 0) isi += `<p>${p}: ${a[p]}</p>`;
           });
           const update = a['Last Update'] || 'Belum update';
