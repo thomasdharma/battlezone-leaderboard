@@ -1,129 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Battlezone Acquisition 2025</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="background"></div>
-  <header class="header">
-    <h1>🏆 Battlezone Acquisition 2025</h1>
-    <div id="countdown" class="countdown">Loading countdown...</div>
-  </header>
+#last-merchant {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 15px rgba(0,255,255,0.2);
+  backdrop-filter: blur(5px);
+  text-align: left;
+}
 
-  <!-- Leaderboard Section -->
-  <section class="leaderboard-section">
-    <h2>🥇 Leaderboard Tim</h2>
-    <div class="leaderboard">
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Tim</th>
-            <th>Total Poin</th>
-          </tr>
-        </thead>
-        <tbody id="leaderboard-body"></tbody>
-      </table>
-    </div>
-  </section>
+#last-merchant h3 {
+  color: #00ffff;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
 
-  <!-- Reward Section -->
-  <section class="reward-section">
-    <h2>🎁 Daftar Hadiah</h2>
-    <div class="reward-grid reward-centered">
-      <div class="reward-item">
-        <img src="assets/silver-medal.png" class="reward-img" alt="Silver Medal" />
-        <p>🥈 Juara 2<br>Silver Medal</p>
-      </div>
-
-      <div class="reward-item reward-winner">
-        <img src="assets/gold-medal.png" class="reward-img-big" alt="Gold Medal" />
-        <img src="assets/gift.png" class="reward-img-small" alt="Gift" />
-        <p>🥇 Juara 1<br>Gold Medal + Cash<br>Rp300.000</p>
-      </div>
-
-      <div class="reward-item">
-        <img src="assets/bronze-medal.png" class="reward-img" alt="Bronze Medal" />
-        <p>🥉 Juara 3<br>Bronze Medal</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Accordion Section -->
-  <section class="detail-section">
-    <h2>📋 Detail Akuisisi Anggota</h2>
-    <div class="accordion">
-      <div class="accordion-item">
-        <button class="accordion-button">🎯 Tim Alpha</button>
-        <div class="accordion-content"><ul></ul></div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-button">🎯 Tim Bravo</button>
-        <div class="accordion-content"><ul></ul></div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-button">🎯 Tim Charlie</button>
-        <div class="accordion-content"><ul></ul></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Scripts -->
-  <script>
-    function countdownTimer() {
-      const el = document.getElementById('countdown');
-      const now = new Date();
-      const target = new Date(now.getFullYear(), now.getMonth() + 1, 1, 8, 0, 0);
-      const dist = target - now;
-      if (dist <= 0) return el.innerHTML = "Leaderboard disembunyikan. Hasil diumumkan hari Senin!";
-      const d = Math.floor(dist / (1000 * 60 * 60 * 24));
-      const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((dist % (1000 * 60)) / 1000);
-      el.innerHTML = `Reset dalam: ${d}h ${h}j ${m}m ${s}s`;
-    }
-    setInterval(countdownTimer, 1000);
-
-    document.querySelectorAll('.accordion-button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.classList.toggle('active');
-        const content = btn.nextElementSibling;
-        content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
-      });
-    });
-
-    async function fetchLeaderboard() {
-      const res = await fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/LeaderboardTim');
-      const data = await res.json();
-      const tbody = document.getElementById('leaderboard-body');
-      tbody.innerHTML = '';
-      data.forEach(row => {
-        tbody.innerHTML += `<tr><td>${row.Rank}</td><td>${row['Nama Tim']}</td><td>${row['Total Poin']}</td></tr>`;
-      });
-    }
-    fetchLeaderboard();
-
-    async function fetchDetailAnggota() {
-      const res = await fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/DetailAnggota');
-      const data = await res.json();
-      document.querySelectorAll('.accordion-item').forEach(item => {
-        const tim = item.querySelector('.accordion-button').textContent.replace('🎯 ', '').trim();
-        const ul = item.querySelector('ul');
-        ul.innerHTML = '';
-        data.filter(a => a['Nama Tim'] === tim).forEach(a => {
-          let isi = '';
-          ['Livin','Giro','EDC','Tabungan Now','Kopra','Visit Point','Tabungan Bisnis'].forEach(p => {
-            if (a[p] && parseInt(a[p]) > 0) isi += `- ${p}: ${a[p]}<br>`;
-          });
-          ul.innerHTML += `<li><strong>${a['Nama Anggota']}</strong><br>${isi}<em>Update: ${a['Last Update']}</em><br><em>Total Poin: ${a['Total Poin Anggota']}</em></li>`;
-        });
-      });
-    }
-    fetchDetailAnggota();
-  </script>
-</body>
-</html>
+#last-merchant p {
+  font-size: 14px;
+  color: #fff;
+  margin: 4px 0;
+}
