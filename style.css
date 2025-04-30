@@ -203,27 +203,28 @@ body {
 
 /* === Responsive === */
 @media (max-width: 600px) {
-  .header h1 {
-    font-size: 22px;
-  }
-  .menu-btn, .menu-buttons button {
-    width: 100%;
-    max-width: 300px;
-  }
-  .anggota-card {
-    width: 90%;
-  }
-  .leaderboard table {
-    font-size: 12px;
-  }
-  .modal-content {
-    width: 95%;
-  }
   .reward-grid {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+  .reward-item {
+    min-width: 140px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .reward-img, .reward-img-combo {
+    width: 50px !important;
   }
   .reward-combo {
     flex-direction: row;
+    gap: 4px;
+  }
+  .reward-item p {
+    font-size: 13px;
   }
 }
+
