@@ -12,7 +12,6 @@ body {
   padding-bottom: 80px;
 }
 
-/* === Layout === */
 .header {
   padding: 20px;
   text-align: center;
@@ -24,6 +23,7 @@ body {
   font-size: 16px;
   color: #ff0;
 }
+
 .leaderboard-section, .detail-section {
   padding: 20px;
   text-align: center;
@@ -37,17 +37,18 @@ body {
   border-radius: 8px;
   overflow: hidden;
 }
+
 .leaderboard th, .leaderboard td {
   padding: 12px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
   font-size: 14px;
 }
+
 .leaderboard th {
   background-color: rgba(0, 255, 255, 0.1);
   color: #0ff;
 }
 
-/* === Tombol Menu === */
 .menu-buttons {
   margin-top: 20px;
   display: flex;
@@ -56,18 +57,21 @@ body {
   gap: 12px;
 }
 .menu-btn, .menu-buttons button {
-  background: transparent;
-  color: #fff;
+  background: #0ff;
+  color: #000;
   border: 2px solid #0ff;
   padding: 10px 20px;
   border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
   transition: background 0.3s;
   text-decoration: none;
+  font-weight: bold;
 }
 .menu-btn:hover, .menu-buttons button:hover {
-  background: rgba(0,255,255,0.2);
+  background: #00ffffcc;
+  color: #000;
 }
 
 /* === Modal === */
@@ -91,6 +95,7 @@ body {
   max-width: 600px;
   border-radius: 10px;
   position: relative;
+  text-align: center;
 }
 .modal .close {
   position: absolute;
@@ -101,22 +106,24 @@ body {
   cursor: pointer;
 }
 
-/* === Reward Grid === */
 .reward-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  align-items: center;
   margin-top: 20px;
 }
 .reward-item {
   text-align: center;
+  flex: 1 1 120px;
+  max-width: 140px;
 }
 .reward-img {
-  width: 70px;
+  width: 40px;
 }
-.reward-winner .reward-img-combo {
-  width: 50px;
+.reward-img-combo {
+  width: 70px;
 }
 .reward-combo {
   display: flex;
@@ -125,9 +132,33 @@ body {
   gap: 6px;
 }
 .plus-sign {
-  font-size: 18px;
+  font-size: 20px;
   color: #fff;
   font-weight: bold;
+}
+
+/* === Merchant Box === */
+#last-merchant {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+#last-merchant h3 {
+  color: #ff00ff;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+#merchant-info p {
+  font-size: 14px;
+  margin: 2px 0;
 }
 
 /* === Detail Page === */
@@ -187,5 +218,12 @@ body {
   }
   .modal-content {
     width: 95%;
+  }
+  .reward-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .reward-combo {
+    flex-direction: row;
   }
 }
