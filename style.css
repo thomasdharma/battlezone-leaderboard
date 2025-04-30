@@ -1,282 +1,56 @@
-/* Import Orbitron font */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: 'Orbitron', sans-serif;
-  background-color: #0d0d0d;
-  background-image: url('assets/neon-bg.png');
-  background-size: cover;
-  background-position: center;
-  color: #ffffff;
-  overflow-x: hidden;
-}
-
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: -1;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f8ff;
+  color: #333;
 }
 
 .header {
-  text-align: center;
-  padding: 40px 20px 20px;
-  color: #00ffff;
-  text-shadow: 0 0 8px #00ffff, 0 0 16px #ff00ff;
-}
-
-.header h1 {
-  font-size: 38px;
-}
-
-.countdown {
-  font-size: 18px;
-  color: #fff;
-  text-shadow: 0 0 5px #ff0;
-  margin-top: 10px;
-}
-
-.leaderboard-section, .reward-section, .detail-section {
-  padding: 40px 20px;
-  text-align: center;
-}
-
-#last-merchant {
-  margin-top: 30px;
+  background-color: #002d73;
+  color: white;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  border-radius: 10px;
-  width: 90%;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0 15px rgba(0,255,255,0.2);
-  backdrop-filter: blur(5px);
-  text-align: left;
-}
-
-#last-merchant h3 {
-  color: #00ffff;
-  margin-bottom: 10px;
-  font-size: 20px;
-}
-
-#last-merchant p {
-  font-size: 14px;
-  color: #fff;
-  margin: 4px 0;
-}
-
-.menu-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 30px;
-  flex-wrap: wrap;
-}
-
-.menu-buttons .menu-btn,
-.menu-buttons button {
-  background-color: rgba(0, 255, 255, 0.1);
-  color: #fff;
-  font-family: 'Orbitron', sans-serif;
-  border: 2px solid #00ffff;
-  border-radius: 14px;
-  padding: 12px 24px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.3s;
-  text-decoration: none;
-}
-
-.menu-buttons .wide-button {
-  padding: 12px 30px;
-  font-size: 15px;
-}
-
-.menu-buttons .menu-btn:hover,
-.menu-buttons button:hover {
-  background-color: rgba(0, 255, 255, 0.3);
-}
-
-.leaderboard table {
-  width: 90%;
-  margin: 0 auto;
-  border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-}
-
-.leaderboard th, .leaderboard td {
-  padding: 12px 16px;
-  font-size: 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.leaderboard th {
-  background-color: rgba(0, 255, 255, 0.15);
-  color: #00ffff;
-}
-
-.leaderboard tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.03);
-}
-
-.reward-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-}
-
-.reward-item {
   text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 15px;
-  width: 220px;
-  box-shadow: 0 0 10px rgba(0,255,255,0.2);
-  backdrop-filter: blur(6px);
-}
-
-.reward-winner {
-  transform: scale(1.1);
-  box-shadow: 0 0 25px rgba(255, 255, 0, 0.4);
-  border: 2px solid rgba(255, 215, 0, 0.3);
-}
-
-.reward-combo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-}
-
-.plus-sign {
-  font-size: 18px;
-  color: #fff;
-  font-weight: bold;
-}
-
-.reward-img {
-  width: 80px;
-  height: auto;
-}
-
-.reward-img-combo {
-  width: 55px;
-  height: auto;
-}
-
-/* Modal Styles */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  padding-top: 80px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.8);
-}
-
-.modal-content {
-  background-color: rgba(20, 20, 40, 0.95);
-  margin: auto;
-  padding: 30px;
-  border: 2px solid #00ffff;
-  width: 90%;
-  max-width: 700px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,255,255,0.2);
   position: relative;
-  text-align: center;
 }
 
-.close {
-  color: #fff;
+.logo {
+  height: 40px;
   position: absolute;
-  top: 12px;
-  right: 20px;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
+  left: 20px;
+  top: 20px;
 }
 
-.close:hover,
-.close:focus {
-  color: #f00;
-}
-
-.card-grid {
+.anggota-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
-  margin-top: 20px;
+  gap: 20px;
+  padding: 30px 20px;
 }
 
 .anggota-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 15px;
-  width: 220px;
-  box-shadow: 0 0 10px rgba(0,255,255,0.2);
-  backdrop-filter: blur(6px);
-  text-align: left;
+  background-color: #ffffff;
+  border: 2px solid #007bff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 260px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.anggota-card h4 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #00ffff;
+.anggota-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-.card-body p {
-  margin: 4px 0;
-  font-size: 14px;
-}
-
-.card-foot {
-  margin-top: 12px;
-  font-size: 13px;
-  color: #fff;
-}
-
-.team-header {
+.anggota-card h3 {
+  margin: 0 0 12px;
   font-size: 20px;
-  color: #fff;
-  margin-top: 40px;
-  margin-bottom: 10px;
-  text-shadow: 0 0 4px #ff00ff;
-  text-align: center;
+  color: #002d73;
 }
 
-@media (max-width: 768px) {
-  .reward-grid, .card-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .leaderboard table {
-    width: 100%;
-  }
-
-  .header h1 {
-    font-size: 28px;
-  }
+.anggota-card p {
+  margin: 6px 0;
+  font-size: 16px;
+  line-height: 1.4;
 }
