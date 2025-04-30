@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Pencapaian Individu</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background"></div>
+  <header class="header">
+    <h1>🧾 Detail Pencapaian Individu</h1>
+  </header>
+
+  <section class="detail-section" id="detail-individu">
+    <div id="individual-cards"></div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const cardWrapper = document.getElementById("individual-cards");
+      const grouped = { 'Tim Alpha': [], 'Tim Bravo': [], 'Tim Charlie': [] };
+      const res = await fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/DetailAnggota');
+      const data = await res.json();
+      data.forEach(a => grouped[a['Nama Tim']].push(a));
+
+      for (const [team, members] of Object.entries(grouped)) {
+        const section = document.createElement('div');
+        section.innerHTML = `<h3 class="team-header">${team}</h3>`;
+        const grid = document.createElement('div');
+        grid.className = 'card-grid';
+
+        members.forEach(a => {
+          let isi = '';
+          ['Livin','Giro','EDC','Tabungan Now','Kopra','Visit Point','Tabungan Bisnis'].forEach(p => {
+            if (a[p] && parseInt(a[p]) > 0) isi += `<span>${p}: ${a[p]}</span>`;
+          });
+          const update = a['Last Update'] || 'Belum update';
+          const total = a['Total Poin Anggota'] || '0';
+          const card = document.createElement('div');
+          card.className = 'anggota-card';
+          card.innerHTML = `
+            <h4>👤 ${a['Nama Anggota']}</h4>
+            <div class="card-body">${isi}</div>
+            <p class="card-foot">🗓 ${update} &nbsp; ⭐ ${total} Poin</p>
+          `;
+          grid.appendChild(card);
+        });
+
+        section.appendChild(grid);
+        cardWrapper.appendChild(section);
+      }
+    });
+  </script>
+</body>
+</html>
 
