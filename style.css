@@ -1,56 +1,43 @@
-body {
-  margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f8ff;
-  color: #333;
-}
-
-.header {
-  background-color: #002d73;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  position: relative;
-}
-
-.logo {
-  height: 40px;
-  position: absolute;
-  left: 20px;
-  top: 20px;
-}
-
-.anggota-container {
+.card-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 20px;
-  padding: 30px 20px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .anggota-card {
-  background-color: #ffffff;
-  border: 2px solid #007bff;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  width: 260px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 15px;
+  width: 220px;
+  box-shadow: 0 0 10px rgba(0,255,255,0.2);
+  backdrop-filter: blur(6px);
+  text-align: left;
 }
 
-.anggota-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+.anggota-card h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #00ffff;
 }
 
-.anggota-card h3 {
-  margin: 0 0 12px;
+.card-body p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.card-foot {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #fff;
+}
+
+.team-header {
   font-size: 20px;
-  color: #002d73;
-}
-
-.anggota-card p {
-  margin: 6px 0;
-  font-size: 16px;
-  line-height: 1.4;
+  color: #fff;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 4px #ff00ff;
+  text-align: center;
 }
