@@ -27,22 +27,24 @@ body {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 12px;
   padding: 20px;
-  border: 1px solid rgba(255, 149, 0, 0.4);
-  box-shadow: 0 0 15px rgba(255, 149, 0, 0.5), 0 0 25px rgba(255, 149, 0, 0.3);
   backdrop-filter: blur(8px);
+  color: #fff;
+  animation: pulseGlow 3s infinite;
+  border: 2px solid rgba(255, 149, 0, 0.3);
 }
 .leaderboard-section, .detail-section {
   padding: 20px;
   text-align: center;
 }
 .leaderboard {
+ .leaderboard {
   position: relative;
-  background: rgba(20, 10, 0, 0.5); /* dark orange-transparent background */
+  background: rgba(20, 10, 0, 0.5);
   border-radius: 12px;
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 149, 0, 0.4);
-  box-shadow: 0 0 15px rgba(255, 149, 0, 0.6), 0 0 25px rgba(255, 149, 0, 0.3);
   color: #fff;
+  animation: pulseGlow 3s infinite;
+  border: 2px solid rgba(255, 149, 0, 0.3);
 }
 .leaderboard table {
   width: 100%;
@@ -256,6 +258,19 @@ body {
   }
   .reward-item p {
     font-size: 13px;
+  }
+  @keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.2);
+    border-color: rgba(255, 149, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 149, 0, 0.6), 0 0 40px rgba(255, 149, 0, 0.3);
+    border-color: rgba(255, 149, 0, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.2);
+    border-color: rgba(255, 149, 0, 0.3);
   }
 }
 
