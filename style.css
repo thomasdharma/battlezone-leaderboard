@@ -23,21 +23,13 @@ body {
   font-size: 16px;
   color: #ff0;
 }
-#last-merchant {
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 12px;
-  padding: 20px;
-  backdrop-filter: blur(8px);
-  color: #fff;
-  animation: pulseGlow 3s infinite;
-  border: 2px solid rgba(255, 149, 0, 0.3);
-}
+
 .leaderboard-section, .detail-section {
   padding: 20px;
   text-align: center;
 }
+
 .leaderboard {
- .leaderboard {
   position: relative;
   background: rgba(20, 10, 0, 0.5);
   border-radius: 12px;
@@ -46,11 +38,11 @@ body {
   animation: pulseGlow 3s infinite;
   border: 2px solid rgba(255, 149, 0, 0.3);
 }
+
 .leaderboard table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: transparent;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -59,11 +51,12 @@ body {
   padding: 12px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
   font-size: 14px;
+  color: #fff;
 }
 
 .leaderboard th {
-  background-color: rgba(0, 255, 255, 0.1);
-  color: #0ff;
+  background-color: rgba(255, 149, 0, 0.1);
+  color: #ff9500;
 }
 
 .menu-buttons {
@@ -91,7 +84,6 @@ body {
   color: #000;
 }
 
-/* === Modal === */
 .modal {
   display: none;
   position: fixed;
@@ -137,17 +129,17 @@ body {
   max-width: 140px;
 }
 .reward-item.reward-winner {
-  flex: 1 1 220px;
-  max-width: 240px;
-}
-.reward-winner .reward-img-combo:last-child {
-  width: 110px !important;
+  flex: 1 1 200px;
+  max-width: 220px;
 }
 .reward-img {
   width: 40px;
 }
 .reward-img-combo {
   width: 70px;
+}
+.reward-winner .reward-img-combo:last-child {
+  width: 85px !important;
 }
 .reward-combo {
   display: flex;
@@ -161,22 +153,18 @@ body {
   font-weight: bold;
 }
 
-/* === Merchant Box === */
 #last-merchant {
-  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  border-radius: 10px;
-  width: 90%;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  animation: pulseGlow 3s infinite;
+  border: 2px solid rgba(255, 149, 0, 0.3);
+  box-shadow: 0 0 15px rgba(255, 149, 0, 0.5), 0 0 25px rgba(255, 149, 0, 0.3);
 }
 #last-merchant h3 {
-  color: #ff00ff;
+  color: #ffa500;
   margin-bottom: 10px;
   font-size: 18px;
 }
@@ -185,7 +173,6 @@ body {
   margin: 2px 0;
 }
 
-/* === Detail Page === */
 .card-grid {
   display: flex;
   flex-wrap: wrap;
@@ -225,30 +212,41 @@ body {
   text-align: center;
 }
 
-/* === Responsive === */
 @media (max-width: 600px) {
-   .leaderboard th,
-  .leaderboard td {
-    color: #fff !important;
-    background: rgba(0, 0, 0, 0.1); /* semi gelap agar tetap kontras */
+  .header h1 {
+    font-size: 22px;
+  }
+  .menu-btn, .menu-buttons button {
+    width: 100%;
+    max-width: 300px;
+  }
+  .anggota-card {
+    width: 90%;
+  }
+  .leaderboard table {
+    font-size: 12px;
+  }
+  .modal-content {
+    width: 95%;
   }
   .reward-grid {
     flex-wrap: nowrap;
     overflow-x: auto;
-    gap: 10px;
     justify-content: flex-start;
+    padding-bottom: 10px;
   }
   .reward-item {
     min-width: 140px;
     flex-shrink: 0;
     background: rgba(255,255,255,0.05);
-    padding: 10px;
+    padding: 12px;
     border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,255,255,0.2);
   }
   .reward-item.reward-winner {
-  min-width: 220px;
-  max-width: 240px;
-}
+    min-width: 180px;
+    max-width: 220px;
+  }
   .reward-img, .reward-img-combo {
     width: 50px !important;
   }
@@ -258,8 +256,12 @@ body {
   }
   .reward-item p {
     font-size: 13px;
+    text-align: center;
+    margin-top: 8px;
   }
-  @keyframes pulseGlow {
+}
+
+@keyframes pulseGlow {
   0% {
     box-shadow: 0 0 10px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.2);
     border-color: rgba(255, 149, 0, 0.3);
@@ -273,4 +275,3 @@ body {
     border-color: rgba(255, 149, 0, 0.3);
   }
 }
-
