@@ -33,7 +33,7 @@
 
         members.forEach(a => {
           let isi = '';
-          ['Livin','Giro','EDC','Tabungan Now','Kopra','Visit Point','Tabungan Bisnis'].forEach(p => {
+          ['Livin TabReg ','Giro','EDC','Livin TabNow','Kopra','Visit Point','Tabungan Bisnis'].forEach(p => {
             if (a[p] && parseInt(a[p]) > 0) isi += `<p>${p}: ${a[p]}</p>`;
           });
           const update = a['Last Update'] || 'Belum update';
