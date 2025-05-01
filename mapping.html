@@ -64,17 +64,19 @@
             // Tambah ke array heatmap
             heatData.push(new google.maps.LatLng(lat, lng));
 
-            // Buat marker dengan InfoWindow
+            // Buat marker dengan InfoWindow yang memuat PIC, Nama Tim, Nama Toko & Produk
             const marker = new google.maps.Marker({
               position: { lat, lng },
               map,
             });
             const info = new google.maps.InfoWindow({
               content: `
-                <strong>${item['Nama Toko']}</strong><br>
-                Produk: ${item.Produk}<br>
-                Tanggal: ${item.Tanggal}<br>
-                PIC: ${item.PIC}
+                <div style="min-width:200px; line-height:1.4;">
+                  <strong>Nama Toko:</strong> ${item['Nama Toko']}<br>
+                  <strong>Nama Tim:</strong> ${item['Nama Tim'] || '-'}<br>
+                  <strong>PIC:</strong> ${item.PIC || '-'}<br>
+                  <strong>Produk:</strong> ${item.Produk || '-'}
+                </div>
               `,
             });
             marker.addListener("click", () => info.open(map, marker));
