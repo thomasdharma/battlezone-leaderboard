@@ -108,18 +108,21 @@
             perTeamHeat[team]?.push(pos);
 
             // render marker sebagai DOM (optimized=false), zIndex tinggi -> gampang diklik
-            const marker = new google.maps.Marker({
-              position: pos,
-              map,
-              optimized: false,                                 // disable canvas optimization
-              zIndex: google.maps.Marker.MAX_ZINDEX,            // selalu di atas heatmap
-              icon: { path: google.maps.SymbolPath.CIRCLE, scale:0 },
-              label: {
-                text: '📌',
-                color: teamColors[team] || '#fff',
-                fontSize: '24px'
-              }
-            });
+           const marker = new google.maps.Marker({
+  position: pos,
+  map: map,
+  icon: {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 1, // dari 0 → 1 agar bisa diklik
+    fillOpacity: 0,
+    strokeWeight: 0
+  },
+  label: {
+    text: '📌',
+    color: teamColors[team],
+    fontSize: '24px'
+  }
+});
 
             // info window
             const infoHtml = `
