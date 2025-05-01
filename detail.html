@@ -6,6 +6,44 @@
   <title>Detail Pencapaian Individu</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    .top3-wrapper {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .top3-card {
+      background: linear-gradient(135deg, #ffd700, #ff8c00);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+      font-size: 0.9rem;
+      text-align: center;
+      animation: glow 1.5s infinite alternate;
+      color: #000;
+      min-width: 180px;
+    }
+    .top3-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+      }
+      to {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 1);
+      }
+    }
+    @media (max-width: 768px) {
+      .top3-wrapper, .card-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="background"></div>
@@ -14,20 +52,43 @@
   </header>
 
   <section class="detail-section">
+    <div id="top-3" class="top3-wrapper"></div>
     <div id="individual-cards"></div>
   </section>
 
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
+      const top3Wrapper = document.getElementById("top-3");
       const cardWrapper = document.getElementById("individual-cards");
       const grouped = { 'Tim Alpha': [], 'Tim Bravo': [], 'Tim Charlie': [] };
+      const allData = [];
       const res = await fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/DetailAnggota');
       const data = await res.json();
 
       data.forEach(a => {
         if (grouped[a['Nama Tim']]) grouped[a['Nama Tim']].push(a);
+        allData.push(a);
       });
 
+      // TOP 3
+      const top3 = [...allData]
+        .filter(a => parseFloat(a['Total Poin']) > 0)
+        .sort((a, b) => parseFloat(b['Total Poin']) - parseFloat(a['Total Poin']))
+        .slice(0, 3);
+
+      top3.forEach((a, i) => {
+        const card = document.createElement('div');
+        card.className = 'top3-card';
+        card.innerHTML = `
+          <h3>🏆 ${i + 1}. ${a['Nama Anggota']}</h3>
+          <p>${a['Nama Tim']}</p>
+          <p>⭐ ${a['Total Poin']} Poin</p>
+          <p>🗓 ${a['Last Update'] || 'Belum update'}</p>
+        `;
+        top3Wrapper.appendChild(card);
+      });
+
+      // TIM SECTIONS
       for (const [team, members] of Object.entries(grouped)) {
         const section = document.createElement('div');
         section.innerHTML = `<h3 class="team-header">${team}</h3>`;
