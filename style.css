@@ -1,137 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Battlezone Acquisition 2025</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
-</head>
-<body>
-  <div class="background"></div>
-  <header class="header">
-    <h1>🏆 Battlezone Acquisition 2025</h1>
-    <p>Bank Mandiri Lapangan Merdeka</p>
-    <div id="countdown" class="countdown">Loading countdown...</div>
-  </header>
+/* === Reset & Global === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <section class="leaderboard-section">
-    <h2>🥇 Leaderboard Tim</h2>
-    <div class="leaderboard">
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Tim</th>
-            <th>Total Poin</th>
-          </tr>
-        </thead>
-        <tbody id="leaderboard-body"><tr><td colspan="3">Loading...</td></tr></tbody>
-      </table>
-    </div>
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: #0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
+  color: #fff;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
 
-    <section id="last-merchant">
-      <h3>📌 Merchant Terakhir Diakuisisi</h3>
-      <div id="merchant-info">
-        <p>Loading...</p>
-      </div>
-    </section>
+.header {
+  padding: 20px;
+  text-align: center;
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff;
+}
 
-    <div class="menu-buttons">
-      <button onclick="document.getElementById('rewardModal').style.display='block'">🎁 Daftar Hadiah</button>
-      <a href="detail.html" class="menu-btn wide-button">🧾 Detail Pencapaian Individu</a>
-    </div>
-  </section>
+.countdown {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #ff0;
+}
 
-  <!-- Modal Hadiah -->
-  <div id="rewardModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="document.getElementById('rewardModal').style.display='none'">&times;</span>
-      <h2>🎁 Daftar Hadiah</h2>
-      <div class="reward-grid reward-centered">
-        <div class="reward-item">
-          <img src="assets/silver-medal.png" class="reward-img" alt="Silver Medal" />
-          <p>🥈 Juara 2<br>Silver Medal</p>
-        </div>
-        <div class="reward-item reward-winner">
-          <div class="reward-combo">
-            <img src="assets/gold-medal.png" class="reward-img-combo" alt="Gold Medal" />
-            <span class="plus-sign">+</span>
-            <img src="assets/gift.png" class="reward-img-combo" style="width: 55px;" alt="Gift" />
-          </div>
-          <p>🥇 Juara 1<br>Gold Medal + Hadiah</p>
-        </div>
-        <div class="reward-item">
-          <img src="assets/bronze-medal.png" class="reward-img" alt="Bronze Medal" />
-          <p>🥉 Juara 3<br>Bronze Medal</p>
-        </div>
-      </div>
-    </div>
-  </div>
+/* === Leaderboard Section === */
+.leaderboard-section {
+  padding: 20px;
+  text-align: center;
+}
 
-  <script>
-    window.addEventListener("DOMContentLoaded", function () {
-      const countdown = document.getElementById("countdown");
-      const now = new Date();
-      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-      const target = new Date(lastDay.getFullYear(), lastDay.getMonth(), lastDay.getDate(), 8, 0, 0);
-      const timer = setInterval(() => {
-        const now = new Date();
-        const dist = target - now;
-        if (dist <= 0) {
-          clearInterval(timer);
-          countdown.innerHTML = "Leaderboard disembunyikan. Hasil diumumkan hari Senin!";
-          return;
-        }
-        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
-        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((dist % (1000 * 60)) / 1000);
-        countdown.innerHTML = `Reset dalam: ${d}h ${h}j ${m}m ${s}s`;
-      }, 1000);
+.leaderboard-section h2 {
+  margin-bottom: 1.2rem;
+  font-size: 24px;
+}
 
-      // Fetch data from 'Summary Per Tim' sheet
-      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Summary%20Per%20Tim")
-        .then(res => res.json())
-        .then(data => {
-          const tbody = document.getElementById("leaderboard-body");
-          tbody.innerHTML = "";
+.leaderboard {
+  position: relative;
+  background: rgba(20, 10, 0, 0.5);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  color: #fff;
+  animation: pulseGlow 3s infinite;
+  border: 2px solid rgba(255, 149, 0, 0.3);
+}
 
-          // Sort data by Total Poin in descending order to get rank
-          const sortedData = data.sort((a, b) => b['Total Poin'] - a['Total Poin']);
-          
-          // Add rank based on sorted order
-          sortedData.forEach((row, i) => {
-            const rank = i + 1; // Rank starts from 1
-            const cls = rank === 1 ? "rank-1" : ""; // Apply rank-1 class to the row if it's Rank 1
-            tbody.innerHTML += `
-              <tr class="${cls}">
-                <td>${rank}</td> <!-- Add Rank -->
-                <td>${row['Nama Tim'] || 'N/A'}</td>
-                <td>${row['Total Poin'] || '0'}</td>
-              </tr>
-            `;
-          });
-        })
-        .catch(() => {
-          document.getElementById("leaderboard-body").innerHTML = '<tr><td colspan="3">Gagal memuat data</td></tr>';
-        });
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-      // Fetch Merchant Info (if needed)
-      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir")
-        .then(res => res.json())
-        .then(data => {
-          const m = data[0];
-          document.getElementById("merchant-info").innerHTML = `
-            <p>🏪 <strong>${m.Merchant}</strong></p>
-            <p>👤 Oleh: ${m.Oleh}</p>
-            <p>📍 Produk: ${m.Produk}</p>
-            <p>🗓️ Tanggal: ${m.Tanggal}</p>`;
-        })
-        .catch(() => {
-          document.getElementById("merchant-info").innerHTML = '<p>Gagal memuat data merchant.</p>';
-        });
-    });
-  </script>
-</body>
-</html>
+.leaderboard th, .leaderboard td {
+  padding: 12px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.leaderboard th {
+  background-color: rgba(255, 149, 0, 0.2);
+}
+
+/* === Rank 1 Styling === */
+.rank-1 {
+  background: linear-gradient(90deg, #ffd700, #ff8c00); /* Emas di seluruh kolom Rank 1 */
+  color: #000;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+  animation: glowRow 2s ease-in-out infinite alternate; /* Apply glowing animation */
+}
+
+.rank-1 td {
+  background: linear-gradient(90deg, #ffd700, #ff8c00); /* Emas untuk seluruh kolom Rank 1 */
+}
+
+/* Glow effect for Rank 1 */
+@keyframes glowRow {
+  from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+  to { box-shadow: 0 0 25px rgba(255, 215, 0, 1); }
+}
+
+/* === Menu and Buttons === */
+.menu-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.menu-btn, .menu-buttons button {
+  background: #0ff;
+  color: #000;
+  border: 2px solid #0ff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  transition: background 0.3s;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu-btn:hover, .menu-buttons button:hover {
+  background: #00ffffcc;
+  color: #000;
+}
+
+/* === Styling for Merchant Info === */
+#last-merchant {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  color: #fff;
+  animation: pulseGlow 3s infinite;
+  border: 2px solid rgba(255, 149, 0, 0.3);
+  box-shadow: 0 0 15px rgba(255, 149, 0, 0.5), 0 0 25px rgba(255, 149, 0, 0.3);
+  margin-top: 30px;
+}
+
+#last-merchant h3 {
+  color: #ffa500;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+#merchant-info p {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+/* === Card Styling === */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.anggota-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 15px;
+  width: 220px;
+  box-shadow: 0 0 10px rgba(0,255,255,0.2);
+  backdrop-filter: blur(6px);
+  text-align: left;
+}
+
+.anggota-card h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #00ffff;
+}
+
+.card-body p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.card-foot {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #fff;
+}
+
+/* === Responsive Design === */
+@media (max-width: 600px) {
+  .leaderboard th, .leaderboard td {
+    font-size: 12px;
+  }
+
+  .anggota-card {
+    width: 90%;
+  }
+
+  .menu-btn, .menu-buttons button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+}
+
+/* === Glow Animation for General Effects === */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.2);
+    border-color: rgba(255, 149, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 149, 0, 0.6), 0 0 40px rgba(255, 149, 0, 0.3);
+    border-color: rgba(255, 149, 0, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.2);
+    border-color: rgba(255, 149, 0, 0.3);
+  }
+}
