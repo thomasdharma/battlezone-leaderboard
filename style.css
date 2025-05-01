@@ -56,6 +56,7 @@ body {
   color: #fff;
   animation: pulseGlow 3s infinite;
   border: 2px solid rgba(255, 149, 0, 0.3);
+  overflow: hidden;
 }
 .leaderboard table {
   width: 100%;
@@ -70,16 +71,38 @@ body {
 .leaderboard th {
   background-color: rgba(255, 149, 0, 0.2);
 }
+.leaderboard tbody tr {
+  background: rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease;
+}
+.leaderboard tbody tr:hover {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* === Border Radius Fix for Corners === */
+.leaderboard thead tr th:first-child {
+  border-top-left-radius: 12px;
+}
+.leaderboard thead tr th:last-child {
+  border-top-right-radius: 12px;
+}
+.leaderboard tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+.leaderboard tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
 
 /* === Rank 1 Styling === */
 .rank-1 {
-  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  background: linear-gradient(to right, #ffeb3b, #ff9800);
   color: #000;
   font-weight: bold;
   animation: glowRow 2s ease-in-out infinite alternate;
 }
 .rank-1 td {
-  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  background: transparent;
+  box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.3);
 }
 @keyframes glowRow {
   from { box-shadow: 0 0 10px rgba(255,215,0,0.4); }
