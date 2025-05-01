@@ -23,7 +23,10 @@
       const grouped = { 'Tim Alpha': [], 'Tim Bravo': [], 'Tim Charlie': [] };
       const res = await fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/DetailAnggota');
       const data = await res.json();
-      data.forEach(a => grouped[a['Nama Tim']].push(a));
+
+      data.forEach(a => {
+        if (grouped[a['Nama Tim']]) grouped[a['Nama Tim']].push(a);
+      });
 
       for (const [team, members] of Object.entries(grouped)) {
         const section = document.createElement('div');
@@ -33,11 +36,11 @@
 
         members.forEach(a => {
           let isi = '';
-          ['Livin','Giro','EDC','Tabungan Now','Kopra','Visit Point','Tabungan Bisnis'].forEach(p => {
-            if (a[p] && parseInt(a[p]) > 0) isi += `<p>${p}: ${a[p]}</p>`;
+          ['Livin','KOPRA','EDC/LVM','Tabnow','TabBisnis','Visit Point'].forEach(p => {
+            if (a[p] && parseFloat(a[p]) > 0) isi += `<p>${p}: ${a[p]}</p>`;
           });
           const update = a['Last Update'] || 'Belum update';
-          const total = a['Total Poin Anggota'] || '0';
+          const total = a['Total Poin'] || '0';
           const card = document.createElement('div');
           card.className = 'anggota-card';
           card.innerHTML = `
