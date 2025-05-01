@@ -1,28 +1,156 @@
-/* === Marquee Teks Berjalan === */
-.marquee-container {
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  background: rgba(0, 255, 255, 0.1);
-  border-top: 2px solid #0ff;
-  border-bottom: 2px solid #0ff;
-  padding: 8px 0;
+/* === Reset & Global === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === Base Layout untuk Peta dan Background Neon === */
+html, body {
+  height: 100%;
+}
+.background {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
+  z-index: -1;
+}
+
+/* === Body Utama === */
+body {
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
+
+/* === Header & Countdown === */
+.header {
+  padding: 20px;
+  text-align: center;
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff;
+}
+.countdown {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #ff0;
+}
+
+/* === Leaderboard Section === */
+.leaderboard-section {
+  padding: 20px;
+  text-align: center;
+}
+.leaderboard-section h2 {
+  margin-bottom: 1.2rem;
+  font-size: 24px;
+}
+
+.leaderboard {
+  position: relative;
+  background: rgba(20, 10, 0, 0.5);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  color: #fff;
+  animation: pulseGlow 3s infinite;
+  border: 2px solid rgba(255, 149, 0, 0.3);
+}
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.leaderboard th, .leaderboard td {
+  padding: 12px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.leaderboard th {
+  background-color: rgba(255, 149, 0, 0.2);
+}
+
+/* === Rank 1 Styling === */
+.rank-1 {
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  color: #000;
+  font-weight: bold;
+  animation: glowRow 2s ease-in-out infinite alternate;
+}
+.rank-1 td {
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+}
+@keyframes glowRow {
+  from { box-shadow: 0 0 10px rgba(255,215,0,0.4); }
+  to   { box-shadow: 0 0 25px rgba(255,215,0,1); }
+}
+
+/* === Marquee Style === */
+.marquee-wrapper {
+  margin: 24px auto;
+  padding: 8px 0;
+  background: rgba(0, 255, 255, 0.1);
+  border: 2px solid #0ff;
+  border-radius: 8px;
+  max-width: 800px;
+  overflow: hidden;
 }
 
 #marquee-text {
   display: inline-block;
   padding-left: 100%;
-  animation: marqueeScroll 20s linear infinite;
-  font-family: 'Orbitron', sans-serif;
+  white-space: nowrap;
+  animation: marqueeScrollMid 18s linear infinite;
   color: #0ff;
+  font-family: 'Orbitron', sans-serif;
   font-size: 14px;
 }
 
-@keyframes marqueeScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-100%); }
+@keyframes marqueeScrollMid {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
+
+@media (max-width: 600px) {
+  #marquee-text {
+    font-size: 13px;
+  }
+}
+
+/* === Menu and Buttons === */
+.menu-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 0 12px;
+}
+
+.menu-buttons .menu-btn,
+.menu-buttons button,
+.menu-buttons a {
+  background: #0ff;
+  color: #000;
+  border: 2px solid #0ff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-decoration: none;
+  flex: 1 1 200px;
+  max-width: 220px;
+  text-align: center;
+}
+
+.menu-buttons .menu-btn:hover,
+.menu-buttons button:hover,
+.menu-buttons a:hover {
+  background: #00ffffcc;
+}
+
+/* (remaining styles omitted for brevity, unchanged) */
