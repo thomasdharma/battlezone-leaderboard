@@ -5,21 +5,33 @@
   box-sizing: border-box;
 }
 
+/* === Base Layout untuk Peta dan Background Neon === */
+html, body {
+  height: 100%;
+}
+.background {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
+  z-index: -1; /* di belakang konten */
+}
+
+/* === Body Utama === */
 body {
   font-family: 'Orbitron', sans-serif;
-  background: #0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
   color: #fff;
   overflow-x: hidden;
   padding-bottom: 80px;
 }
 
+/* === Header & Countdown === */
 .header {
   padding: 20px;
   text-align: center;
   color: #0ff;
   text-shadow: 0 0 5px #0ff;
 }
-
 .countdown {
   margin-top: 10px;
   font-size: 16px;
@@ -31,7 +43,6 @@ body {
   padding: 20px;
   text-align: center;
 }
-
 .leaderboard-section h2 {
   margin-bottom: 1.2rem;
   font-size: 24px;
@@ -51,14 +62,12 @@ body {
   width: 100%;
   border-collapse: collapse;
 }
-
 .leaderboard th, .leaderboard td {
   padding: 12px;
   font-size: 16px;
   text-align: center;
   border: 1px solid rgba(255,255,255,0.1);
 }
-
 .leaderboard th {
   background-color: rgba(255, 149, 0, 0.2);
 }
@@ -73,7 +82,6 @@ body {
 .rank-1 td {
   background: linear-gradient(90deg, #ffd700, #ff8c00);
 }
-
 @keyframes glowRow {
   from { box-shadow: 0 0 10px rgba(255,215,0,0.4); }
   to   { box-shadow: 0 0 25px rgba(255,215,0,1); }
@@ -86,7 +94,6 @@ body {
   justify-content: center;
   gap: 20px;
 }
-
 .menu-btn, .menu-buttons button {
   background: #0ff;
   color: #000;
@@ -100,7 +107,6 @@ body {
   transition: background 0.3s;
   text-decoration: none;
 }
-
 .menu-btn:hover, .menu-buttons button:hover {
   background: #00ffffcc;
 }
@@ -115,17 +121,14 @@ body {
   backdrop-filter: blur(8px);
   background: rgba(0,0,0,0.85);
 }
-
 .modal.show {
   display: block;
 }
-
 @keyframes popIn {
   0%   { transform: scale(0.5) translateY(-200px); opacity: 0; }
   60%  { transform: scale(1.1) translateY(20px); opacity: 1; }
   100% { transform: scale(1) translateY(0); }
 }
-
 .modal-content {
   background: radial-gradient(circle at top left,
                 rgba(30,30,30,0.95),
@@ -142,7 +145,6 @@ body {
   animation: popIn 0.6s ease-out forwards;
   position: relative;
 }
-
 .modal .close {
   position: absolute;
   top: 12px; right: 16px;
@@ -160,7 +162,6 @@ body {
   justify-content: center;
   margin-top: 30px;
 }
-
 .reward-item {
   background: linear-gradient(145deg,
                 rgba(40,40,40,0.9),
@@ -175,14 +176,12 @@ body {
   transform: none;
   transition: transform 0.3s, box-shadow 0.3s;
 }
-
 .reward-item:hover {
   transform: scale(1.05);
   box-shadow:
     0 8px 20px rgba(0,0,0,0.6),
     0 0 16px rgba(255,215,0,0.7);
 }
-
 .reward-item.reward-winner {
   width: 180px;
   padding: 20px;
@@ -191,8 +190,7 @@ body {
     0 0 20px rgba(255,215,0,1),
     inset 0 0 12px rgba(255,215,0,0.6);
 }
-
-/* ===== Perbaiki ukuran gambar hadiah ===== */
+/* Perbaiki ukuran gambar hadiah */
 .modal-content .reward-item img {
   max-width: 80px;
   width: auto;
@@ -206,8 +204,7 @@ body {
   width: auto !important;
   height: auto !important;
 }
-
-/* ===== Float animation medal ===== */
+/* Float animation medal */
 @keyframes floatMedal {
   0%,100% { transform: translateY(0); }
   50%     { transform: translateY(-6px); }
@@ -227,13 +224,11 @@ body {
   box-shadow: 0 0 15px rgba(255,149,0,0.5),0 0 25px rgba(255,149,0,0.3);
   margin-top: 30px;
 }
-
 #last-merchant h3 {
   color: #ffa500;
   margin-bottom: 10px;
   font-size: 18px;
 }
-
 #merchant-info p {
   font-size: 14px;
   margin: 2px 0;
@@ -247,7 +242,6 @@ body {
   justify-content: center;
   margin-top: 20px;
 }
-
 .anggota-card {
   background: rgba(255,255,255,0.05);
   padding: 20px;
@@ -257,18 +251,15 @@ body {
   backdrop-filter: blur(6px);
   text-align: left;
 }
-
 .anggota-card h4 {
   color: #00ffff;
   margin-bottom: 10px;
   font-size: 18px;
 }
-
 .card-body p {
   margin: 4px 0;
   font-size: 14px;
 }
-
 .card-foot {
   margin-top: 12px;
   font-size: 13px;
@@ -289,7 +280,7 @@ body {
   .modal-content {
     width: 95%;
   }
-  /* ===== Perbaikan tampilan reward di mobile ===== */
+  /* Perbaikan tampilan reward di mobile */
   .modal-content {
     width: 90%;
     max-width: 600px;
@@ -329,9 +320,8 @@ body {
   width: 100%;
   height: 500px;
 }
-
 @media (max-width: 600px) {
   #map {
     height: 350px; /* agar muat di layar HP */
   }
-} 
+}
