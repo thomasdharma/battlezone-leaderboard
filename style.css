@@ -14,7 +14,7 @@ html, body {
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: #0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
-  z-index: -1; /* di belakang konten */
+  z-index: -1;
 }
 
 /* === Body Utama === */
@@ -57,7 +57,6 @@ body {
   animation: pulseGlow 3s infinite;
   border: 2px solid rgba(255, 149, 0, 0.3);
 }
-
 .leaderboard table {
   width: 100%;
   border-collapse: collapse;
@@ -91,10 +90,15 @@ body {
 .menu-buttons {
   margin-top: 20px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 16px;
+  padding: 0 10px;
 }
-.menu-btn, .menu-buttons button {
+
+.menu-btn,
+.menu-buttons button,
+.menu-buttons a {
   background: #0ff;
   color: #000;
   border: 2px solid #0ff;
@@ -106,8 +110,14 @@ body {
   cursor: pointer;
   transition: background 0.3s;
   text-decoration: none;
+  flex: 1 1 200px;
+  max-width: 220px;
+  text-align: center;
 }
-.menu-btn:hover, .menu-buttons button:hover {
+
+.menu-btn:hover,
+.menu-buttons button:hover,
+.menu-buttons a:hover {
   background: #00ffffcc;
 }
 
@@ -190,7 +200,6 @@ body {
     0 0 20px rgba(255,215,0,1),
     inset 0 0 12px rgba(255,215,0,0.6);
 }
-/* Perbaiki ukuran gambar hadiah */
 .modal-content .reward-item img {
   max-width: 80px;
   width: auto;
@@ -204,7 +213,6 @@ body {
   width: auto !important;
   height: auto !important;
 }
-/* Float animation medal */
 @keyframes floatMedal {
   0%,100% { transform: translateY(0); }
   50%     { transform: translateY(-6px); }
@@ -265,43 +273,6 @@ body {
   font-size: 13px;
 }
 
-/* === Responsive Design === */
-@media (max-width: 600px) {
-  .leaderboard th, .leaderboard td {
-    font-size: 12px;
-  }
-  .anggota-card {
-    width: 90%;
-  }
-  .menu-btn, .menu-buttons button {
-    width: 100%;
-    max-width: 300px;
-  }
-  .modal-content {
-    width: 95%;
-  }
-  /* Perbaikan tampilan reward di mobile */
-  .modal-content {
-    width: 90%;
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-  }
-  .reward-grid {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding-bottom: 8px;
-  }
-  .reward-item {
-    flex: 0 0 auto;
-    margin-right: 16px;
-  }
-  .reward-grid::-webkit-scrollbar {
-    display: none;
-  }
-}
-
 /* === Glow Animation for General Effects === */
 @keyframes pulseGlow {
   0% {
@@ -322,6 +293,50 @@ body {
 }
 @media (max-width: 600px) {
   #map {
-    height: 350px; /* agar muat di layar HP */
+    height: 350px;
+  }
+
+  .leaderboard th, .leaderboard td {
+    font-size: 12px;
+  }
+
+  .anggota-card {
+    width: 90%;
+  }
+
+  .menu-buttons {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 12px;
+  }
+
+  .menu-buttons .menu-btn,
+  .menu-buttons button,
+  .menu-buttons a {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .modal-content {
+    width: 90%;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .reward-grid {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 8px;
+  }
+
+  .reward-item {
+    flex: 0 0 auto;
+    margin-right: 16px;
+  }
+
+  .reward-grid::-webkit-scrollbar {
+    display: none;
   }
 }
