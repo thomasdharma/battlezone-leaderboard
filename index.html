@@ -26,7 +26,9 @@
             <th>Total Poin</th>
           </tr>
         </thead>
-        <tbody id="leaderboard-body"><tr><td colspan="3">Loading...</td></tr></tbody>
+        <tbody id="leaderboard-body">
+          <tr><td colspan="3">Loading...</td></tr>
+        </tbody>
       </table>
     </div>
 
@@ -99,9 +101,9 @@
           data.forEach((row, i) => {
             tbody.innerHTML += `
               <tr>
-                <td>${row['Rank']}</td>
-                <td>${row['Nama Tim']}</td>
-                <td>${row['Total Poin']}</td>
+                <td>${row['Rank'] || 'N/A'}</td>
+                <td>${row['Nama Tim'] || 'N/A'}</td>
+                <td>${row['Total Poin'] || '0'}</td>
               </tr>
             `;
           });
