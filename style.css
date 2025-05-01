@@ -60,16 +60,18 @@ body {
 }
 .leaderboard table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 .leaderboard th, .leaderboard td {
   padding: 12px;
   font-size: 16px;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .leaderboard th {
   background-color: rgba(255, 149, 0, 0.2);
+  border-top: none;
 }
 .leaderboard tbody tr {
   background: rgba(0, 0, 0, 0.25);
@@ -124,7 +126,9 @@ body {
 .marquee-inner {
   display: inline-block;
   white-space: nowrap;
-  animation: marqueeScroll 20s linear infinite;
+  animation: marqueeScroll linear infinite;
+  animation-duration: calc(15s + 0.15s * var(--length));
+  --length: 0;
   color: #00ffff;
   font-weight: 600;
   font-size: 14px;
@@ -391,6 +395,6 @@ body {
 
   .marquee-inner {
     font-size: 13px;
-    animation-duration: 8s;
+    animation-duration: 12s;
   }
 }
