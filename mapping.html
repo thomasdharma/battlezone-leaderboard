@@ -5,22 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mapping Zone Kawasan</title>
   <link rel="stylesheet" href="style.css" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap"
-    rel="stylesheet"
-  />
   <style>
-    /* Pastikan ada styling untuk #map */
+    html, body { height:100%; margin:0; padding:0; }
+    .background {
+      position: fixed; top:0; left:0;
+      width:100%; height:100%;
+      background: #0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
+      z-index:-1;
+    }
     #map {
-      width: 100%;
-      height: 500px;
+      width:100%; 
+      height: calc(100vh - 120px); /* atau 100% jika tanpa header */
       margin: 0 auto;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      border-radius:12px;
+      box-shadow:0 0 10px rgba(0,0,0,0.5);
+      z-index:0;
     }
-    @media (max-width: 600px) {
-      #map { height: 350px; }
-    }
+    header.header { padding:20px; text-align:center; color:#0ff; text-shadow:0 0 5px #0ff; }
   </style>
 </head>
 <body>
@@ -30,21 +31,17 @@
     <p>Bank Mandiri Lapangan Merdeka</p>
   </header>
 
-  <section class="leaderboard-section">
-    <div id="map"></div>
-  </section>
+  <div id="map"></div>
 
-  <!-- load Google Maps + heatmap library -->
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuSerwi_mY5J89CihWaUZ6Itl_0ywIto&libraries=visualization&callback=initMap"
-    async
+    async defer
   ></script>
   <script>
     function initMap() {
-      const center = { lat: 3.566559, lng: 98.694630 };
-      const map = new google.maps.Map(document.getElementById("map"), {
-        center,
-        zoom: 13,
+      const center = { lat:3.566559, lng:98.694630 };
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center, zoom:13
       });
 
       // 1) Layer zona kawasan dari My Maps (KML)
