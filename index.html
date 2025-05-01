@@ -7,34 +7,58 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
   <style>
+    /* Leaderboard Section */
     .leaderboard-section h2 {
       margin-bottom: 1.2rem;
+      font-size: 24px;
+    }
+
+    .leaderboard table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .leaderboard th, .leaderboard td {
+      padding: 12px;
+      font-size: 16px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .leaderboard th {
+      background-color: rgba(255, 149, 0, 0.2);
     }
 
     .rank-1 {
       background: linear-gradient(90deg, gold, orange);
       color: #000;
       font-weight: bold;
+      position: relative;
+      z-index: 1;
       animation: glowRow 1.5s infinite alternate;
     }
 
+    .rank-1::before {
+      content: '👑 CHAMPION';
+      position: absolute;
+      top: -8px;
+      left: 8px;
+      font-size: 12px;
+      background: #000;
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: #ffd700;
+      box-shadow: 0 0 8px #ffd700;
+      z-index: 2;
+    }
+
+    /* Glow animation for champion */
     @keyframes glowRow {
       from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
       to { box-shadow: 0 0 25px rgba(255, 215, 0, 1); }
     }
 
-    .header h1 {
-      font-size: 32px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    #countdown {
-      font-size: 16px;
-      color: #ff0;
-      text-align: center;
-    }
-
+    /* Menu and Buttons */
     .menu-buttons {
       margin-top: 20px;
       display: flex;
@@ -61,65 +85,7 @@
       color: #000;
     }
 
-    /* Leaderboard */
-    .leaderboard {
-      position: relative;
-      background: rgba(20, 10, 0, 0.5);
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
-      color: #fff;
-      animation: pulseGlow 3s infinite;
-      border: 2px solid rgba(255, 149, 0, 0.3);
-    }
-
-    .leaderboard table {
-      width: 100%;
-      border-collapse: collapse;
-      background: transparent;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .leaderboard th, .leaderboard td {
-      padding: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      font-size: 14px;
-      color: #fff;
-    }
-
-    .leaderboard th {
-      background-color: rgba(255, 149, 0, 0.1);
-      color: #ff9500;
-    }
-
-    /* Champion styling */
-    .rank-1 {
-      background: linear-gradient(90deg, #ffd700, #ff8c00);
-      color: #000;
-      font-weight: bold;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      animation: glowRow 2s ease-in-out infinite alternate, floatRank 4s ease-in-out infinite;
-      border-radius: 8px;
-    }
-
-    .rank-1::before {
-      content: '👑 CHAMPION';
-      position: absolute;
-      top: -10px;
-      right: 10px;
-      font-size: 12px;
-      font-weight: bold;
-      background: #000;
-      padding: 2px 6px;
-      border-radius: 6px;
-      color: #ffd700;
-      box-shadow: 0 0 8px #ffd700;
-      z-index: 2;
-    }
-
-    /* Styling for merchant section */
+    /* Styling for Merchant Info */
     #last-merchant {
       background: rgba(255, 255, 255, 0.04);
       border-radius: 12px;
@@ -143,10 +109,50 @@
       margin: 2px 0;
     }
 
-    /* General styling for mobile responsiveness */
+    /* Card styling */
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .anggota-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 15px;
+      width: 220px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.2);
+      backdrop-filter: blur(6px);
+      text-align: left;
+    }
+
+    .anggota-card h4 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #00ffff;
+    }
+
+    .card-body p {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+
+    .card-foot {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    /* Responsive Design */
     @media (max-width: 600px) {
-      .leaderboard table {
+      .leaderboard th, .leaderboard td {
         font-size: 12px;
+      }
+
+      .anggota-card {
+        width: 90%;
       }
 
       .menu-btn, .menu-buttons button {
@@ -154,39 +160,11 @@
         max-width: 300px;
       }
 
-      .anggota-card {
-        width: 90%;
-      }
-
       .modal-content {
         width: 95%;
       }
-
-      .reward-grid {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        justify-content: flex-start;
-        padding-bottom: 10px;
-      }
-
-      .reward-item {
-        min-width: 140px;
-        flex-shrink: 0;
-        background: rgba(255,255,255,0.05);
-        padding: 12px;
-        border-radius: 10px;
-        box-shadow: 0 0 8px rgba(0,255,255,0.2);
-      }
-
-      .reward-item.reward-winner {
-        min-width: 180px;
-        max-width: 220px;
-      }
-
-      .reward-img, .reward-img-combo {
-        width: 50px !important;
-      }
     }
+
   </style>
 </head>
 <body>
@@ -255,7 +233,7 @@
     window.addEventListener("DOMContentLoaded", function () {
       const countdown = document.getElementById("countdown");
       const now = new Date();
-      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0); // akhir bulan ini
+      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
       const target = new Date(lastDay.getFullYear(), lastDay.getMonth(), lastDay.getDate(), 8, 0, 0);
       const timer = setInterval(() => {
         const now = new Date();
