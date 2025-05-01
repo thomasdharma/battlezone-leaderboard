@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mapping Zone Kawasan</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
     /* Pastikan ada styling untuk #map */
     #map {
@@ -58,27 +61,38 @@
         .then(data => {
           const heatData = [];
           data.forEach(item => {
-            const lat = parseFloat(item.Lat), lng = parseFloat(item.Lng);
+            const lat = parseFloat(item.Lat),
+                  lng = parseFloat(item.Lng);
             if (isNaN(lat) || isNaN(lng)) return;
 
             // Tambah ke array heatmap
             heatData.push(new google.maps.LatLng(lat, lng));
 
-            // Buat marker dengan InfoWindow yang memuat PIC, Nama Tim, Nama Toko & Produk
+            // Buat marker dengan InfoWindow yang memuat detail
             const marker = new google.maps.Marker({
               position: { lat, lng },
               map,
             });
+
             const info = new google.maps.InfoWindow({
               content: `
-                <div style="min-width:200px; line-height:1.4;">
+                <div style="
+                  background: #fff;
+                  color: #000;
+                  padding: 8px 12px;
+                  border-radius: 6px;
+                  font-family: 'Orbitron', sans-serif;
+                  line-height: 1.4;
+                  min-width: 200px;
+                ">
                   <strong>Nama Toko:</strong> ${item['Nama Toko']}<br>
-                  <strong>Nama Tim:</strong> ${item['Nama Tim'] || '-'}<br>
+                  <strong>Nama Tim:</strong> ${item.Nama Tim || '-'}<br>
                   <strong>PIC:</strong> ${item.PIC || '-'}<br>
                   <strong>Produk:</strong> ${item.Produk || '-'}
                 </div>
               `,
             });
+
             marker.addListener("click", () => info.open(map, marker));
           });
 
