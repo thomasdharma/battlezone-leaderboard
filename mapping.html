@@ -6,59 +6,47 @@
   <title>Mapping Zone Kawasan</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Full-page layout & background efek */
+    /* Full-screen bg */
     html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: 'Orbitron', sans-serif;
+      height:100%;
+      margin:0; padding:0;
+      font-family:'Orbitron',sans-serif;
     }
     .background {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: #0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
-      z-index: -1;
+      position:fixed; top:0; left:0;
+      width:100%; height:100%;
+      background:#0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
+      z-index:-1;
     }
-
-    /* Tombol Back */
+    /* tombol back */
     .back-btn {
-      position: absolute;
-      top: 20px; left: 20px;
-      background: #0ff;
-      color: #000;
-      padding: 8px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(0,255,255,0.4);
-      z-index: 1;
+      position:absolute; top:20px; left:20px;
+      background:#0ff; color:#000;
+      padding:8px 12px; border-radius:6px;
+      text-decoration:none; font-weight:bold;
+      box-shadow:0 0 8px rgba(0,255,255,0.4);
+      z-index:1;
     }
-    .back-btn:hover {
-      background: #00ffffcc;
-    }
+    .back-btn:hover { background:#00ffffcc; }
 
-    /* Header */
+    /* header */
     header.header {
-      padding: 20px;
-      text-align: center;
-      color: #0ff;
-      text-shadow: 0 0 5px #0ff;
+      padding:20px; text-align:center;
+      color:#0ff; text-shadow:0 0 5px #0ff;
     }
 
-    /* Kontainer Peta */
+    /* peta */
     #map {
-      width: 90%;
-      max-width: 1200px;
-      height: calc(100vh - 160px);
-      margin: 0 auto 60px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      width:90%; max-width:1200px;
+      height:calc(100vh - 160px);
+      margin:0 auto 60px;
+      border-radius:12px;
+      box-shadow:0 0 20px rgba(0,0,0,0.6);
     }
-    @media (max-width: 600px) {
+    @media(max-width:600px){
       #map {
-        width: 95%;
-        height: 60vh;
+        width:95%;
+        height:60vh;
       }
     }
   </style>
@@ -74,72 +62,99 @@
   <div id="map"></div>
 
   <script>
-    // 1) Definisi initMap sebelum API load
+    // Inisialisasi tim & styling
+    const teamColors   = {
+      'Tim Alpha':   '#0066cc',
+      'Tim Bravo':   '#cc0000',
+      'Tim Charlie': '#00cc44'
+    };
+    const teamGradients = {
+      'Tim Alpha': [
+        'rgba(0,0,0,0)',
+        'rgba(0,102,204,0.4)',
+        'rgba(0,102,204,1)'
+      ],
+      'Tim Bravo': [
+        'rgba(0,0,0,0)',
+        'rgba(204,0,0,0.4)',
+        'rgba(204,0,0,1)'
+      ],
+      'Tim Charlie': [
+        'rgba(0,0,0,0)',
+        'rgba(0,204,68,0.4)',
+        'rgba(0,204,68,1)'
+      ]
+    };
+
     function initMap() {
-      // Pusat peta
-      const center = { lat: 3.566559, lng: 98.694630 };
+      const center = { lat:3.566559, lng:98.694630 };
       const map = new google.maps.Map(document.getElementById('map'), {
-        center,
-        zoom: 13,
+        center, zoom:13
       });
 
-      // 2) Tambahkan layer KML zona kawasan dari My Maps kamu
+      // 1) KML zona kawasan
       new google.maps.KmlLayer({
         url: 'https://www.google.com/maps/d/kml?forcekml=1&mid=11uDxJ_HJDwN9UbU9ihAhrloBmR--18o',
         preserveViewport: true,
         map: map
       });
 
-      // 3) Fetch data akuisisi merchant → buat heatmap & markers
+      // 2) fetch data & kumpulkan per-tim
+      const perTeamHeat = { 'Tim Alpha': [], 'Tim Bravo': [], 'Tim Charlie': [] };
+
       fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Akuisisi%20Merchant')
-        .then(res => res.json())
+        .then(r => r.json())
         .then(data => {
-          const heatData = [];
           data.forEach(item => {
-            const lat = parseFloat(item.Lat),
-                  lng = parseFloat(item.Lng);
-            if (isNaN(lat) || isNaN(lng)) return;
+            const lat = parseFloat(item.Lat);
+            const lng = parseFloat(item.Lng);
+            const team = item['Nama Tim'];
+            if (isNaN(lat)||isNaN(lng)||!team) return;
 
-            // titik untuk heatmap
-            heatData.push(new google.maps.LatLng(lat, lng));
+            const pos = new google.maps.LatLng(lat,lng);
+            perTeamHeat[team]?.push(pos);
 
-            // marker & InfoWindow
+            // marker custom: icon circle 0 + emoji label
             const marker = new google.maps.Marker({
-              position: { lat, lng },
-              map,
+              position: pos,
+              map: map,
+              icon: { path: google.maps.SymbolPath.CIRCLE, scale:0 },
+              label: {
+                text: '📌',
+                color: teamColors[team],
+                fontSize: '24px'
+              }
             });
-
             const infoHtml = `
               <div style="
-                background: #fff;
-                color: #000;
-                padding: 10px 14px;
-                border-radius: 8px;
-                font-family: 'Orbitron', sans-serif;
-                line-height: 1.4;
-                min-width: 200px;
+                background:#fff;color:#000;
+                padding:10px 14px;border-radius:8px;
+                font-family:'Orbitron',sans-serif;
+                line-height:1.4;min-width:200px;
               ">
                 <strong>Nama Toko:</strong> ${item['Nama Toko']}<br>
-                <strong>Nama Tim:</strong> ${item['Nama Tim'] || '-'}<br>
-                <strong>PIC:</strong> ${item.PIC || '-'}<br>
-                <strong>Produk:</strong> ${item.Produk || '-'}
-              </div>
-            `;
-            const infoWindow = new google.maps.InfoWindow({ content: infoHtml });
-            marker.addListener('click', () => infoWindow.open(map, marker));
+                <strong>Nama Tim:</strong> ${team}<br>
+                <strong>PIC:</strong> ${item.PIC||'-'}<br>
+                <strong>Produk:</strong> ${item.Produk||'-'}
+              </div>`;
+            const iw = new google.maps.InfoWindow({ content: infoHtml });
+            marker.addListener('click', ()=> iw.open(map,marker));
           });
 
-          // heatmap layer
-          new google.maps.visualization.HeatmapLayer({
-            data: heatData,
-            radius: 50
-          }).setMap(map);
+          // 3) buat satu heatmap per tim
+          Object.entries(perTeamHeat).forEach(([team, points]) => {
+            if (!points.length) return;
+            new google.maps.visualization.HeatmapLayer({
+              data: points,
+              radius: 50,
+              gradient: teamGradients[team]
+            }).setMap(map);
+          });
         })
-        .catch(err => console.error('Gagal load data akuisisi:', err));
+        .catch(e => console.error('Gagal load data akuisisi:', e));
     }
   </script>
 
-  <!-- 4) Load Google Maps API dengan callback initMap -->
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuSerwi_mY5J89CihWaUZ6Itl_0ywIto&libraries=visualization&callback=initMap"
     async defer>
