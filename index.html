@@ -237,19 +237,26 @@
         countdown.innerHTML = `Reset dalam: ${d}h ${h}j ${m}m ${s}s`;
       }, 1000);
 
-      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/LeaderboardTim")
-        .then(res => res.json())
-        .then(data => {
-          const tbody = document.getElementById("leaderboard-body");
-          tbody.innerHTML = "";
-          data.forEach((row, i) => {
-            const cls = row.Rank === "1" ? "rank-1" : "";
-            tbody.innerHTML += `<tr><td>${row.Rank}</td><td class='${cls}'>${row['Nama Tim']}</td><td>${row['Total Poin']}</td></tr>`;
-          });
-        })
-        .catch(() => {
-          document.getElementById("leaderboard-body").innerHTML = '<tr><td colspan="3">Gagal memuat data</td></tr>';
-        });
+        fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/LeaderboardTim")
+  .then(res => res.json())
+  .then(data => {
+    const tbody = document.getElementById("leaderboard-body");
+    tbody.innerHTML = "";
+    data.forEach((row, i) => {
+      // Apply rank-1 class to the entire row if it's Rank 1
+      const cls = row.Rank === "1" ? "rank-1" : ""; // Apply rank-1 class to the row
+      tbody.innerHTML += `
+        <tr class="${cls}">
+          <td>${row.Rank}</td>
+          <td>${row['Nama Tim']}</td>
+          <td>${row['Total Poin']}</td>
+        </tr>
+      `;
+    });
+  })
+  .catch(() => {
+    document.getElementById("leaderboard-body").innerHTML = '<tr><td colspan="3">Gagal memuat data</td></tr>';
+  });
 
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir")
         .then(res => res.json())
