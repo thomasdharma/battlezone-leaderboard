@@ -68,18 +68,15 @@ body {
   background: linear-gradient(90deg, #ffd700, #ff8c00);
   color: #000;
   font-weight: bold;
-  position: relative;
-  z-index: 1;
   animation: glowRow 2s ease-in-out infinite alternate;
 }
 .rank-1 td {
   background: linear-gradient(90deg, #ffd700, #ff8c00);
 }
 
-/* Glow effect for Rank 1 */
 @keyframes glowRow {
-  from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
-  to   { box-shadow: 0 0 25px rgba(255, 215, 0, 1); }
+  from { box-shadow: 0 0 10px rgba(255,215,0,0.4); }
+  to   { box-shadow: 0 0 25px rgba(255,215,0,1); }
 }
 
 /* === Menu and Buttons === */
@@ -97,49 +94,60 @@ body {
   padding: 10px 20px;
   border-radius: 10px;
   font-size: 14px;
-  cursor: pointer;
   font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
   transition: background 0.3s;
   text-decoration: none;
-  font-weight: bold;
 }
 
 .menu-btn:hover, .menu-buttons button:hover {
   background: #00ffffcc;
-  color: #000;
 }
 
 /* === Modal Popup (Daftar Hadiah) === */
 .modal {
-  display: none;               /* sembunyikan kecuali diaktifkan */
+  display: none;
   position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  overflow-y: auto;
+  z-index: 2000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.85);
+}
+
+.modal.show {
+  display: block;
+}
+
+@keyframes popIn {
+  0%   { transform: scale(0.5) translateY(-200px); opacity: 0; }
+  60%  { transform: scale(1.1) translateY(20px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); }
 }
 
 .modal-content {
-  background: #111;
-  margin: 60px auto;
-  padding: 20px;
-  border: 2px solid #0ff;
-  width: 90%;
-  max-width: 600px;
-  border-radius: 10px;
+  background: radial-gradient(circle at top left,
+                rgba(30,30,30,0.95),
+                rgba(10,10,10,0.95));
+  margin: 80px auto;
+  padding: 30px;
+  width: 90%; max-width: 600px;
+  border-radius: 16px;
+  border: 2px solid #ffd700;
+  box-shadow:
+    0 0 20px rgba(255,215,0,0.6),
+    inset 0 0 10px rgba(255,215,0,0.4);
+  animation: popIn 0.6s ease-out forwards;
   position: relative;
-  text-align: center;
 }
 
 .modal .close {
   position: absolute;
-  top: 10px;
-  right: 20px;
-  color: #fff;
-  font-size: 24px;
+  top: 12px; right: 16px;
+  font-size: 28px;
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255,215,0,0.8);
   cursor: pointer;
 }
 
@@ -147,51 +155,69 @@ body {
 .reward-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 24px;
   justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .reward-item {
+  background: linear-gradient(145deg,
+                rgba(40,40,40,0.9),
+                rgba(20,20,20,0.9));
+  width: 130px;
+  padding: 20px;
+  border-radius: 12px;
   text-align: center;
-  flex: 1 1 120px;
-  max-width: 140px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,255,255,0.2);
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.5),
+    0 0 8px rgba(255,215,0,0.3);
+  transform: perspective(500px) rotateX(5deg);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.reward-item:hover {
+  transform: perspective(500px) rotateX(0) scale(1.05);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.6),
+    0 0 16px rgba(255,215,0,0.7);
 }
 
 .reward-item.reward-winner {
-  flex: 1 1 180px;
-  max-width: 220px;
+  width: 180px;
+  padding: 24px;
+  border: 2px solid gold;
+  box-shadow:
+    0 0 20px rgba(255,215,0,1),
+    inset 0 0 12px rgba(255,215,0,0.6);
 }
 
-.reward-img {
-  width: 40px;
+.reward-img, .reward-img-combo {
+  display: block;
+  margin: 0 auto 12px;
+  animation: floatMedal 3s ease-in-out infinite;
 }
 
-.reward-img-combo {
-  width: 70px;
+@keyframes floatMedal {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-6px); }
 }
 
 .plus-sign {
-  font-size: 20px;
-  margin: 0 6px;
-  color: #fff;
+  font-size: 24px;
+  margin: 0 8px;
+  color: #ffd700;
+  text-shadow: 0 0 4px rgba(255,215,0,0.8);
 }
 
 /* === Styling for Merchant Info === */
 #last-merchant {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255,255,255,0.04);
   border-radius: 12px;
   padding: 20px;
   backdrop-filter: blur(8px);
-  color: #fff;
   animation: pulseGlow 3s infinite;
-  border: 2px solid rgba(255, 149, 0, 0.3);
-  box-shadow: 0 0 15px rgba(255, 149, 0, 0.5), 0 0 25px rgba(255, 149, 0, 0.3);
+  border: 2px solid rgba(255,149,0,0.3);
+  box-shadow: 0 0 15px rgba(255,149,0,0.5),0 0 25px rgba(255,149,0,0.3);
   margin-top: 30px;
 }
 
@@ -216,7 +242,7 @@ body {
 }
 
 .anggota-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255,255,255,0.05);
   padding: 20px;
   border-radius: 15px;
   width: 220px;
@@ -226,9 +252,9 @@ body {
 }
 
 .anggota-card h4 {
+  color: #00ffff;
   margin-bottom: 10px;
   font-size: 18px;
-  color: #00ffff;
 }
 
 .card-body p {
@@ -239,7 +265,6 @@ body {
 .card-foot {
   margin-top: 12px;
   font-size: 13px;
-  color: #fff;
 }
 
 /* === Responsive Design === */
@@ -262,15 +287,12 @@ body {
 /* === Glow Animation for General Effects === */
 @keyframes pulseGlow {
   0% {
-    box-shadow: 0 0 10px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.2);
-    border-color: rgba(255, 149, 0, 0.3);
+    box-shadow: 0 0 10px rgba(255,149,0,0.4),0 0 20px rgba(255,149,0,0.2);
   }
   50% {
-    box-shadow: 0 0 20px rgba(255, 149, 0, 0.6), 0 0 40px rgba(255, 149, 0, 0.3);
-    border-color: rgba(255, 149, 0, 0.6);
+    box-shadow: 0 0 20px rgba(255,149,0,0.6),0 0 40px rgba(255,149,0,0.3);
   }
   100% {
-    box-shadow: 0 0 10px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.2);
-    border-color: rgba(255, 149, 0, 0.3);
+    box-shadow: 0 0 10px rgba(255,149,0,0.4),0 0 20px rgba(255,149,0,0.2);
   }
 }
