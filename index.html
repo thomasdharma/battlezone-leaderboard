@@ -137,14 +137,16 @@
         });
 
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/iseng")
-        .then(res => res.json())
-        .then(data => {
-          const msg = data.map(row => row['Teks'] || '').join(' • ');
-          document.getElementById("marquee-text").textContent = msg || 'Tidak ada info terbaru.';
-        })
-        .catch(() => {
-          document.getElementById("marquee-text").textContent = 'Gagal memuat info marquee.';
-        });
+  .then(res => res.json())
+  .then(data => {
+    const marquee = document.getElementById("marquee-text");
+    const msg = data.map(row => row['Teks'] || '').join(' • ');
+    marquee.textContent = msg || 'Tidak ada info terbaru.';
+    marquee.style.setProperty('--length', msg.length);
+  })
+  .catch(() => {
+    document.getElementById("marquee-text").textContent = 'Gagal memuat info marquee.';
+  });
     });
   </script>
 </body>
