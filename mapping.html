@@ -6,19 +6,12 @@
   <title>Mapping Zone Kawasan</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Full-screen bg */
-    html, body {
-      height:100%;
-      margin:0; padding:0;
-      font-family:'Orbitron',sans-serif;
-    }
+    html, body { height:100%; margin:0; padding:0; font-family:'Orbitron',sans-serif; }
     .background {
-      position:fixed; top:0; left:0;
-      width:100%; height:100%;
+      position:fixed; top:0; left:0; width:100%; height:100%;
       background:#0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
       z-index:-1;
     }
-    /* tombol back */
     .back-btn {
       position:absolute; top:20px; left:20px;
       background:#0ff; color:#000;
@@ -29,25 +22,21 @@
     }
     .back-btn:hover { background:#00ffffcc; }
 
-    /* header */
     header.header {
       padding:20px; text-align:center;
       color:#0ff; text-shadow:0 0 5px #0ff;
     }
 
-    /* peta */
     #map {
       width:90%; max-width:1200px;
       height:calc(100vh - 160px);
       margin:0 auto 60px;
       border-radius:12px;
       box-shadow:0 0 20px rgba(0,0,0,0.6);
+      z-index:0;
     }
     @media(max-width:600px){
-      #map {
-        width:95%;
-        height:60vh;
-      }
+      #map { width:95%; height:60vh; }
     }
   </style>
 </head>
@@ -62,8 +51,8 @@
   <div id="map"></div>
 
   <script>
-    // Inisialisasi tim & styling
-    const teamColors   = {
+    // warna & gradient per tim
+    const teamColors = {
       'Tim Alpha':   '#0066cc',
       'Tim Bravo':   '#cc0000',
       'Tim Charlie': '#00cc44'
@@ -92,45 +81,52 @@
         center, zoom:13
       });
 
-      // 1) KML zona kawasan
+      // 1) Layer zona kawasan dari My Maps
       new google.maps.KmlLayer({
         url: 'https://www.google.com/maps/d/kml?forcekml=1&mid=11uDxJ_HJDwN9UbU9ihAhrloBmR--18o',
         preserveViewport: true,
-        map: map
+        map
       });
 
-      // 2) fetch data & kumpulkan per-tim
-      const perTeamHeat = { 'Tim Alpha': [], 'Tim Bravo': [], 'Tim Charlie': [] };
+      // 2) Ambil data akuisisi, kelompokkan per tim
+      const perTeamHeat = {
+        'Tim Alpha':   [],
+        'Tim Bravo':   [],
+        'Tim Charlie': []
+      };
 
       fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Akuisisi%20Merchant')
         .then(r => r.json())
         .then(data => {
           data.forEach(item => {
-            const lat = parseFloat(item.Lat);
-            const lng = parseFloat(item.Lng);
+            const lat  = parseFloat(item.Lat);
+            const lng  = parseFloat(item.Lng);
             const team = item['Nama Tim'];
-            if (isNaN(lat)||isNaN(lng)||!team) return;
-
-            const pos = new google.maps.LatLng(lat,lng);
+            if (isNaN(lat) || isNaN(lng) || !team) return;
+            const pos = new google.maps.LatLng(lat, lng);
             perTeamHeat[team]?.push(pos);
 
-            // marker custom: icon circle 0 + emoji label
+            // render marker sebagai DOM (optimized=false), zIndex tinggi -> gampang diklik
             const marker = new google.maps.Marker({
               position: pos,
-              map: map,
+              map,
+              optimized: false,                                 // disable canvas optimization
+              zIndex: google.maps.Marker.MAX_ZINDEX,            // selalu di atas heatmap
               icon: { path: google.maps.SymbolPath.CIRCLE, scale:0 },
               label: {
                 text: '📌',
-                color: teamColors[team],
+                color: teamColors[team] || '#fff',
                 fontSize: '24px'
               }
             });
+
+            // info window
             const infoHtml = `
               <div style="
-                background:#fff;color:#000;
-                padding:10px 14px;border-radius:8px;
+                background:#fff; color:#000;
+                padding:10px 14px; border-radius:8px;
                 font-family:'Orbitron',sans-serif;
-                line-height:1.4;min-width:200px;
+                line-height:1.4; min-width:200px;
               ">
                 <strong>Nama Toko:</strong> ${item['Nama Toko']}<br>
                 <strong>Nama Tim:</strong> ${team}<br>
@@ -138,10 +134,10 @@
                 <strong>Produk:</strong> ${item.Produk||'-'}
               </div>`;
             const iw = new google.maps.InfoWindow({ content: infoHtml });
-            marker.addListener('click', ()=> iw.open(map,marker));
+            marker.addListener('click', () => iw.open(map, marker));
           });
 
-          // 3) buat satu heatmap per tim
+          // 3) Buat heatmap per tim
           Object.entries(perTeamHeat).forEach(([team, points]) => {
             if (!points.length) return;
             new google.maps.visualization.HeatmapLayer({
@@ -154,7 +150,6 @@
         .catch(e => console.error('Gagal load data akuisisi:', e));
     }
   </script>
-
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuSerwi_mY5J89CihWaUZ6Itl_0ywIto&libraries=visualization&callback=initMap"
     async defer>
