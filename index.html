@@ -6,6 +6,21 @@
   <title>Battlezone Acquisition 2025</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    .leaderboard-section h2 {
+      margin-bottom: 1.2rem;
+    }
+    .rank-1 {
+      background: linear-gradient(90deg, gold, orange);
+      color: #000;
+      font-weight: bold;
+      animation: glowRow 1.5s infinite alternate;
+    }
+    @keyframes glowRow {
+      from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+      to { box-shadow: 0 0 25px rgba(255, 215, 0, 1); }
+    }
+  </style>
 </head>
 <body>
   <div class="background"></div>
@@ -72,7 +87,7 @@
     window.addEventListener("DOMContentLoaded", function () {
       const countdown = document.getElementById("countdown");
       const now = new Date();
-      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0); // akhir bulan ini
+      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
       const target = new Date(lastDay.getFullYear(), lastDay.getMonth(), lastDay.getDate(), 8, 0, 0);
       const timer = setInterval(() => {
         const now = new Date();
@@ -94,8 +109,9 @@
         .then(data => {
           const tbody = document.getElementById("leaderboard-body");
           tbody.innerHTML = "";
-          data.forEach(row => {
-            tbody.innerHTML += `<tr><td>${row.Rank}</td><td>${row['Nama Tim']}</td><td>${row['Total Poin']}</td></tr>`;
+          data.forEach((row, i) => {
+            const cls = row.Rank === "1" ? "rank-1" : "";
+            tbody.innerHTML += `<tr class='${cls}'><td>${row.Rank}</td><td>${row['Nama Tim']}</td><td>${row['Total Poin']}</td></tr>`;
           });
         })
         .catch(() => {
