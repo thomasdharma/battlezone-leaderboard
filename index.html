@@ -29,8 +29,9 @@
       background-color: rgba(255, 149, 0, 0.2);
     }
 
+    /* Rank 1 Styling */
     .rank-1 {
-      background: linear-gradient(90deg, gold, orange);
+      background: linear-gradient(90deg, #ffd700, #ff8c00);
       color: #000;
       font-weight: bold;
       position: relative;
@@ -38,21 +39,7 @@
       animation: glowRow 1.5s infinite alternate;
     }
 
-    .rank-1::before {
-      content: '👑 CHAMPION';
-      position: absolute;
-      top: -8px;
-      left: 8px;
-      font-size: 12px;
-      background: #000;
-      padding: 4px 10px;
-      border-radius: 6px;
-      color: #ffd700;
-      box-shadow: 0 0 8px #ffd700;
-      z-index: 2;
-    }
-
-    /* Glow animation for champion */
+    /* Glow effect for Rank 1 */
     @keyframes glowRow {
       from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
       to { box-shadow: 0 0 25px rgba(255, 215, 0, 1); }
@@ -257,7 +244,7 @@
           tbody.innerHTML = "";
           data.forEach((row, i) => {
             const cls = row.Rank === "1" ? "rank-1" : "";
-           tbody.innerHTML += `<tr><td>${row.Rank}</td><td class='${cls}'>${row['Nama Tim']}</td><td>${row['Total Poin']}</td></tr>`;
+            tbody.innerHTML += `<tr><td>${row.Rank}</td><td class='${cls}'>${row['Nama Tim']}</td><td>${row['Total Poin']}</td></tr>`;
           });
         })
         .catch(() => {
