@@ -3,91 +3,177 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Battlezone Acquisition 2025</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
+  <title>Bonus Battlezone 2025</title>
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#004080" />
-</head>
-<body>
-  <div class="background"></div>
-
-  <header class="header">
-    <h1>🏆 Battlezone Acquisition 2025</h1>
-    <p>Bank Mandiri Lapangan Merdeka</p>
-    <div class="countdown">Reset dalam: <span id="reset-timer">--</span></div>
-  </header>
-
-  <section class="leaderboard-section">
-    <h2>🥇 Leaderboard Tim</h2>
-    <div class="leaderboard">
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Tim</th>
-            <th>Total Poin</th>
-          </tr>
-        </thead>
-        <tbody id="leaderboard-body">
-          <tr class="rank-1">
-            <td>1</td>
-            <td>Tim Alpha</td>
-            <td>⍥</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Tim Bravo</td>
-            <td>⍥</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Tim Charlie</td>
-            <td>⍥</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="last-merchant">
-    <h3>📌 Merchant Terakhir Diakuisisi</h3>
-    <div id="merchant-info">
-      <p>🏪 <strong>Cafe Lapangan Merdeka</strong></p>
-      <p>👤 Oleh: Thomas</p>
-      <p>🧾 Produk: EDC</p>
-      <p>📅 Tanggal: 16 Apr 2025</p>
-    </div>
-  </section>
-
-  <section class="menu-buttons">
-    <a href="bonus.html" class="menu-btn">🎁 Daftar Hadiah</a>
-    <a href="detail.html" class="menu-btn">📄 Detail Pencapaian Individu</a>
-    <a href="map.html" class="menu-btn">🗺️ Mapping Zone Kawasan</a>
-    <a href="bonus.html#target" class="menu-btn">📊 Info Target & Bonus Point</a>
-  </section>
-
-  <script>
-    // Countdown Timer Script
-    const resetDate = new Date();
-    resetDate.setHours(24, 0, 0, 0); // reset at midnight
-    const countdown = document.getElementById("reset-timer");
-
-    function updateCountdown() {
-      const now = new Date();
-      const diff = resetDate - now;
-      if (diff <= 0) {
-        countdown.textContent = "00h 00m 00s";
-        return;
-      }
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-      countdown.textContent = `${hours}h ${minutes}m ${seconds}s`;
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('assets/neon-bg.png') no-repeat center center fixed;
+      background-size: cover;
     }
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.85);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    h1, h2, h3 {
+      color: #003366;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .award-box {
+      background: #f0f5ff;
+      border-left: 5px solid #003366;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .highlight {
+      background: #fff8dc;
+      border-left: 5px solid #e6b800;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+      color: #5a4500;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <h1>🏆 BONUS BATTLEZONE ACQUISITION 2025</h1>
+      <p style="text-align: center;">Program apresiasi untuk tim terbaik dalam akuisisi produk Mandiri di kawasan <strong>Medan Area Kota</strong>.</p>
+
+      <div class="award-box">
+        <h2>🎖 Penghargaan Juara</h2>
+        <p>Tim terbaik ditentukan dari perolehan total poin tertinggi dalam periode kompetisi.</p>
+        <ul>
+          <li>🥇 Juara 1: Medali Emas + Hadiah Utama</li>
+          <li>🥈 Juara 2: Medali Perak</li>
+          <li>🥉 Juara 3: Medali Perunggu</li>
+        </ul>
+      </div>
+
+      <div class="award-box">
+        <h2>📊 Sistem Poin</h2>
+        <h3>Bobot Produk MPS:</h3>
+        <ul>
+          <li>Livin: 1 poin</li>
+          <li>KOPRA: 3 poin</li>
+          <li>EDC/LVM: 3 poin</li>
+          <li>TabNow: 1 poin</li>
+          <li>Tabungan Bisnis: 3 poin</li>
+          <li>Visit Point: 0.5 poin (tidak termasuk MPS)</li>
+        </ul>
+      </div>
+
+      <div class="award-box">
+        <h2>🔁 Multiplier Berdasarkan Cross-sell</h2>
+        <p>Jumlah produk MPS yang berhasil dicross-sell akan mempengaruhi multiplier terhadap total poin:</p>
+        <ul>
+          <li>1 Produk MPS: <strong>x0.75</strong></li>
+          <li>2 Produk: <strong>x1.00</strong></li>
+          <li>3 Produk: <strong>x1.30</strong> <em>(Cross-sell menengah)</em></li>
+          <li>4 Produk: <strong>x1.50</strong> <em>(Cross-sell optimal)</em></li>
+          <li>5 Produk: <strong>x1.60</strong> <em>(Cross-sell maksimal)</em></li>
+        </ul>
+
+        <h3>📐 Tiering Tambahan (Berdasarkan Capaian Target):</h3>
+        <ul>
+          <li><strong>MPS 1 Produk:</strong>
+            <ul>
+              <li>&lt;100% target: <strong>x0.75</strong></li>
+              <li>=100% target: <strong>x0.75</strong></li>
+              <li>101%–200%: <strong>x0.80</strong></li>
+              <li>&gt;200%: <strong>x0.85</strong></li>
+            </ul>
+          </li>
+          <li><strong>MPS 2 Produk:</strong>
+            <ul>
+              <li>&lt;100%: <strong>x0</strong></li>
+              <li>≥100%: <strong>x1.00</strong></li>
+            </ul>
+          </li>
+          <li><strong>MPS 3 Produk:</strong>
+            <ul>
+              <li>&lt;100%: <strong>x0.20</strong></li>
+              <li>≥100%: <strong>x1.30</strong></li>
+            </ul>
+          </li>
+          <li><strong>MPS 4 Produk:</strong>
+            <ul>
+              <li>&lt;100%: <strong>x0.30</strong></li>
+              <li>≥100%: <strong>x1.50</strong></li>
+            </ul>
+          </li>
+          <li><strong>MPS 5 Produk:</strong>
+            <ul>
+              <li>&lt;100%: <strong>x0.40</strong></li>
+              <li>≥100%: <strong>x1.60</strong></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="highlight">
+          🎯 <strong>Tips:</strong> Ingin skor tinggi? Fokus pada pencapaian target dan cross-sell sebanyak mungkin produk!
+        </div>
+      </div>
+
+      <div class="award-box">
+        <h2>🎯 Target Akuisisi Produk (per Tim)</h2>
+        <p>Target disesuaikan dengan jumlah produk yang dicross-sell. Semakin banyak produk, semakin ringan per targetnya.</p>
+        <ul>
+          <li>Livin: 170 → 51</li>
+          <li>KOPRA: 7 → 2</li>
+          <li>EDC/LVM: 9 → 3</li>
+          <li>TabNow: 150 → 45</li>
+          <li>TabBisnis: 6 → 2</li>
+        </ul>
+        <p><em>*Detail lengkap tersedia di spreadsheet resmi Battlezone.</em></p>
+      </div>
+
+      <div class="award-box">
+        <h2>📌 Ketentuan Tambahan</h2>
+        <ul>
+          <li>Data diambil dari spreadsheet resmi dan terverifikasi</li>
+          <li>Keputusan panitia bersifat mutlak dan tidak dapat diganggu gugat</li>
+        </ul>
+      </div>
+
+      <p style="text-align:center; font-weight:bold; margin-top:40px;">🚀 Tunjukkan performa terbaik tim kamu dan menangkan medali Battlezone 2025!</p>
+    </div>
+  </div>
 </body>
 </html>
