@@ -71,6 +71,11 @@
     </div>
   </div>
 
+  <!-- Marquee Section -->
+  <div class="marquee-container">
+    <div id="marquee-text">Loading info...</div>
+  </div>
+
   <script>
     window.addEventListener("DOMContentLoaded", function () {
       const countdown = document.getElementById("countdown");
@@ -92,13 +97,11 @@
         countdown.innerHTML = `Reset dalam: ${d}h ${h}j ${m}m ${s}s`;
       }, 1000);
 
-      // Fetch data from 'Summary Per Tim' sheet
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Summary%20Per%20Tim")
         .then(res => res.json())
         .then(data => {
           const tbody = document.getElementById("leaderboard-body");
           tbody.innerHTML = "";
-
           const sortedData = data.sort((a, b) => b['Total Poin'] - a['Total Poin']);
           sortedData.forEach((row, i) => {
             const rank = i + 1;
@@ -108,14 +111,14 @@
                 <td>${rank}</td>
                 <td>${row['Nama Tim'] || 'N/A'}</td>
                 <td>${row['Total Poin'] || '0'}</td>
-              </tr>`;
+              </tr>
+            `;
           });
         })
         .catch(() => {
           document.getElementById("leaderboard-body").innerHTML = '<tr><td colspan="3">Gagal memuat data</td></tr>';
         });
 
-      // Fetch Merchant Info
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir")
         .then(res => res.json())
         .then(data => {
@@ -124,10 +127,21 @@
             <p>🏪 <strong>${m.Merchant}</strong></p>
             <p>👤 Oleh: ${m.Oleh}</p>
             <p>📍 Produk: ${m.Produk}</p>
-            <p>🗓️ Tanggal: ${m.Tanggal}</p>`;
+            <p>🗓️ Tanggal: ${m.Tanggal}</p>
+          `;
         })
         .catch(() => {
           document.getElementById("merchant-info").innerHTML = '<p>Gagal memuat data merchant.</p>';
+        });
+
+      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/iseng")
+        .then(res => res.json())
+        .then(data => {
+          const msg = data.map(row => row['Teks'] || '').join(' • ');
+          document.getElementById("marquee-text").textContent = msg || 'Tidak ada info terbaru.';
+        })
+        .catch(() => {
+          document.getElementById("marquee-text").textContent = 'Gagal memuat info marquee.';
         });
     });
   </script>
