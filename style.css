@@ -65,14 +65,13 @@ body {
 
 /* Rank 1 Styling */
 .rank-1 {
-  background: linear-gradient(90deg, #ffd700, #ff8c00); /* Emas di seluruh kolom Rank 1 */
+  background: linear-gradient(90deg, #ffd700, #ff8c00); /* Gold gradient background */
   color: #000;
   font-weight: bold;
   position: relative;
   z-index: 1;
-  animation: glowRow 2s ease-in-out infinite alternate;
-  border-radius: 8px;
-  text-align: center; /* Pastikan teks di tengah */
+  animation: glowRow 2s ease-in-out infinite alternate; /* Apply glowing animation */
+  text-align: center;
 }
 
 .menu-buttons {
@@ -323,10 +322,10 @@ body {
 /* Animasi untuk glowing effect yang terjadi di seluruh baris Rank 1 */
 @keyframes glowRow {
   from {
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); /* Glow lembut pada awal */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); /* Subtle glow effect */
   }
   to {
-    box-shadow: 0 0 25px rgba(255, 215, 0, 1); /* Glow lebih intens pada akhir */
+    box-shadow: 0 0 25px rgba(255, 215, 0, 1); /* Stronger glow effect */
   }
 }
 
