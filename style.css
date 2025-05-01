@@ -65,7 +65,7 @@ body {
 
 /* Rank 1 Styling */
 .rank-1 {
-  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  background: linear-gradient(90deg, #ffd700, #ff8c00); /* Emas di seluruh kolom Rank 1 */
   color: #000;
   font-weight: bold;
   position: relative;
@@ -75,10 +75,11 @@ body {
   text-align: center;
 }
 
+/* Menghapus efek tulisan "CHAMPION" */
 .rank-1::before {
-  content: '👑 CHAMPION';
+  content: ''; /* Menghapus tulisan "CHAMPION" */
   position: absolute;
-  top: -10px;
+  top: -10px; /* Menyesuaikan posisinya */
   left: 8px;
   font-size: 12px;
   font-weight: bold;
@@ -89,7 +90,6 @@ body {
   box-shadow: 0 0 8px #ffd700;
   z-index: 2;
 }
-
 .menu-buttons {
   margin-top: 20px;
   display: flex;
