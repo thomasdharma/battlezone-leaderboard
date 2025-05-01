@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Battlezone Acquisition 2025</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#004080" />
 </head>
 <body>
   <div class="background"></div>
+
   <header class="header">
     <h1>🏆 Battlezone Acquisition 2025</h1>
     <p>Bank Mandiri Lapangan Merdeka</p>
-    <div id="countdown" class="countdown">Loading countdown...</div>
+    <div class="countdown">Reset dalam: <span id="reset-timer">--</span></div>
   </header>
 
   <section class="leaderboard-section">
@@ -26,116 +29,65 @@
             <th>Total Poin</th>
           </tr>
         </thead>
-        <tbody id="leaderboard-body"><tr><td colspan="3">Loading...</td></tr></tbody>
+        <tbody id="leaderboard-body">
+          <tr class="rank-1">
+            <td>1</td>
+            <td>Tim Alpha</td>
+            <td>⍥</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Tim Bravo</td>
+            <td>⍥</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Tim Charlie</td>
+            <td>⍥</td>
+          </tr>
+        </tbody>
       </table>
     </div>
-
-    <section id="last-merchant">
-      <h3>📌 Merchant Terakhir Diakuisisi</h3>
-      <div id="merchant-info">
-        <p>Loading...</p>
-      </div>
-    </section>
-
-    <div class="menu-buttons">
-  <button onclick="document.getElementById('rewardModal').style.display='block'">🎁 Daftar Hadiah</button>
-  <a href="detail.html" class="menu-btn wide-button">🧾 Detail Pencapaian Individu</a>
-  <button onclick="window.location.href='mapping.html'" class="menu-btn">🌐 Mapping Zone Kawasan</button>
-  <button onclick="window.location.href='bonus.html'" class="menu-btn">📊 Info Target & Bonus Point</button>
-</div>
-      
-</div>
   </section>
 
-  <!-- Modal Hadiah -->
-  <div id="rewardModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="document.getElementById('rewardModal').style.display='none'">&times;</span>
-      <h2>🎁 Daftar Hadiah</h2>
-      <div class="reward-grid reward-centered">
-        <div class="reward-item">
-          <img src="assets/silver-medal.png" class="reward-img" alt="Silver Medal" />
-          <p>🥈 Juara 2<br>Silver Medal</p>
-        </div>
-        <div class="reward-item reward-winner">
-          <div class="reward-combo">
-            <img src="assets/gold-medal.png" class="reward-img-combo" alt="Gold Medal" />
-            <span class="plus-sign">+</span>
-            <img src="assets/gift.png" class="reward-img-combo" style="width: 55px;" alt="Gift" />
-          </div>
-          <p>🥇 Juara 1<br>Gold Medal + Hadiah</p>
-        </div>
-        <div class="reward-item">
-          <img src="assets/bronze-medal.png" class="reward-img" alt="Bronze Medal" />
-          <p>🥉 Juara 3<br>Bronze Medal</p>
-        </div>
-      </div>
+  <section id="last-merchant">
+    <h3>📌 Merchant Terakhir Diakuisisi</h3>
+    <div id="merchant-info">
+      <p>🏪 <strong>Cafe Lapangan Merdeka</strong></p>
+      <p>👤 Oleh: Thomas</p>
+      <p>🧾 Produk: EDC</p>
+      <p>📅 Tanggal: 16 Apr 2025</p>
     </div>
-  </div>
+  </section>
+
+  <section class="menu-buttons">
+    <a href="bonus.html" class="menu-btn">🎁 Daftar Hadiah</a>
+    <a href="detail.html" class="menu-btn">📄 Detail Pencapaian Individu</a>
+    <a href="map.html" class="menu-btn">🗺️ Mapping Zone Kawasan</a>
+    <a href="bonus.html#target" class="menu-btn">📊 Info Target & Bonus Point</a>
+  </section>
 
   <script>
-    window.addEventListener("DOMContentLoaded", function () {
-      const countdown = document.getElementById("countdown");
+    // Countdown Timer Script
+    const resetDate = new Date();
+    resetDate.setHours(24, 0, 0, 0); // reset at midnight
+    const countdown = document.getElementById("reset-timer");
+
+    function updateCountdown() {
       const now = new Date();
-      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-      const target = new Date(lastDay.getFullYear(), lastDay.getMonth(), lastDay.getDate(), 8, 0, 0);
-      const timer = setInterval(() => {
-        const now = new Date();
-        const dist = target - now;
-        if (dist <= 0) {
-          clearInterval(timer);
-          countdown.innerHTML = "Leaderboard disembunyikan. Hasil diumumkan hari Senin!";
-          return;
-        }
-        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
-        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((dist % (1000 * 60)) / 1000);
-        countdown.innerHTML = `Reset dalam: ${d}h ${h}j ${m}m ${s}s`;
-      }, 1000);
+      const diff = resetDate - now;
+      if (diff <= 0) {
+        countdown.textContent = "00h 00m 00s";
+        return;
+      }
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      countdown.textContent = `${hours}h ${minutes}m ${seconds}s`;
+    }
 
-      // Fetch data from 'Summary Per Tim' sheet
-      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Summary%20Per%20Tim")
-        .then(res => res.json())
-        .then(data => {
-          const tbody = document.getElementById("leaderboard-body");
-          tbody.innerHTML = "";
-
-          // Sort data by Total Poin in descending order to get rank
-          const sortedData = data.sort((a, b) => b['Total Poin'] - a['Total Poin']);
-          
-          // Add rank based on sorted order
-          sortedData.forEach((row, i) => {
-            const rank = i + 1; // Rank starts from 1
-            const cls = rank === 1 ? "rank-1" : ""; // Apply rank-1 class to the row if it's Rank 1
-            tbody.innerHTML += `
-              <tr class="${cls}">
-                <td>${rank}</td> <!-- Add Rank -->
-                <td>${row['Nama Tim'] || 'N/A'}</td>
-                <td>${row['Total Poin'] || '0'}</td>
-              </tr>
-            `;
-          });
-        })
-        .catch(() => {
-          document.getElementById("leaderboard-body").innerHTML = '<tr><td colspan="3">Gagal memuat data</td></tr>';
-        });
-
-      // Fetch Merchant Info (if needed)
-      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir")
-        .then(res => res.json())
-        .then(data => {
-          const m = data[0];
-          document.getElementById("merchant-info").innerHTML = `
-            <p>🏪 <strong>${m.Merchant}</strong></p>
-            <p>👤 Oleh: ${m.Oleh}</p>
-            <p>📍 Produk: ${m.Produk}</p>
-            <p>🗓️ Tanggal: ${m.Tanggal}</p>`;
-        })
-        .catch(() => {
-          document.getElementById("merchant-info").innerHTML = '<p>Gagal memuat data merchant.</p>';
-        });
-    });
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
   </script>
 </body>
 </html>
