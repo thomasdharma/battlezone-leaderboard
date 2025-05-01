@@ -13,10 +13,11 @@
       padding: 0;
       background: url('assets/neon-bg.png') no-repeat center center fixed;
       background-size: cover;
+      color: #000;
     }
 
     .overlay {
-      background-color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.7);
       min-height: 100vh;
       padding: 20px;
     }
@@ -60,6 +61,39 @@
       color: #5a4500;
     }
 
+    .progress-bar {
+      margin-bottom: 12px;
+    }
+    .progress-bar span {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+    .bar {
+      height: 8px;
+      background: #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .fill {
+      height: 8px;
+      display: block;
+    }
+    .livin { width: 20%; background: #00f5ff; }
+    .kopra { width: 60%; background: #ffa500; }
+    .edc { width: 60%; background: #00c853; }
+    .tabnow { width: 20%; background: #ff4081; }
+    .tabbisnis { width: 60%; background: #673ab7; }
+
+    details {
+      margin-top: 16px;
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     @media (max-width: 600px) {
       .container {
         padding: 20px;
@@ -89,14 +123,27 @@
       <div class="award-box">
         <h2>📊 Sistem Poin</h2>
         <h3>Bobot Produk MPS:</h3>
-        <ul>
-          <li>Livin: 1 poin</li>
-          <li>KOPRA: 3 poin</li>
-          <li>EDC/LVM: 3 poin</li>
-          <li>TabNow: 1 poin</li>
-          <li>Tabungan Bisnis: 3 poin</li>
-          <li>Visit Point: 0.5 poin (tidak termasuk MPS)</li>
-        </ul>
+        <div class="progress-bar">
+          <span>Livin (1 poin)</span>
+          <div class="bar"><div class="fill livin"></div></div>
+        </div>
+        <div class="progress-bar">
+          <span>KOPRA (3 poin)</span>
+          <div class="bar"><div class="fill kopra"></div></div>
+        </div>
+        <div class="progress-bar">
+          <span>EDC/LVM (3 poin)</span>
+          <div class="bar"><div class="fill edc"></div></div>
+        </div>
+        <div class="progress-bar">
+          <span>TabNow (1 poin)</span>
+          <div class="bar"><div class="fill tabnow"></div></div>
+        </div>
+        <div class="progress-bar">
+          <span>Tabungan Bisnis (3 poin)</span>
+          <div class="bar"><div class="fill tabbisnis"></div></div>
+        </div>
+        <p>Visit Point: 0.5 poin (tidak termasuk MPS)</p>
       </div>
 
       <div class="award-box">
@@ -153,23 +200,31 @@
 
       <div class="award-box">
         <h2>🎯 Target Akuisisi Produk (per Tim)</h2>
-        <p>Target disesuaikan dengan jumlah produk yang dicross-sell. Semakin banyak produk, semakin ringan per targetnya.</p>
+        <p>Target per tim telah disesuaikan agar semakin banyak produk yang berhasil dicross-sell, semakin ringan pula target per produknya. Berikut rincian lengkap:</p>
         <ul>
-          <li>Livin: 170 → 51</li>
-          <li>KOPRA: 7 → 2</li>
-          <li>EDC/LVM: 9 → 3</li>
-          <li>TabNow: 150 → 45</li>
-          <li>TabBisnis: 6 → 2</li>
+          <li><strong>Livin:</strong> 1 produk: 170 | 2 produk: 119 | 3 produk: 85 | 4 produk: 68 | 5 produk: 51</li>
+          <li><strong>KOPRA:</strong> 1 produk: 7 | 2 produk: 5 | 3 produk: 4 | 4 produk: 3 | 5 produk: 2</li>
+          <li><strong>EDC/LVM:</strong> 1 produk: 9 | 2 produk: 6 | 3 produk: 4 | 4 produk: 4 | 5 produk: 3</li>
+          <li><strong>TabNow:</strong> 1 produk: 150 | 2 produk: 105 | 3 produk: 75 | 4 produk: 60 | 5 produk: 45</li>
+          <li><strong>TabBisnis:</strong> 1 produk: 6 | 2 produk: 4 | 3 produk: 3 | 4 produk: 2 | 5 produk: 2</li>
         </ul>
         <p><em>*Detail lengkap tersedia di spreadsheet resmi Battlezone.</em></p>
       </div>
 
       <div class="award-box">
-        <h2>📌 Ketentuan Tambahan</h2>
-        <ul>
-          <li>Data diambil dari spreadsheet resmi dan terverifikasi</li>
-          <li>Keputusan panitia bersifat mutlak dan tidak dapat diganggu gugat</li>
-        </ul>
+        <h2>📚 FAQ & Penjelasan Tambahan</h2>
+        <details>
+          <summary>❓ Apa itu Cross-sell?</summary>
+          <p>Cross-sell berarti menjual lebih dari satu produk MPS ke merchant yang sama. Misalnya, jika merchant sudah punya Livin, lalu juga berhasil buka TabNow dan KOPRA, itu dianggap 3 produk cross-sell.</p>
+        </details>
+        <details>
+          <summary>❓ Visit Point apakah termasuk MPS?</summary>
+          <p>Tidak. Visit Point hanya berfungsi sebagai penambah poin kecil, tapi tidak masuk dalam hitungan produk MPS untuk multiplier.</p>
+        </details>
+        <details>
+          <summary>❓ Apakah EDC dan Livin Merchant dihitung satu produk?</summary>
+          <p>Ya. EDC dan Livin Merchant digabung menjadi satu produk yang disebut EDC/LVM.</p>
+        </details>
       </div>
 
       <p style="text-align:center; font-weight:bold; margin-top:40px;">🚀 Tunjukkan performa terbaik tim kamu dan menangkan medali Battlezone 2025!</p>
