@@ -65,22 +65,21 @@ body {
 
 /* === Rank 1 Styling === */
 .rank-1 {
-  background: linear-gradient(90deg, #ffd700, #ff8c00); /* Emas di seluruh kolom Rank 1 */
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
   color: #000;
   font-weight: bold;
   position: relative;
   z-index: 1;
-  animation: glowRow 2s ease-in-out infinite alternate; /* Apply glowing animation */
+  animation: glowRow 2s ease-in-out infinite alternate;
 }
-
 .rank-1 td {
-  background: linear-gradient(90deg, #ffd700, #ff8c00); /* Emas untuk seluruh kolom Rank 1 */
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
 }
 
 /* Glow effect for Rank 1 */
 @keyframes glowRow {
   from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
-  to { box-shadow: 0 0 25px rgba(255, 215, 0, 1); }
+  to   { box-shadow: 0 0 25px rgba(255, 215, 0, 1); }
 }
 
 /* === Menu and Buttons === */
@@ -108,6 +107,79 @@ body {
 .menu-btn:hover, .menu-buttons button:hover {
   background: #00ffffcc;
   color: #000;
+}
+
+/* === Modal Popup (Daftar Hadiah) === */
+.modal {
+  display: none;               /* sembunyikan kecuali diaktifkan */
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  overflow-y: auto;
+}
+
+.modal-content {
+  background: #111;
+  margin: 60px auto;
+  padding: 20px;
+  border: 2px solid #0ff;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+  position: relative;
+  text-align: center;
+}
+
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* === Grid & Item untuk Daftar Hadiah === */
+.reward-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.reward-item {
+  text-align: center;
+  flex: 1 1 120px;
+  max-width: 140px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,255,255,0.2);
+}
+
+.reward-item.reward-winner {
+  flex: 1 1 180px;
+  max-width: 220px;
+}
+
+.reward-img {
+  width: 40px;
+}
+
+.reward-img-combo {
+  width: 70px;
+}
+
+.plus-sign {
+  font-size: 20px;
+  margin: 0 6px;
+  color: #fff;
 }
 
 /* === Styling for Merchant Info === */
@@ -175,16 +247,13 @@ body {
   .leaderboard th, .leaderboard td {
     font-size: 12px;
   }
-
   .anggota-card {
     width: 90%;
   }
-
   .menu-btn, .menu-buttons button {
     width: 100%;
     max-width: 300px;
   }
-
   .modal-content {
     width: 95%;
   }
