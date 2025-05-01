@@ -132,7 +132,8 @@ body {
                 rgba(10,10,10,0.95));
   margin: 80px auto;
   padding: 30px;
-  width: 90%; max-width: 600px;
+  width: 90%;
+  max-width: 600px;
   border-radius: 16px;
   border: 2px solid #ffd700;
   box-shadow:
@@ -165,18 +166,18 @@ body {
                 rgba(40,40,40,0.9),
                 rgba(20,20,20,0.9));
   width: 130px;
-  padding: 20px;
+  padding: 16px; /* dikurangi sedikit */
   border-radius: 12px;
   text-align: center;
   box-shadow:
     0 4px 12px rgba(0,0,0,0.5),
     0 0 8px rgba(255,215,0,0.3);
-  transform: perspective(500px) rotateX(5deg);
+  transform: none; /* matikan 3D agar gambar terlihat jelas */
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .reward-item:hover {
-  transform: perspective(500px) rotateX(0) scale(1.05);
+  transform: scale(1.05);
   box-shadow:
     0 8px 20px rgba(0,0,0,0.6),
     0 0 16px rgba(255,215,0,0.7);
@@ -184,29 +185,35 @@ body {
 
 .reward-item.reward-winner {
   width: 180px;
-  padding: 24px;
+  padding: 20px; /* sedikit dikurangi */
   border: 2px solid gold;
   box-shadow:
     0 0 20px rgba(255,215,0,1),
     inset 0 0 12px rgba(255,215,0,0.6);
 }
 
-.reward-img, .reward-img-combo {
+/* ===== Perbaiki ukuran gambar hadiah ===== */
+.modal-content .reward-item img {
+  max-width: 80px;
+  width: auto;
+  height: auto;
   display: block;
-  margin: 0 auto 12px;
-  animation: floatMedal 3s ease-in-out infinite;
+  margin: 0 auto 8px;
+}
+.reward-img,
+.reward-img-combo {
+  max-width: 80px !important;
+  width: auto !important;
+  height: auto !important;
 }
 
+/* ===== Float animation medal ===== */
 @keyframes floatMedal {
   0%,100% { transform: translateY(0); }
   50%     { transform: translateY(-6px); }
 }
-
-.plus-sign {
-  font-size: 24px;
-  margin: 0 8px;
-  color: #ffd700;
-  text-shadow: 0 0 4px rgba(255,215,0,0.8);
+.reward-img, .reward-img-combo {
+  animation: floatMedal 3s ease-in-out infinite;
 }
 
 /* === Styling for Merchant Info === */
