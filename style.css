@@ -368,5 +368,6 @@ body {
 
   .marquee-inner {
     font-size: 13px;
+    animation-duration: 12s;
   }
 }
