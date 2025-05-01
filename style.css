@@ -289,8 +289,32 @@ body {
   .modal-content {
     width: 95%;
   }
-}
 
+  /* ===== Perbaikan tampilan reward di mobile ===== */
+  .modal-content {
+    width: 90%;          /* Popup tidak terlalu besar di HP */
+    max-width: 600px;
+    margin: 40px auto;    /* Ruang atas/bawah lebih compact */
+    padding: 20px;
+  }
+
+  .reward-grid {
+    flex-wrap: nowrap;          /* Tetap baris, jangan vertikal */
+    overflow-x: auto;           /* Scroll horizontal jika overflow */
+    justify-content: flex-start;/* Mulai dari kiri */
+    padding-bottom: 8px;        /* Ruang bawah untuk scroll */
+  }
+
+  .reward-item {
+    flex: 0 0 auto;     /* Lebar fixed sesuai desktop */
+    margin-right: 16px;  /* Jarak antar kartu */
+  }
+
+  /* Opsional: sembunyikan scrollbar di iOS/Android */
+  .reward-grid::-webkit-scrollbar {
+    display: none;
+  }
+}
 /* === Glow Animation for General Effects === */
 @keyframes pulseGlow {
   0% {
