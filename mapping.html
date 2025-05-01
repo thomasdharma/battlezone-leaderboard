@@ -1,51 +1,94 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  …
-  <!-- (tetap sama seperti sebelumnya) -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mapping Zone Kawasan</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* Pastikan ada styling untuk #map */
+    #map {
+      width: 100%;
+      height: 500px;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    @media (max-width: 600px) {
+      #map { height: 350px; }
+    }
+  </style>
 </head>
 <body>
-  …
+  <div class="background"></div>
+  <header class="header">
+    <h1>🌐 Mapping Zone Kawasan</h1>
+    <p>Bank Mandiri Lapangan Merdeka</p>
+  </header>
+
+  <section class="leaderboard-section">
+    <div id="map"></div>
+  </section>
+
+  <!-- load Google Maps + heatmap library -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuSerwi_mY5J89CihWaUZ6Itl_0ywIto&libraries=visualization&callback=initMap"
+    async
+  ></script>
   <script>
     function initMap() {
-      …
-      fetch("https://opensheet.elk.sh/.../Akuisisi%20Merchant")
-        .then(res=>res.json())
-        .then(data=>{
+      const center = { lat: 3.566559, lng: 98.694630 };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center,
+        zoom: 13,
+      });
+
+      // 1) Layer zona kawasan dari My Maps (KML)
+      const kmlUrl = "https://www.google.com/maps/d/kml?forcekml=1&mid=11uDxJ_HJDwN9UbU9ihAhrloBmR--18o";
+      new google.maps.KmlLayer({
+        url: kmlUrl,
+        preserveViewport: true,
+        map: map
+      });
+
+      // 2) Ambil data akuisisi dari Google Sheets, buat heatmap + markers
+      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Akuisisi%20Merchant")
+        .then(res => res.json())
+        .then(data => {
           const heatData = [];
-          data.forEach(item=>{
-            const lat = parseFloat(item.Lat),
-                  lng = parseFloat(item.Lng);
-            if (isNaN(lat)||isNaN(lng)) return;
-            heatData.push(new google.maps.LatLng(lat,lng));
+          data.forEach(item => {
+            const lat = parseFloat(item.Lat), lng = parseFloat(item.Lng);
+            if (isNaN(lat) || isNaN(lng)) return;
+
+            // Tambah ke array heatmap
+            heatData.push(new google.maps.LatLng(lat, lng));
+
+            // Buat marker dengan InfoWindow yang memuat PIC, Nama Tim, Nama Toko & Produk
             const marker = new google.maps.Marker({
-              position:{lat,lng}, map
+              position: { lat, lng },
+              map,
             });
             const info = new google.maps.InfoWindow({
               content: `
-                <div style="
-                  color: #000;
-                  background: #fff;
-                  padding: 8px 12px;
-                  border-radius: 6px;
-                  font-family: 'Orbitron', sans-serif;
-                  line-height: 1.4;
-                ">
+                <div style="min-width:200px; line-height:1.4;">
                   <strong>Nama Toko:</strong> ${item['Nama Toko']}<br>
-                  <strong>Nama Tim:</strong> ${item['Nama Tim']|| '-'}<br>
-                  <strong>PIC:</strong> ${item.PIC|| '-'}<br>
-                  <strong>Produk:</strong> ${item.Produk|| '-'}
+                  <strong>Nama Tim:</strong> ${item['Nama Tim'] || '-'}<br>
+                  <strong>PIC:</strong> ${item.PIC || '-'}<br>
+                  <strong>Produk:</strong> ${item.Produk || '-'}
                 </div>
               `,
             });
-            marker.addListener("click", ()=> info.open(map,marker));
+            marker.addListener("click", () => info.open(map, marker));
           });
+
+          // Buat heatmap layer
           new google.maps.visualization.HeatmapLayer({
             data: heatData,
-            radius: 40
+            radius: 40,
           }).setMap(map);
         })
-        .catch(console.error);
+        .catch(err => console.error("Gagal load data akuisisi:", err));
     }
   </script>
 </body>
