@@ -1,179 +1,140 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bonus Battlezone 2025</title>
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#004080" />
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: url('assets/neon-bg.png') no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    .overlay {
-      background-color: rgba(255, 255, 255, 0.85);
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-
-    h1, h2, h3 {
-      color: #003366;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .award-box {
-      background: #f0f5ff;
-      border-left: 5px solid #003366;
-      padding: 20px;
-      margin: 20px 0;
-      border-radius: 8px;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    .highlight {
-      background: #fff8dc;
-      border-left: 5px solid #e6b800;
-      padding: 15px;
-      margin-top: 20px;
-      border-radius: 8px;
-      color: #5a4500;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px;
-      }
-      h1 {
-        font-size: 1.5em;
-      }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battlezone Acquisition 2025</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="overlay">
-    <div class="container">
-      <h1>🏆 BONUS BATTLEZONE ACQUISITION 2025</h1>
-      <p style="text-align: center;">Program apresiasi untuk tim terbaik dalam akuisisi produk Mandiri di kawasan <strong>Medan Area Kota</strong>.</p>
+  <div class="background"></div>
+  <header class="header">
+    <h1>🏆 Battlezone Acquisition 2025</h1>
+    <p>Bank Mandiri Lapangan Merdeka</p>
+    <div id="countdown" class="countdown">Loading countdown...</div>
+  </header>
 
-      <div class="award-box">
-        <h2>🎖 Penghargaan Juara</h2>
-        <p>Tim terbaik ditentukan dari perolehan total poin tertinggi dalam periode kompetisi.</p>
-        <ul>
-          <li>🥇 Juara 1: Medali Emas + Hadiah Utama</li>
-          <li>🥈 Juara 2: Medali Perak</li>
-          <li>🥉 Juara 3: Medali Perunggu</li>
-        </ul>
+  <section class="leaderboard-section">
+    <h2>🥇 Leaderboard Tim</h2>
+    <div class="leaderboard">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Tim</th>
+            <th>Total Poin</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body"><tr><td colspan="3">Loading...</td></tr></tbody>
+      </table>
+    </div>
+
+    <section id="last-merchant">
+      <h3>📌 Merchant Terakhir Diakuisisi</h3>
+      <div id="merchant-info">
+        <p>Loading...</p>
       </div>
+    </section>
 
-      <div class="award-box">
-        <h2>📊 Sistem Poin</h2>
-        <h3>Bobot Produk MPS:</h3>
-        <ul>
-          <li>Livin: 1 poin</li>
-          <li>KOPRA: 3 poin</li>
-          <li>EDC/LVM: 3 poin</li>
-          <li>TabNow: 1 poin</li>
-          <li>Tabungan Bisnis: 3 poin</li>
-          <li>Visit Point: 0.5 poin (tidak termasuk MPS)</li>
-        </ul>
-      </div>
+   <div class="menu-buttons">
+  <button onclick="document.getElementById('rewardModal').style.display='block'">🎁 Daftar Hadiah</button>
+  <a href="detail.html" class="menu-btn wide-button">🧾 Detail Pencapaian Individu</a>
+  <button onclick="window.location.href='mapping.html'" class="menu-btn">🌐 Mapping Zone Kawasan</button>
+  <button onclick="window.location.href='bonus.html'" class="menu-btn">📊 Info Target & Bonus Point</button>
+</div>
+    
+  </section>
 
-      <div class="award-box">
-        <h2>🔁 Multiplier Berdasarkan Cross-sell</h2>
-        <p>Jumlah produk MPS yang berhasil dicross-sell akan mempengaruhi multiplier terhadap total poin:</p>
-        <ul>
-          <li>1 Produk MPS: <strong>x0.75</strong></li>
-          <li>2 Produk: <strong>x1.00</strong></li>
-          <li>3 Produk: <strong>x1.30</strong> <em>(Cross-sell menengah)</em></li>
-          <li>4 Produk: <strong>x1.50</strong> <em>(Cross-sell optimal)</em></li>
-          <li>5 Produk: <strong>x1.60</strong> <em>(Cross-sell maksimal)</em></li>
-        </ul>
-
-        <h3>📐 Tiering Tambahan (Berdasarkan Capaian Target):</h3>
-        <ul>
-          <li><strong>MPS 1 Produk:</strong>
-            <ul>
-              <li>&lt;100% target: <strong>x0.75</strong></li>
-              <li>=100% target: <strong>x0.75</strong></li>
-              <li>101%–200%: <strong>x0.80</strong></li>
-              <li>&gt;200%: <strong>x0.85</strong></li>
-            </ul>
-          </li>
-          <li><strong>MPS 2 Produk:</strong>
-            <ul>
-              <li>&lt;100%: <strong>x0</strong></li>
-              <li>≥100%: <strong>x1.00</strong></li>
-            </ul>
-          </li>
-          <li><strong>MPS 3 Produk:</strong>
-            <ul>
-              <li>&lt;100%: <strong>x0.20</strong></li>
-              <li>≥100%: <strong>x1.30</strong></li>
-            </ul>
-          </li>
-          <li><strong>MPS 4 Produk:</strong>
-            <ul>
-              <li>&lt;100%: <strong>x0.30</strong></li>
-              <li>≥100%: <strong>x1.50</strong></li>
-            </ul>
-          </li>
-          <li><strong>MPS 5 Produk:</strong>
-            <ul>
-              <li>&lt;100%: <strong>x0.40</strong></li>
-              <li>≥100%: <strong>x1.60</strong></li>
-            </ul>
-          </li>
-        </ul>
-
-        <div class="highlight">
-          🎯 <strong>Tips:</strong> Ingin skor tinggi? Fokus pada pencapaian target dan cross-sell sebanyak mungkin produk!
+  <!-- Modal Hadiah -->
+  <div id="rewardModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="document.getElementById('rewardModal').style.display='none'">&times;</span>
+      <h2>🎁 Daftar Hadiah</h2>
+      <div class="reward-grid reward-centered">
+        <div class="reward-item">
+          <img src="assets/silver-medal.png" class="reward-img" alt="Silver Medal" />
+          <p>🥈 Juara 2<br>Silver Medal</p>
+        </div>
+        <div class="reward-item reward-winner">
+          <div class="reward-combo">
+            <img src="assets/gold-medal.png" class="reward-img-combo" alt="Gold Medal" />
+            <span class="plus-sign">+</span>
+            <img src="assets/gift.png" class="reward-img-combo" style="width: 55px;" alt="Gift" />
+          </div>
+          <p>🥇 Juara 1<br>Gold Medal + Hadiah</p>
+        </div>
+        <div class="reward-item">
+          <img src="assets/bronze-medal.png" class="reward-img" alt="Bronze Medal" />
+          <p>🥉 Juara 3<br>Bronze Medal</p>
         </div>
       </div>
-
-      <div class="award-box">
-        <h2>🎯 Target Akuisisi Produk (per Tim)</h2>
-        <p>Target disesuaikan dengan jumlah produk yang dicross-sell. Semakin banyak produk, semakin ringan per targetnya.</p>
-        <ul>
-          <li>Livin: 170 → 51</li>
-          <li>KOPRA: 7 → 2</li>
-          <li>EDC/LVM: 9 → 3</li>
-          <li>TabNow: 150 → 45</li>
-          <li>TabBisnis: 6 → 2</li>
-        </ul>
-        <p><em>*Detail lengkap tersedia di spreadsheet resmi Battlezone.</em></p>
-      </div>
-
-      <div class="award-box">
-        <h2>📌 Ketentuan Tambahan</h2>
-        <ul>
-          <li>Data diambil dari spreadsheet resmi dan terverifikasi</li>
-          <li>Keputusan panitia bersifat mutlak dan tidak dapat diganggu gugat</li>
-        </ul>
-      </div>
-
-      <p style="text-align:center; font-weight:bold; margin-top:40px;">🚀 Tunjukkan performa terbaik tim kamu dan menangkan medali Battlezone 2025!</p>
     </div>
   </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      const countdown = document.getElementById("countdown");
+      const now = new Date();
+      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      const target = new Date(lastDay.getFullYear(), lastDay.getMonth(), lastDay.getDate(), 8, 0, 0);
+      const timer = setInterval(() => {
+        const now = new Date();
+        const dist = target - now;
+        if (dist <= 0) {
+          clearInterval(timer);
+          countdown.innerHTML = "Leaderboard disembunyikan. Hasil diumumkan hari Senin!";
+          return;
+        }
+        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((dist % (1000 * 60)) / 1000);
+        countdown.innerHTML = Reset dalam: ${d}h ${h}j ${m}m ${s}s;
+      }, 1000);
+
+      // Fetch data from 'Summary Per Tim' sheet
+      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Summary%20Per%20Tim")
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.getElementById("leaderboard-body");
+          tbody.innerHTML = "";
+
+          // Sort data by Total Poin in descending order to get rank
+          const sortedData = data.sort((a, b) => b['Total Poin'] - a['Total Poin']);
+          
+          // Add rank based on sorted order
+          sortedData.forEach((row, i) => {
+            const rank = i + 1; // Rank starts from 1
+            const cls = rank === 1 ? "rank-1" : ""; // Apply rank-1 class to the row if it's Rank 1
+            tbody.innerHTML += 
+              <tr class="${cls}">
+                <td>${rank}</td> <!-- Add Rank -->
+                <td>${row['Nama Tim'] || 'N/A'}</td>
+                <td>${row['Total Poin'] || '0'}</td>
+              </tr>
+            ;
+          });
+        })
+        .catch(() => {
+          document.getElementById("leaderboard-body").innerHTML = '<tr><td colspan="3">Gagal memuat data</td></tr>';
+        });
+
+      // Fetch Merchant Info (if needed)
+      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir")
+        .then(res => res.json())
+        .then(data => {
+          const m = data[0];
+          document.getElementById("merchant-info").innerHTML = 
+            <p>🏪 <strong>${m.Merchant}</strong></p>
+            <p>👤 Oleh: ${m.Oleh}</p>
+            <p>📍 Produk: ${m.Produk}</p>
+            <p>🗓️ Tanggal: ${m.Tanggal}</p>;
+        })
+        .catch(() => {
+          document.getElementById("merchant-info").innerHTML = '<p>Gagal memuat data merchant.</p>';
+        });
+    });
+  </script>
 </body>
 </html>
