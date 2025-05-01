@@ -257,7 +257,7 @@
           tbody.innerHTML = "";
           data.forEach((row, i) => {
             const cls = row.Rank === "1" ? "rank-1" : "";
-            tbody.innerHTML += `<tr class='${cls}'><td>${row.Rank}</td><td>${row['Nama Tim']}</td><td>${row['Total Poin']}</td></tr>`;
+           tbody.innerHTML += `<tr><td>${row.Rank}</td><td class='${cls}'>${row['Nama Tim']}</td><td>${row['Total Poin']}</td></tr>`;
           });
         })
         .catch(() => {
