@@ -24,13 +24,15 @@ body {
   color: #ff0;
 }
 
-.leaderboard-section, .detail-section {
+/* === Leaderboard Section === */
+.leaderboard-section {
   padding: 20px;
   text-align: center;
 }
 
 .leaderboard-section h2 {
   margin-bottom: 1.2rem;
+  font-size: 24px;
 }
 
 .leaderboard {
@@ -46,40 +48,45 @@ body {
 .leaderboard table {
   width: 100%;
   border-collapse: collapse;
-  background: transparent;
-  border-radius: 8px;
-  overflow: hidden;
 }
 
 .leaderboard th, .leaderboard td {
   padding: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  font-size: 14px;
-  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .leaderboard th {
-  background-color: rgba(255, 149, 0, 0.1);
-  color: #ff9500;
+  background-color: rgba(255, 149, 0, 0.2);
 }
 
-/* Rank 1 Styling */
+/* === Rank 1 Styling === */
 .rank-1 {
-  background: linear-gradient(90deg, #ffd700, #ff8c00); /* Gold gradient background */
+  background: linear-gradient(90deg, #ffd700, #ff8c00); /* Golden gradient */
   color: #000;
   font-weight: bold;
   position: relative;
   z-index: 1;
   animation: glowRow 2s ease-in-out infinite alternate; /* Apply glowing animation */
-  text-align: center;
 }
 
+.rank-1 td {
+  background: linear-gradient(90deg, #ffd700, #ff8c00); /* Apply gold background to entire row */
+}
+
+/* Glow effect for Rank 1 */
+@keyframes glowRow {
+  from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+  to { box-shadow: 0 0 25px rgba(255, 215, 0, 1); }
+}
+
+/* === Menu and Buttons === */
 .menu-buttons {
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  gap: 20px;
 }
 
 .menu-btn, .menu-buttons button {
@@ -101,87 +108,7 @@ body {
   color: #000;
 }
 
-/* Modal Styling */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  overflow-y: auto;
-}
-
-.modal-content {
-  background: #111;
-  margin: 50px auto;
-  padding: 20px;
-  border: 2px solid #0ff;
-  width: 90%;
-  max-width: 600px;
-  border-radius: 10px;
-  position: relative;
-  text-align: center;
-}
-
-.modal .close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-/* Reward Styling */
-.reward-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.reward-item {
-  text-align: center;
-  flex: 1 1 120px;
-  max-width: 140px;
-}
-
-.reward-item.reward-winner {
-  flex: 1 1 200px;
-  max-width: 220px;
-}
-
-.reward-img {
-  width: 40px;
-}
-
-.reward-img-combo {
-  width: 70px;
-}
-
-.reward-winner .reward-img-combo:last-child {
-  width: 85px !important;
-}
-
-.reward-combo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.plus-sign {
-  font-size: 20px;
-  color: #fff;
-  font-weight: bold;
-}
-
-/* Last Merchant Styling */
+/* === Styling for Merchant Info === */
 #last-merchant {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 12px;
@@ -205,7 +132,7 @@ body {
   margin: 2px 0;
 }
 
-/* Member Card Styling */
+/* === Card Styling === */
 .card-grid {
   display: flex;
   flex-wrap: wrap;
@@ -241,70 +168,27 @@ body {
   color: #fff;
 }
 
-/* Team Header Styling */
-.team-header {
-  font-size: 20px;
-  color: #fff;
-  margin-top: 40px;
-  margin-bottom: 10px;
-  text-shadow: 0 0 4px #ff00ff;
-  text-align: center;
-}
-
-/* Responsive Design */
+/* === Responsive Design === */
 @media (max-width: 600px) {
-  .header h1 {
-    font-size: 22px; /* Ukuran judul yang lebih kecil di perangkat mobile */
-  }
-
-  .menu-btn, .menu-buttons button {
-    width: 100%; /* Memastikan tombol menu penuh lebar pada perangkat kecil */
-    max-width: 300px;
+  .leaderboard th, .leaderboard td {
+    font-size: 12px;
   }
 
   .anggota-card {
-    width: 90%; /* Card anggota lebih lebar di perangkat kecil */
+    width: 90%;
   }
 
-  .leaderboard table {
-    font-size: 12px; /* Memperkecil font leaderboard di perangkat kecil */
+  .menu-btn, .menu-buttons button {
+    width: 100%;
+    max-width: 300px;
   }
 
   .modal-content {
-    width: 95%; /* Modal lebih lebar di perangkat kecil */
-  }
-
-  .reward-item {
-    min-width: 140px; /* Ukuran minimum reward item */
-    flex-shrink: 0;
-    background: rgba(255,255,255,0.05);
-    padding: 12px;
-    border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0,255,255,0.2);
-  }
-
-  .reward-item.reward-winner {
-    min-width: 180px;
-    max-width: 220px;
-  }
-
-  .reward-img, .reward-img-combo {
-    width: 50px !important; /* Ukuran gambar hadiah lebih besar di perangkat kecil */
-  }
-
-  .reward-combo {
-    flex-direction: row;
-    gap: 4px;
-  }
-
-  .reward-item p {
-    font-size: 13px;
-    text-align: center;
-    margin-top: 8px;
+    width: 95%;
   }
 }
 
-/* Animasi untuk glowing efek pada elemen */
+/* === Glow Animation for General Effects === */
 @keyframes pulseGlow {
   0% {
     box-shadow: 0 0 10px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.2);
@@ -317,27 +201,5 @@ body {
   100% {
     box-shadow: 0 0 10px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.2);
     border-color: rgba(255, 149, 0, 0.3);
-  }
-}
-/* Animasi untuk glowing effect yang terjadi di seluruh baris Rank 1 */
-@keyframes glowRow {
-  from {
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); /* Subtle glow effect */
-  }
-  to {
-    box-shadow: 0 0 25px rgba(255, 215, 0, 1); /* Stronger glow effect */
-  }
-}
-
-/* Animasi untuk efek floating Rank 1 (gerakan naik dan turun) */
-@keyframes floatRank {
-  0% {
-    transform: translateY(0px); /* Posisi normal */
-  }
-  50% {
-    transform: translateY(-4px); /* Mengangkat sedikit */
-  }
-  100% {
-    transform: translateY(0px); /* Kembali ke posisi normal */
   }
 }
