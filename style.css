@@ -101,11 +101,6 @@ body {
   font-weight: bold;
   animation: glowRow 2s ease-in-out infinite alternate;
 }
-.rank-1 {
-  color: #000;
-  font-weight: bold;
-  animation: glowRow 2s ease-in-out infinite alternate;
-}
 .rank-1 td {
   background-color: #ffdf70;
   color: #000;
@@ -291,9 +286,6 @@ body {
   font-weight: bold;
   border: 2px solid rgba(255,215,0,0.5);
   box-shadow: 0 0 18px rgba(255,215,0,0.6);
-  background-image: url('assets/sparkle.gif'), linear-gradient(135deg, #ffd700, #ff8c00);
-  background-size: cover;
-  background-blend-mode: overlay;
   backdrop-filter: blur(6px);
   animation: pulseGlow 3s infinite;
 }
