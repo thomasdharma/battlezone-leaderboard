@@ -96,13 +96,13 @@
         'Tim Charlie': []
       };
 
-      fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Akuisisi%20Merchant')
+      fetch('https://opensheet.elk.sh/1kxEaA9JuqyW2BZtBWYHqCJh4ymFlncY4wT0DrcHP7ws/AutoFetchMap')
         .then(r => r.json())
         .then(data => {
           data.forEach(item => {
             const lat  = parseFloat(item.Lat);
             const lng  = parseFloat(item.Lng);
-            const team = item['Nama Tim'];
+            const team = item['Nama Tim'] || '–';
             if (isNaN(lat) || isNaN(lng) || !team) return;
             const pos = new google.maps.LatLng(lat, lng);
             perTeamHeat[team]?.push(pos);
