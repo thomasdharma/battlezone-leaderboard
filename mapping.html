@@ -47,6 +47,14 @@
     #map.animate {
       transform: scale(1.02);
     }
+    #map:fullscreen {
+      width: 100vw !important;
+      height: 100vh !important;
+      border-radius: 0 !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      z-index: 9999;
+    }
     .legend {
       display: flex;
       justify-content: center;
@@ -110,6 +118,9 @@
     <button id="locate-btn" style="background:#ffd700; color:#000; font-weight:bold; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; margin-left: 8px; box-shadow:0 0 10px rgba(255,215,0,0.6);">
       📍 Lokasi Saya
     </button>
+    <button id="fullscreen-btn" style="background:#fff; color:#000; font-weight:bold; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; margin-left: 8px; box-shadow:0 0 10px rgba(255,255,255,0.4);">
+      🔍 Layar Penuh
+    </button>
   </div>
   <div class="legend">
     <div class="legend-item"><span class="legend-color" style="background:#0066cc"></span> Tim Alpha</div>
@@ -157,7 +168,7 @@
       });
 
       loadMerchantData();
-      setInterval(loadMerchantData, 180000); // Refresh tiap 3 menit
+      setInterval(loadMerchantData, 180000);
     }
 
     function loadMerchantData() {
@@ -220,7 +231,9 @@
     document.addEventListener('DOMContentLoaded', () => {
       const toggleBtn = document.getElementById('toggle-style');
       const locateBtn = document.getElementById('locate-btn');
+      const fullscreenBtn = document.getElementById('fullscreen-btn');
       let isDark = false;
+
       toggleBtn.addEventListener('click', () => {
         isDark = !isDark;
         map.setOptions({ styles: isDark ? darkMapStyle : null });
@@ -239,6 +252,17 @@
             icon: { url: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png' }
           });
         }, err => alert("Gagal mendeteksi lokasi."));
+      });
+
+      fullscreenBtn.addEventListener('click', () => {
+        const mapDiv = document.getElementById('map');
+        if (mapDiv.requestFullscreen) {
+          mapDiv.requestFullscreen();
+        } else if (mapDiv.webkitRequestFullscreen) {
+          mapDiv.webkitRequestFullscreen();
+        } else if (mapDiv.msRequestFullscreen) {
+          mapDiv.msRequestFullscreen();
+        }
       });
     });
   </script>
