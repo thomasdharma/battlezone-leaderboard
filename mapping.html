@@ -120,27 +120,27 @@
               }
             });
 
-            const gmapLink = `https://maps.google.com/?q=${lat},${lng}`;
+            const gmapLink = `https://www.google.com/maps?q=${lat},${lng}`;
+const infoHtml = `
+  <div style="
+    background:#fff; color:#000;
+    padding:10px 14px; border-radius:8px;
+    font-family:'Orbitron',sans-serif;
+    line-height:1.4; min-width:200px;">
+    <strong>Nama Toko:</strong> ${item['Nama Toko']}<br>
+    <strong>PIC:</strong> ${item.PIC || '-'}<br>
+    <strong>Nama Tim:</strong> ${team}<br>
+    <strong>Produk:</strong> ${item.Produk || '-'}<br>
+    <strong>Alamat:</strong> ${item.Alamat || '-'}<br>
+    <strong>Lat:</strong> ${lat}<br>
+    <strong>Lng:</strong> ${lng}<br>
+    <a href="${gmapLink}" target="_blank" style="
+      margin-top:8px; display:inline-block;
+      background:#0ff; color:#000; padding:4px 8px;
+      border-radius:6px; text-decoration:none;
+      font-weight:bold;">📍 Buka di Google Maps</a>
+  </div>`;
 
-            const infoHtml = `
-              <div style="
-                background:#fff; color:#000;
-                padding:10px 14px; border-radius:8px;
-                font-family:'Orbitron',sans-serif;
-                line-height:1.4; min-width:200px;">
-                <strong>Nama Toko:</strong> ${item['Nama Toko']}<br>
-                <strong>PIC:</strong> ${item.PIC || '-'}<br>
-                <strong>Nama Tim:</strong> ${team}<br>
-                <strong>Produk:</strong> ${item.Produk || '-'}<br>
-                <strong>Alamat:</strong> ${item['Alamat'] || '-'}<br>
-                <strong>Lat:</strong> ${lat}<br>
-                <strong>Lng:</strong> ${lng}<br>
-                <a href="${gmapLink}" target="_blank" style="
-                  margin-top:8px; display:inline-block;
-                  background:#0ff; color:#000; padding:4px 8px;
-                  border-radius:6px; text-decoration:none;
-                  font-weight:bold;">📍 Buka di Google Maps</a>
-              </div>`;
             const iw = new google.maps.InfoWindow({ content: infoHtml });
             marker.addListener('click', () => iw.open(map, marker));
           });
