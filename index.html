@@ -6,6 +6,21 @@
   <title>Battlezone Acquisition 2025</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .fadeInUp {
+      animation: fadeInUp 0.6s ease-out;
+    }
+  </style>
 </head>
 <body>
   <div class="background"></div>
@@ -79,6 +94,32 @@
   </div>
 
   <script>
+    function loadLeaderboard() {
+      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Summary%20Per%20Tim")
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.getElementById("leaderboard-body");
+          tbody.innerHTML = "";
+          const sortedData = data.sort((a, b) => b['Total Poin'] - a['Total Poin']);
+          sortedData.forEach((row, i) => {
+            const rank = i + 1;
+            const cls = rank === 1 ? "rank-1" : "";
+            const icon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : "";
+            const tr = document.createElement("tr");
+            tr.className = `${cls} fadeInUp`;
+            tr.innerHTML = `
+              <td>${icon} ${rank}</td>
+              <td>${row['Nama Tim'] || 'N/A'}</td>
+              <td>${row['Total Poin'] || '0'}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+        })
+        .catch(() => {
+          document.getElementById("leaderboard-body").innerHTML = '<tr><td colspan="3">Gagal memuat data</td></tr>';
+        });
+    }
+
     window.addEventListener("DOMContentLoaded", function () {
       const countdown = document.getElementById("countdown");
       const now = new Date();
@@ -99,27 +140,8 @@
         countdown.innerHTML = `Reset dalam: ${d}h ${h}j ${m}m ${s}s`;
       }, 1000);
 
-      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Summary%20Per%20Tim")
-        .then(res => res.json())
-        .then(data => {
-          const tbody = document.getElementById("leaderboard-body");
-          tbody.innerHTML = "";
-          const sortedData = data.sort((a, b) => b['Total Poin'] - a['Total Poin']);
-          sortedData.forEach((row, i) => {
-            const rank = i + 1;
-            const cls = rank === 1 ? "rank-1" : "";
-            tbody.innerHTML += `
-              <tr class="${cls}">
-                <td>${rank}</td>
-                <td>${row['Nama Tim'] || 'N/A'}</td>
-                <td>${row['Total Poin'] || '0'}</td>
-              </tr>
-            `;
-          });
-        })
-        .catch(() => {
-          document.getElementById("leaderboard-body").innerHTML = '<tr><td colspan="3">Gagal memuat data</td></tr>';
-        });
+      loadLeaderboard(); // initial load
+      setInterval(loadLeaderboard, 30000); // refresh leaderboard every 30s
 
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir")
         .then(res => res.json())
@@ -137,16 +159,16 @@
         });
 
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/iseng")
-  .then(res => res.json())
-  .then(data => {
-    const marquee = document.getElementById("marquee-text");
-    const msg = data.map(row => row['Teks'] || '').join(' • ');
-    marquee.textContent = msg || 'Tidak ada info terbaru.';
-    marquee.style.setProperty('--length', msg.length);
-  })
-  .catch(() => {
-    document.getElementById("marquee-text").textContent = 'Gagal memuat info marquee.';
-  });
+        .then(res => res.json())
+        .then(data => {
+          const marquee = document.getElementById("marquee-text");
+          const msg = data.map(row => row['Teks'] || '').join(' • ');
+          marquee.textContent = msg || 'Tidak ada info terbaru.';
+          marquee.style.setProperty('--length', msg.length);
+        })
+        .catch(() => {
+          document.getElementById("marquee-text").textContent = 'Gagal memuat info marquee.';
+        });
     });
   </script>
 </body>
