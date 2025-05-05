@@ -331,6 +331,44 @@ body {
   font-size: 13px;
 }
 
+/* === Team Header Styling === */
+.team-header {
+  font-size: 1.6rem;
+  margin: 60px 0 20px;
+  text-align: left;
+  padding-left: 24px;
+  color: #00ffff;
+  text-shadow: 0 0 6px #0ff, 0 0 10px #00f;
+  animation: fadeInSlide 0.9s ease-in-out both;
+  position: relative;
+}
+.team-header::before {
+  content: '🏁';
+  position: absolute;
+  left: 0;
+  transform: translateX(-130%);
+  font-size: 1.4rem;
+  animation: flagWave 2s infinite ease-in-out;
+}
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes flagWave {
+  0%, 100% {
+    transform: translateX(-130%) rotate(-10deg);
+  }
+  50% {
+    transform: translateX(-130%) rotate(10deg);
+  }
+}
+
 /* === Glow Animation for General Effects === */
 @keyframes pulseGlow {
   0% {
@@ -403,5 +441,20 @@ body {
   .marquee-inner {
     font-size: 13px;
     animation-duration: 12s;
+  }
+
+  .team-header {
+    text-align: center;
+    padding-left: 0;
+    font-size: 1.4rem;
+    margin: 40px 0 10px;
+  }
+
+  .team-header::before {
+    position: static;
+    display: block;
+    margin: 0 auto 8px;
+    transform: none;
+    animation: none;
   }
 }
