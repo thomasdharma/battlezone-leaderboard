@@ -423,6 +423,44 @@ body {
   display: inline-block;
   border: 1px solid #ccc;
 }
+/* === Tombol Tambahan di Mapping (Ganti Tampilan, Lokasi Saya, Fullscreen) === */
+.map-buttons-wrapper {
+  text-align: center;
+  margin: 20px auto 10px;
+}
+
+.map-buttons-wrapper button,
+#toggle-style, #locate-btn, #fullscreen-btn {
+  background: #0ff;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 4px 6px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 0 10px rgba(0,255,255,0.5);
+  transition: background 0.3s ease;
+}
+
+.map-buttons-wrapper button:hover,
+#toggle-style:hover, #locate-btn:hover, #fullscreen-btn:hover {
+  background: #00ffffcc;
+}
+
+/* === Style Khusus Tombol Lokasi Saya dan Fullscreen === */
+#locate-btn {
+  background: #ffd700 !important;
+  box-shadow: 0 0 10px rgba(255,215,0,0.6);
+}
+
+#fullscreen-btn {
+  background: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+
 /* === Responsive Design === */
 @media (max-width: 600px) {
   #map {
