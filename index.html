@@ -60,7 +60,7 @@
     </section>
 
     <div class="menu-buttons">
-      <button class="menu-btn" onclick="document.getElementById('rewardModal').style.display='block'">🎁 Daftar Hadiah</button>
+      <button class="menu-btn" onclick="openRewardModal()">🎁 Daftar Hadiah</button>
       <a href="detail.html" class="menu-btn">🧾 Detail Individu</a>
       <a href="mapping.html" class="menu-btn">🌐 Mapping Kawasan</a>
       <a href="bonus.html" class="menu-btn">📊 Info Target dan Bonus Point</a>
@@ -93,7 +93,16 @@
     </div>
   </div>
 
+  <audio id="giftSound" src="assets/pinclick.mp3" preload="auto"></audio>
+  <audio id="startSound" src="assets/beginning.mp3" preload="auto"></audio>
+
   <script>
+    function openRewardModal() {
+      document.getElementById('rewardModal').style.display = 'block';
+      const sound = document.getElementById('giftSound');
+      if (sound) sound.play().catch(() => {});
+    }
+
     function loadLeaderboard() {
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Summary%20Per%20Tim")
         .then(res => res.json())
@@ -140,8 +149,15 @@
         countdown.innerHTML = `Reset dalam: ${d}h ${h}j ${m}m ${s}s`;
       }, 1000);
 
-      loadLeaderboard(); // initial load
-      setInterval(loadLeaderboard, 30000); // refresh leaderboard every 30s
+      const startSound = document.getElementById("startSound");
+      if (startSound) {
+        document.addEventListener("click", () => {
+          startSound.play().catch(() => {});
+        }, { once: true });
+      }
+
+      loadLeaderboard();
+      setInterval(loadLeaderboard, 30000);
 
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir")
         .then(res => res.json())
