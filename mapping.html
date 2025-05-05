@@ -6,10 +6,13 @@
   <title>Mapping Zone Kawasan</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    html, body { height:100%; margin:0; padding:0; font-family:'Orbitron',sans-serif; }
+    html, body {
+      height:100%; margin:0; padding:0;
+      font-family:'Orbitron',sans-serif;
+      background:#0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
+    }
     .background {
       position:fixed; top:0; left:0; width:100%; height:100%;
-      background:#0d0d0d url('assets/neon-bg.png') center/cover no-repeat fixed;
       z-index:-1;
     }
     .back-btn {
@@ -25,15 +28,49 @@
     header.header {
       padding:20px; text-align:center;
       color:#0ff; text-shadow:0 0 5px #0ff;
+      animation: fadeInDown 1s ease-out;
+    }
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     #map {
       width:90%; max-width:1200px;
-      height:calc(100vh - 160px);
+      height:calc(100vh - 210px);
       margin:0 auto 60px;
       border-radius:12px;
       box-shadow:0 0 20px rgba(0,0,0,0.6);
       z-index:0;
+    }
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 10px auto 20px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(0,255,255,0.2);
+    }
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+    }
+    .summary {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: #0ff;
     }
     @media(max-width:600px){
       #map { width:95%; height:60vh; }
@@ -47,7 +84,12 @@
     <h1>🌐 Mapping Zone Kawasan</h1>
     <p>Bank Mandiri Lapangan Merdeka</p>
   </header>
-
+  <div class="summary" id="summary-text">Loading data akuisisi...</div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-color" style="background:#0066cc"></span> Tim Alpha</div>
+    <div class="legend-item"><span class="legend-color" style="background:#cc0000"></span> Tim Bravo</div>
+    <div class="legend-item"><span class="legend-color" style="background:#00cc44"></span> Tim Charlie</div>
+  </div>
   <div id="map"></div>
 
   <script>
@@ -88,9 +130,14 @@
       });
 
       const perTeamHeat = {
-        'Tim Alpha':   [],
-        'Tim Bravo':   [],
+        'Tim Alpha': [],
+        'Tim Bravo': [],
         'Tim Charlie': []
+      };
+      const markerCount = {
+        'Tim Alpha': 0,
+        'Tim Bravo': 0,
+        'Tim Charlie': 0
       };
 
       fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/Akuisisi%20Merchant')
@@ -103,6 +150,7 @@
             if (isNaN(lat) || isNaN(lng) || !team) return;
             const pos = new google.maps.LatLng(lat, lng);
             perTeamHeat[team]?.push(pos);
+            markerCount[team]++;
 
             const marker = new google.maps.Marker({
               position: pos,
@@ -121,25 +169,25 @@
             });
 
             const gmapLink = `https://www.google.com/maps?q=${lat},${lng}`;
-const infoHtml = `
-  <div style="
-    background:#fff; color:#000;
-    padding:10px 14px; border-radius:8px;
-    font-family:'Orbitron',sans-serif;
-    line-height:1.4; min-width:200px;">
-    <strong>Nama Toko:</strong> ${item['Nama Toko']}<br>
-    <strong>PIC:</strong> ${item.PIC || '-'}<br>
-    <strong>Nama Tim:</strong> ${team}<br>
-    <strong>Produk:</strong> ${item.Produk || '-'}<br>
-    <strong>Alamat:</strong> ${item.Alamat || '-'}<br>
-    <strong>Lat:</strong> ${lat}<br>
-    <strong>Lng:</strong> ${lng}<br>
-    <a href="${gmapLink}" target="_blank" style="
-      margin-top:8px; display:inline-block;
-      background:#0ff; color:#000; padding:4px 8px;
-      border-radius:6px; text-decoration:none;
-      font-weight:bold;">📍 Buka di Google Maps</a>
-  </div>`;
+            const infoHtml = `
+              <div style="
+                background:#fff; color:#000;
+                padding:10px 14px; border-radius:8px;
+                font-family:'Orbitron',sans-serif;
+                line-height:1.4; min-width:200px;">
+                <strong>Nama Toko:</strong> ${item['Nama Toko']}<br>
+                <strong>PIC:</strong> ${item.PIC || '-'}<br>
+                <strong>Nama Tim:</strong> ${team}<br>
+                <strong>Produk:</strong> ${item.Produk || '-'}<br>
+                <strong>Alamat:</strong> ${item.Alamat || '-'}<br>
+                <strong>Lat:</strong> ${lat}<br>
+                <strong>Lng:</strong> ${lng}<br>
+                <a href="${gmapLink}" target="_blank" style="
+                  margin-top:8px; display:inline-block;
+                  background:#0ff; color:#000; padding:4px 8px;
+                  border-radius:6px; text-decoration:none;
+                  font-weight:bold;">📍 Buka di Google Maps</a>
+              </div>`;
 
             const iw = new google.maps.InfoWindow({ content: infoHtml });
             marker.addListener('click', () => iw.open(map, marker));
@@ -153,13 +201,18 @@ const infoHtml = `
               gradient: teamGradients[team]
             }).setMap(map);
           });
+
+          const text = Object.entries(markerCount)
+            .map(([team, count]) => `${team}: ${count} titik`)
+            .join(' • ');
+          document.getElementById('summary-text').textContent = text;
         })
-        .catch(e => console.error('Gagal load data akuisisi:', e));
+        .catch(e => {
+          console.error('Gagal load data akuisisi:', e);
+          document.getElementById('summary-text').textContent = 'Gagal memuat data.';
+        });
     }
   </script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuSerwi_mY5J89CihWaUZ6Itl_0ywIto&libraries=visualization&callback=initMap"
-    async defer>
-  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuSerwi_mY5J89CihWaUZ6Itl_0ywIto&libraries=visualization&callback=initMap" async defer></script>
 </body>
 </html>
