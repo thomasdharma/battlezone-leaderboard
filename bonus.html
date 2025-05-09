@@ -7,20 +7,21 @@
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#004080" />
   <style>
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Segoe UI', Tahoma, sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: url('assets/neon-bg.png') no-repeat center center fixed;
       background-size: cover;
       color: #000;
     }
 
-   .overlay {
-  min-height: 100vh;
-  padding: 20px;
-  }
-
+    .overlay {
+      min-height: 100vh;
+      padding: 20px;
+    }
 
     .container {
       max-width: 900px;
@@ -79,10 +80,10 @@
       height: 8px;
       display: block;
     }
-    .livin { width: 20%; background: #00f5ff; }
-    .kopra { width: 60%; background: #ffa500; }
-    .edc { width: 60%; background: #00c853; }
-    .tabnow { width: 20%; background: #ff4081; }
+    .livin   { width: 20%; background: #00f5ff; }
+    .kopra   { width: 60%; background: #ffa500; }
+    .edc     { width: 60%; background: #00c853; }
+    .tabnow  { width: 20%; background: #ff4081; }
     .tabbisnis { width: 60%; background: #673ab7; }
 
     details {
@@ -92,15 +93,49 @@
     summary {
       font-weight: bold;
       cursor: pointer;
+      transition: color 0.3s;
+    }
+    summary:hover {
+      color: #007bff;
+    }
+
+    /* Fade-in for FAQ content */
+    details[open] summary ~ * {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Glowing stars */
+    @keyframes glowStar {
+      0%,100% { text-shadow: 0 0 5px gold; }
+      50%     { text-shadow: 0 0 15px gold; }
+    }
+    em.glow {
+      animation: glowStar 1.5s infinite;
+      display: inline-block;
+    }
+
+    /* Back to Top button */
+    #toTop {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: #004080; color: #fff;
+      border: none; border-radius: 50%;
+      font-size: 20px; padding: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      display: none; z-index: 100;
+    }
+    #toTop:hover {
+      background: #007bff;
     }
 
     @media (max-width: 600px) {
-      .container {
-        padding: 20px;
-      }
-      h1 {
-        font-size: 1.5em;
-      }
+      .container { padding: 20px; }
+      h1 { font-size: 1.5em; }
     }
   </style>
 </head>
@@ -108,7 +143,10 @@
   <div class="overlay">
     <div class="container">
       <h1>🏆 BONUS BATTLEZONE ACQUISITION 2025</h1>
-      <p style="text-align: center;">Program apresiasi untuk tim terbaik dalam akuisisi produk Mandiri di kawasan <strong>Medan Area Kota</strong>.</p>
+      <p style="text-align: center;">
+        Program apresiasi untuk tim terbaik dalam akuisisi produk Mandiri
+        di kawasan <strong>Medan Area Kota</strong>.
+      </p>
 
       <div class="award-box">
         <h2>🎖 Penghargaan Juara</h2>
@@ -152,9 +190,9 @@
         <ul>
           <li>1 Produk MPS: <strong>x0.75</strong></li>
           <li>2 Produk: <strong>x1.00</strong></li>
-          <li>3 Produk: <strong>x1.30</strong> <em>(Cross-sell menengah)</em></li>
-          <li>4 Produk: <strong>x1.50</strong> <em>(Cross-sell optimal)</em></li>
-          <li>5 Produk: <strong>x1.60</strong> <em>(Cross-sell maksimal)</em></li>
+          <li>3 Produk: <strong>x1.30</strong> <em class="glow">(Cross-sell menengah) 🌟</em></li>
+          <li>4 Produk: <strong>x1.50</strong> <em class="glow">(Cross-sell optimal) 🌟</em></li>
+          <li>5 Produk: <strong>x1.60</strong> <em class="glow">(Cross-sell maksimal) 🌟</em></li>
         </ul>
 
         <h3>📐 Tiering Tambahan (Berdasarkan Capaian Target):</h3>
@@ -170,31 +208,31 @@
           <li><strong>MPS 2 Produk:</strong>
             <ul>
               <li>&lt;100%: <strong>x0</strong></li>
-              <li>≥100%: <strong>x1.00</strong></li>
+              <li>&gt;=100%: <strong>x1.00</strong></li>
             </ul>
           </li>
           <li><strong>MPS 3 Produk:</strong>
             <ul>
               <li>&lt;100%: <strong>x0.20</strong></li>
-              <li>≥100%: <strong>x1.30</strong></li>
+              <li>&gt;=100%: <strong>x1.30</strong></li>
             </ul>
           </li>
           <li><strong>MPS 4 Produk:</strong>
             <ul>
               <li>&lt;100%: <strong>x0.30</strong></li>
-              <li>≥100%: <strong>x1.50</strong></li>
+              <li>&gt;=100%: <strong>x1.50</strong></li>
             </ul>
           </li>
           <li><strong>MPS 5 Produk:</strong>
             <ul>
               <li>&lt;100%: <strong>x0.40</strong></li>
-              <li>≥100%: <strong>x1.60</strong></li>
+              <li>&gt;=100%: <strong>x1.60</strong></li>
             </ul>
           </li>
         </ul>
 
         <div class="highlight">
-          🎯 <strong>Tips:</strong> Ingin skor tinggi? Fokus pada pencapaian target dan cross-sell sebanyak mungkin produk!
+          🎯 <strong>Tips:</strong> Fokus pada pencapaian target dan cross-sell sebanyak mungkin produk!
         </div>
       </div>
 
@@ -202,11 +240,11 @@
         <h2>🎯 Target Akuisisi Produk (per Tim)</h2>
         <p>Target per tim telah disesuaikan agar semakin banyak produk yang berhasil dicross-sell, semakin ringan pula target per produknya. Berikut rincian lengkap:</p>
         <ul>
-          <li><strong>Livin:</strong> 1 produk: 170 | 2 produk: 119 | 3 produk: 85 | 4 produk: 68 | 5 produk: 51</li>
-          <li><strong>KOPRA:</strong> 1 produk: 7 | 2 produk: 5 | 3 produk: 4 | 4 produk: 3 | 5 produk: 2</li>
-          <li><strong>EDC/LVM:</strong> 1 produk: 9 | 2 produk: 6 | 3 produk: 4 | 4 produk: 4 | 5 produk: 3</li>
-          <li><strong>TabNow:</strong> 1 produk: 150 | 2 produk: 105 | 3 produk: 75 | 4 produk: 60 | 5 produk: 45</li>
-          <li><strong>TabBisnis:</strong> 1 produk: 6 | 2 produk: 4 | 3 produk: 3 | 4 produk: 2 | 5 produk: 2</li>
+          <li><strong>Livin:</strong> 1:170 | 2:119 | 3:85 | 4:68 | 5:51</li>
+          <li><strong>KOPRA:</strong> 1:7   | 2:5   | 3:4  | 4:3  | 5:2</li>
+          <li><strong>EDC/LVM:</strong> 1:9 | 2:6   | 3:4  | 4:4  | 5:3</li>
+          <li><strong>TabNow:</strong> 1:150 | 2:105 | 3:75 | 4:60 | 5:45</li>
+          <li><strong>TabBisnis:</strong> 1:6 | 2:4    | 3:3  | 4:2  | 5:2</li>
         </ul>
         <p><em>*Detail lengkap tersedia di spreadsheet resmi Battlezone.</em></p>
       </div>
@@ -218,22 +256,34 @@
           <p>Cross-sell berarti menjual lebih dari satu produk MPS ke merchant yang sama. Misalnya, jika merchant sudah punya Livin, lalu juga berhasil buka TabNow dan KOPRA, itu dianggap 3 produk cross-sell.</p>
         </details>
         <details>
-          <summary>❓ Visit Point apakah termasuk MPS?</summary>
+          <summary>❓ Visit Point termasuk MPS?</summary>
           <p>Tidak. Visit Point hanya berfungsi sebagai penambah poin kecil, tapi tidak masuk dalam hitungan produk MPS untuk multiplier.</p>
         </details>
         <details>
           <summary>❓ Apakah EDC dan Livin Merchant dihitung satu produk?</summary>
           <p>Ya. EDC dan Livin Merchant digabung menjadi satu produk yang disebut EDC/LVM.</p>
         </details>
-       <details>
-  <summary>❓ Jika ada nasabah yang langsung datang ke kantor cabang untuk membuka Livin’ Merchant, apakah tetap dihitung dalam penilaian poin?</summary>
-  <p>✅ Ya, tetap dihitung <strong>asalkan lokasi usaha nasabah tersebut berada di dalam zona kawasan</strong> yang telah ditentukan dalam program ini.</p>
-  <p>❌ Tidak, jika lokasi usaha <strong>berada di luar zona kawasan</strong>, maka tidak masuk dalam perhitungan poin.</p>
-</details>
+        <details>
+          <summary>❓ Jika ada nasabah datang langsung ke kantor cabang untuk buka Livin’ Merchant, apakah dihitung?</summary>
+          <p>✅ Ya, apabila lokasi usaha nasabah berada di dalam zona kawasan yang ditentukan.</p>
+          <p>❌ Tidak, jika lokasi usaha berada di luar zona kawasan.</p>
+        </details>
       </div>
 
-      <p style="text-align:center; font-weight:bold; margin-top:40px;">🚀 Tunjukkan performa terbaik tim kamu dan menangkan hadiah utama Battlezone 2025!</p>
+      <p style="text-align:center; font-weight:bold; margin-top:40px;">
+        🚀 Tunjukkan performa terbaik tim kamu dan menangkan hadiah utama Battlezone 2025!
+      </p>
     </div>
   </div>
+
+  <!-- Back to Top Button -->
+  <button id="toTop" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">⬆️</button>
+  <script>
+    // Show/hide Back to Top
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      toTop.style.display = window.scrollY > 200 ? 'block' : 'none';
+    });
+  </script>
 </body>
-</html> 
+</html>
