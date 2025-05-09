@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>Mapping Zone Kawasan</title>
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -36,14 +36,17 @@
     }
 
     #map {
-      width:90%; max-width:1200px;
-      height:calc(100vh - 210px);
-      margin:0 auto 60px;
-      border-radius:12px;
-      box-shadow:0 0 20px rgba(0,0,0,0.6);
-      z-index:0;
-      transition: transform 0.4s ease-in-out;
-    }
+  width:90%; max-width:1200px;
+  height:calc(100vh - 210px);
+  margin:0 auto 60px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,0.6);
+  z-index:0;
+  transition: transform 0.4s ease-in-out;
+
+  /* Tambahan agar satu jari bisa drag peta */
+  touch-action: pan-x pan-y;
+  }
     #map.animate {
       transform: scale(1.02);
     }
@@ -146,7 +149,14 @@
     function initMap() {
       const center = { lat:3.566559, lng:98.694630 };
       map = new google.maps.Map(document.getElementById('map'), {
-        center, zoom:13
+        center, zoom:13,
+          // biar 1‐jari bisa drag peta dan matikan double‑tap zoom halaman
+     gestureHandling: 'greedy',
+    disableDoubleClickZoom: true,
+
+  // opsional: tampilkan tombol zoom; sembunyikan Street‑View pegman
+    zoomControl: true,
+    streetViewControl: false
       });
 
       new google.maps.KmlLayer({
