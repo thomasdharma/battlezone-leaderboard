@@ -71,15 +71,18 @@
     document.addEventListener("DOMContentLoaded", async () => {
       const top3Wrapper = document.getElementById("top-3");
       const cardWrapper = document.getElementById("individual-cards");
-      const grouped = { 'Tim Alpha': [], 'Tim Bravo': [], 'Tim Charlie': [] };
+      const grouped = {};
       const allData = [];
       const res = await fetch('https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/DetailAnggota');
       const data = await res.json();
 
       data.forEach(a => {
-        if (grouped[a['Nama Tim']]) grouped[a['Nama Tim']].push(a);
+        const team = a['Nama Tim'] || 'Tanpa Tim';
+        if (!grouped[team]) grouped[team] = [];
+        grouped[team].push(a);
         allData.push(a);
       });
+
 
       // TOP 3
       const top3 = [...allData]
