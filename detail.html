@@ -77,11 +77,13 @@
       const data = await res.json();
 
       data.forEach(a => {
-        const team = a['Nama Tim'] || 'Tanpa Tim';
-        if (!grouped[team]) grouped[team] = [];
-        grouped[team].push(a);
-        allData.push(a);
+      const team = a['Nama Tim'];
+      if (!team) return; // lewati baris tanpa Nama Tim
+      if (!grouped[team]) grouped[team] = [];
+      grouped[team].push(a);
+      allData.push(a);
       });
+
 
 
       // TOP 3
