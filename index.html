@@ -113,7 +113,7 @@
           sortedData.forEach((row, i) => {
             const rank = i + 1;
             const cls = rank === 1 ? "rank-1" : "";
-            const icon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : "";
+            const icon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : rank === 4 ? "👏" : "";
             const tr = document.createElement("tr");
             tr.className = `${cls} fadeInUp`;
             tr.innerHTML = `
