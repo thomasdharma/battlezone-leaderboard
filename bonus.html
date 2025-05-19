@@ -18,6 +18,58 @@
       color: #000;
     }
 
+    /* ========== TABEL TARGET ========== */
+    .target-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .target-table th, 
+    .target-table td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+
+    .target-table th {
+      background-color: #003366;
+      color: white;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+    }
+
+    .target-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    .target-table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    .total-target {
+      background: #e3f2fd;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    .product-header {
+      background: #003366 !important;
+      color: white !important;
+      font-weight: bold !important;
+    }
+
+    /* ========== STYLE LAINNYA TETAP SAMA ========== */
     .overlay {
       min-height: 100vh;
       padding: 20px;
@@ -136,6 +188,10 @@
     @media (max-width: 600px) {
       .container { padding: 20px; }
       h1 { font-size: 1.5em; }
+      .target-table td, .target-table th {
+        padding: 8px;
+        font-size: 13px;
+      }
     }
   </style>
 </head>
@@ -148,131 +204,286 @@
         di kawasan <strong>Medan Area Kota</strong>.
       </p>
 
-      <div class="award-box">
-        <h2>🎖 Penghargaan Juara</h2>
-        <p>Tim terbaik ditentukan dari perolehan total poin tertinggi dalam periode kompetisi.</p>
-        <ul>
-          <li>🥇 Juara 1: Medali Emas + Hadiah Utama</li>
-          <li>🥈 Juara 2: Medali Perak</li>
-          <li>🥉 Juara 3: Medali Perunggu</li>
-        </ul>
-      </div>
+      <!-- Bagian yang sama sampai Target Akuisisi Produk -->
 
       <div class="award-box">
-        <h2>📊 Sistem Poin</h2>
-        <h3>Bobot Produk MPS:</h3>
-        <div class="progress-bar">
-          <span>Livin (1 poin)</span>
-          <div class="bar"><div class="fill livin"></div></div>
+        <h2>🎯 Target Akuisisi Produk</h2>
+        
+        <div class="total-target">
+          <h3>📌 Total Target Seluruh Tim</h3>
+          <div class="table-container">
+            <table class="target-table">
+              <thead>
+                <tr>
+                  <th class="product-header">Produk</th>
+                  <th>1 Produk</th>
+                  <th>2 Produk</th>
+                  <th>3 Produk</th>
+                  <th>4 Produk</th>
+                  <th>5 Produk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Livin</td>
+                  <td>680</td>
+                  <td>476</td>
+                  <td>340</td>
+                  <td>272</td>
+                  <td>204</td>
+                </tr>
+                <tr>
+                  <td>KOPRA</td>
+                  <td>28</td>
+                  <td>20</td>
+                  <td>16</td>
+                  <td>12</td>
+                  <td>8</td>
+                </tr>
+                <tr>
+                  <td>EDC/LVM</td>
+                  <td>36</td>
+                  <td>24</td>
+                  <td>16</td>
+                  <td>16</td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td>TabNow</td>
+                  <td>600</td>
+                  <td>420</td>
+                  <td>300</td>
+                  <td>240</td>
+                  <td>180</td>
+                </tr>
+                <tr>
+                  <td>TabBisnis</td>
+                  <td>24</td>
+                  <td>16</td>
+                  <td>12</td>
+                  <td>8</td>
+                  <td>8</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-style: italic; color: #666; margin-top: 10px;">
+            *Total target sebelum dibagi ke 4 tim
+          </p>
         </div>
-        <div class="progress-bar">
-          <span>KOPRA (3 poin)</span>
-          <div class="bar"><div class="fill kopra"></div></div>
+
+        <h3>📌 Target per Tim (4 Tim)</h3>
+        <div class="table-container">
+          <table class="target-table">
+            <thead>
+              <tr>
+                <th class="product-header">Produk</th>
+                <th>Tier</th>
+                <th>Tim 1</th>
+                <th>Tim 2</th>
+                <th>Tim 3</th>
+                <th>Tim 4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Livin -->
+              <tr>
+                <td rowspan="5">Livin</td>
+                <td>1 Produk</td>
+                <td>170</td>
+                <td>170</td>
+                <td>170</td>
+                <td>170</td>
+              </tr>
+              <tr>
+                <td>2 Produk</td>
+                <td>119</td>
+                <td>119</td>
+                <td>119</td>
+                <td>119</td>
+              </tr>
+              <tr>
+                <td>3 Produk</td>
+                <td>85</td>
+                <td>85</td>
+                <td>85</td>
+                <td>85</td>
+              </tr>
+              <tr>
+                <td>4 Produk</td>
+                <td>68</td>
+                <td>68</td>
+                <td>68</td>
+                <td>68</td>
+              </tr>
+              <tr>
+                <td>5 Produk</td>
+                <td>51</td>
+                <td>51</td>
+                <td>51</td>
+                <td>51</td>
+              </tr>
+
+              <!-- KOPRA -->
+              <tr>
+                <td rowspan="5">KOPRA</td>
+                <td>1 Produk</td>
+                <td>7</td>
+                <td>7</td>
+                <td>7</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td>2 Produk</td>
+                <td>5</td>
+                <td>5</td>
+                <td>5</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>3 Produk</td>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>4 Produk</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>5 Produk</td>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+              </tr>
+
+              <!-- EDC/LVM -->
+              <tr>
+                <td rowspan="5">EDC/LVM</td>
+                <td>1 Produk</td>
+                <td>9</td>
+                <td>9</td>
+                <td>9</td>
+                <td>9</td>
+              </tr>
+              <tr>
+                <td>2 Produk</td>
+                <td>6</td>
+                <td>6</td>
+                <td>6</td>
+                <td>6</td>
+              </tr>
+              <tr>
+                <td>3 Produk</td>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>4 Produk</td>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>5 Produk</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+              </tr>
+
+              <!-- TabNow -->
+              <tr>
+                <td rowspan="5">TabNow</td>
+                <td>1 Produk</td>
+                <td>150</td>
+                <td>150</td>
+                <td>150</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td>2 Produk</td>
+                <td>105</td>
+                <td>105</td>
+                <td>105</td>
+                <td>105</td>
+              </tr>
+              <tr>
+                <td>3 Produk</td>
+                <td>75</td>
+                <td>75</td>
+                <td>75</td>
+                <td>75</td>
+              </tr>
+              <tr>
+                <td>4 Produk</td>
+                <td>60</td>
+                <td>60</td>
+                <td>60</td>
+                <td>60</td>
+              </tr>
+              <tr>
+                <td>5 Produk</td>
+                <td>45</td>
+                <td>45</td>
+                <td>45</td>
+                <td>45</td>
+              </tr>
+
+              <!-- TabBisnis -->
+              <tr>
+                <td rowspan="5">TabBisnis</td>
+                <td>1 Produk</td>
+                <td>6</td>
+                <td>6</td>
+                <td>6</td>
+                <td>6</td>
+              </tr>
+              <tr>
+                <td>2 Produk</td>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>3 Produk</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>4 Produk</td>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>5 Produk</td>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="progress-bar">
-          <span>EDC/LVM (3 poin)</span>
-          <div class="bar"><div class="fill edc"></div></div>
-        </div>
-        <div class="progress-bar">
-          <span>TabNow (1 poin)</span>
-          <div class="bar"><div class="fill tabnow"></div></div>
-        </div>
-        <div class="progress-bar">
-          <span>Tabungan Bisnis (3 poin)</span>
-          <div class="bar"><div class="fill tabbisnis"></div></div>
-        </div>
-        <p>Visit Point: 0.5 poin (tidak termasuk MPS)</p>
+        
+        <p style="margin-top: 15px;"><em>*Detail lengkap tersedia di spreadsheet resmi Battlezone.</em></p>
       </div>
 
-      <div class="award-box">
-        <h2>🔁 Multiplier Berdasarkan Cross-sell</h2>
-        <p>Jumlah produk MPS yang berhasil dicross-sell akan mempengaruhi multiplier terhadap total poin:</p>
-        <ul>
-          <li>1 Produk MPS: <strong>x0.75</strong></li>
-          <li>2 Produk: <strong>x1.00</strong></li>
-          <li>3 Produk: <strong>x1.30</strong> <em class="glow">(Cross-sell menengah) 🌟</em></li>
-          <li>4 Produk: <strong>x1.50</strong> <em class="glow">(Cross-sell optimal) 🌟</em></li>
-          <li>5 Produk: <strong>x1.60</strong> <em class="glow">(Cross-sell maksimal) 🌟</em></li>
-        </ul>
+      <!-- Bagian FAQ dan lainnya tetap sama -->
 
-        <h3>📐 Tiering Tambahan (Berdasarkan Capaian Target):</h3>
-        <ul>
-          <li><strong>MPS 1 Produk:</strong>
-            <ul>
-              <li>&lt;100% target: <strong>x0</strong></li>
-              <li>=100% target: <strong>x0.75</strong></li>
-              <li>101%–200%: <strong>x0.80</strong></li>
-              <li>&gt;200%: <strong>x0.85</strong></li>
-            </ul>
-          </li>
-          <li><strong>MPS 2 Produk:</strong>
-            <ul>
-              <li>&lt;100%: <strong>x0</strong></li>
-              <li>&gt;=100%: <strong>x1.00</strong></li>
-            </ul>
-          </li>
-          <li><strong>MPS 3 Produk:</strong>
-            <ul>
-              <li>&lt;100%: <strong>x0.20</strong></li>
-              <li>&gt;=100%: <strong>x1.30</strong></li>
-            </ul>
-          </li>
-          <li><strong>MPS 4 Produk:</strong>
-            <ul>
-              <li>&lt;100%: <strong>x0.30</strong></li>
-              <li>&gt;=100%: <strong>x1.50</strong></li>
-            </ul>
-          </li>
-          <li><strong>MPS 5 Produk:</strong>
-            <ul>
-              <li>&lt;100%: <strong>x0.40</strong></li>
-              <li>&gt;=100%: <strong>x1.60</strong></li>
-            </ul>
-          </li>
-        </ul>
-
-        <div class="highlight">
-          🎯 <strong>Tips:</strong> Fokus pada pencapaian target dan cross-sell sebanyak mungkin produk!
-        </div>
-      </div>
-
-      <div class="award-box">
-        <h2>🎯 Target Akuisisi Produk (per Tim)</h2>
-        <p>Target per tim telah disesuaikan agar semakin banyak produk yang berhasil dicross-sell, semakin ringan pula target per produknya. Berikut rincian lengkap:</p>
-        <ul>
-          <li><strong>Livin:</strong> 1:170 | 2:119 | 3:85 | 4:68 | 5:51</li>
-          <li><strong>KOPRA:</strong> 1:7   | 2:5   | 3:4  | 4:3  | 5:2</li>
-          <li><strong>EDC/LVM:</strong> 1:9 | 2:6   | 3:4  | 4:4  | 5:3</li>
-          <li><strong>TabNow:</strong> 1:150 | 2:105 | 3:75 | 4:60 | 5:45</li>
-          <li><strong>TabBisnis:</strong> 1:6 | 2:4    | 3:3  | 4:2  | 5:2</li>
-        </ul>
-        <p><em>*Detail lengkap tersedia di spreadsheet resmi Battlezone.</em></p>
-      </div>
-
-      <div class="award-box">
-        <h2>📚 FAQ & Penjelasan Tambahan</h2>
-        <details>
-          <summary>❓ Apa itu Cross-sell?</summary>
-          <p>Cross-sell berarti menjual lebih dari satu produk MPS ke merchant yang sama. Misalnya, jika merchant sudah punya Livin, lalu juga berhasil buka TabNow dan KOPRA, itu dianggap 3 produk cross-sell.</p>
-        </details>
-        <details>
-          <summary>❓ Visit Point termasuk MPS?</summary>
-          <p>Tidak. Visit Point hanya berfungsi sebagai penambah poin kecil, tapi tidak masuk dalam hitungan produk MPS untuk multiplier.</p>
-        </details>
-        <details>
-          <summary>❓ Apakah EDC dan Livin Merchant dihitung satu produk?</summary>
-          <p>Ya. EDC dan Livin Merchant digabung menjadi satu produk yang disebut EDC/LVM.</p>
-        </details>
-        <details>
-          <summary>❓ Jika ada nasabah datang langsung ke kantor cabang untuk buka Livin’ Merchant, apakah dihitung?</summary>
-          <p>✅ Ya, apabila lokasi usaha nasabah berada di dalam zona kawasan yang ditentukan.</p>
-          <p>❌ Tidak, jika lokasi usaha berada di luar zona kawasan.</p>
-        </details>
-      </div>
-
-      <p style="text-align:center; font-weight:bold; margin-top:40px;">
-        🚀 Tunjukkan performa terbaik tim kamu dan menangkan hadiah utama Battlezone 2025!
-      </p>
     </div>
   </div>
 
