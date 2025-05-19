@@ -158,15 +158,16 @@
       loadLeaderboard();
       setInterval(loadLeaderboard, 30000);
 
-      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/MerchantTerakhir")
+      fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/AkuisisiMerchant")
         .then(res => res.json())
         .then(data => {
           const m = data[0];
           document.getElementById("merchant-info").innerHTML = `
-            <p>🏪 <strong>${m.Merchant}</strong></p>
-            <p>👤 Oleh: ${m.Oleh}</p>
+            <p>🏪 <strong>${m.Nama Usaha/Nasabah}</strong></p>
+            <p>👤 Oleh: ${m.PIC}</p>
+            <p>🫂 Nama Tim: ${m.Nama Tim}</p>
             <p>📍 Produk: ${m.Produk}</p>
-            <p>🗓️ Tanggal: ${m.Tanggal}</p>
+            <p>🗓️ Tanggal: ${m.Timestamp}</p>
           `;
         })
         .catch(() => {
