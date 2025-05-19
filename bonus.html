@@ -94,10 +94,6 @@
         .tabbisnis { width: 60%; background: #673ab7; }
 
         /* ========== TABLE STYLES ========== */
-        .target-section {
-            margin: 30px 0;
-        }
-
         .target-table {
             width: 100%;
             border-collapse: collapse;
@@ -118,16 +114,10 @@
             background-color: #003366;
             color: white;
             font-weight: bold;
-            position: sticky;
-            top: 0;
         }
 
         .target-table tr:nth-child(even) {
             background-color: #f8f9fa;
-        }
-
-        .target-table tr:hover {
-            background-color: #f1f1f1;
         }
 
         .table-container {
@@ -149,10 +139,6 @@
             padding: 10px;
             background: #f8f9fa;
             border-radius: 4px;
-        }
-
-        details[open] summary {
-            margin-bottom: 12px;
         }
 
         /* ========== BACK TO TOP BUTTON ========== */
@@ -258,7 +244,6 @@
             <div class="award-box">
                 <h2>🎯 Target Akuisisi Produk</h2>
                 
-                <!-- Total Target -->
                 <div class="table-container">
                     <h3>Total Target Seluruh Tim</h3>
                     <table class="target-table">
@@ -282,7 +267,6 @@
                     </table>
                 </div>
 
-                <!-- Per Team Target -->
                 <div class="table-container">
                     <h3>Target per Tim (4 Tim)</h3>
                     <table class="target-table">
@@ -334,29 +318,30 @@
                         </tbody>
                     </table>
                 </div>
+                <p><em>*Detail lengkap tersedia di spreadsheet resmi Battlezone.</em></p>
             </div>
 
             <!-- FAQ Section -->
-                  <div class="award-box">
-        <h2>📚 FAQ & Penjelasan Tambahan</h2>
-        <details>
-          <summary>❓ Apa itu Cross-sell?</summary>
-          <p>Cross-sell berarti menjual lebih dari satu produk MPS ke merchant yang sama. Misalnya, jika merchant sudah punya Livin, lalu juga berhasil buka TabNow dan KOPRA, itu dianggap 3 produk cross-sell.</p>
-        </details>
-        <details>
-          <summary>❓ Visit Point termasuk MPS?</summary>
-          <p>Tidak. Visit Point hanya berfungsi sebagai penambah poin kecil, tapi tidak masuk dalam hitungan produk MPS untuk multiplier.</p>
-        </details>
-        <details>
-          <summary>❓ Apakah EDC dan Livin Merchant dihitung satu produk?</summary>
-          <p>Ya. EDC dan Livin Merchant digabung menjadi satu produk yang disebut EDC/LVM.</p>
-        </details>
-        <details>
-          <summary>❓ Jika ada nasabah datang langsung ke kantor cabang untuk buka Livin’ Merchant, apakah dihitung?</summary>
-          <p>✅ Ya, apabila lokasi usaha nasabah berada di dalam zona kawasan yang ditentukan.</p>
-          <p>❌ Tidak, jika lokasi usaha berada di luar zona kawasan.</p>
-        </details>
-      </div>
+            <div class="award-box">
+                <h2>📚 FAQ & Penjelasan Tambahan</h2>
+                <details>
+                    <summary>❓ Apa itu Cross-sell?</summary>
+                    <p>Cross-sell berarti menjual lebih dari satu produk MPS ke merchant yang sama. Misalnya, jika merchant sudah punya Livin, lalu juga berhasil buka TabNow dan KOPRA, itu dianggap 3 produk cross-sell.</p>
+                </details>
+                <details>
+                    <summary>❓ Visit Point termasuk MPS?</summary>
+                    <p>Tidak. Visit Point hanya berfungsi sebagai penambah poin kecil, tapi tidak masuk dalam hitungan produk MPS untuk multiplier.</p>
+                </details>
+                <details>
+                    <summary>❓ Apakah EDC dan Livin Merchant dihitung satu produk?</summary>
+                    <p>Ya. EDC dan Livin Merchant digabung menjadi satu produk yang disebut EDC/LVM.</p>
+                </details>
+                <details>
+                    <summary>❓ Jika ada nasabah datang langsung ke kantor cabang untuk buka Livin’ Merchant, apakah dihitung?</summary>
+                    <p>✅ Ya, apabila lokasi usaha nasabah berada di dalam zona kawasan yang ditentukan.</p>
+                    <p>❌ Tidak, jika lokasi usaha berada di luar zona kawasan.</p>
+                </details>
+            </div>
 
             <!-- Closing -->
             <p style="text-align: center; margin-top: 35px; font-weight: 600; color: #004080;">
@@ -369,7 +354,6 @@
     <button id="toTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
     <script>
-        // Back to Top Logic
         const toTopButton = document.getElementById('toTop');
         window.addEventListener('scroll', () => {
             toTopButton.style.display = window.scrollY > 300 ? 'block' : 'none';
