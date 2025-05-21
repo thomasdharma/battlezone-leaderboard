@@ -164,7 +164,7 @@
     console.log("Data merchant:", data); // Untuk debugging
     if (!data || data.length === 0) throw new Error("Data kosong");
     
-    const m = data[0];
+    const m = data[data.length - 1];
     document.getElementById("merchant-info").innerHTML = `
       <p>🏪 <strong>${m['Nama Usaha/Nasabah'] || 'N/A'}</strong></p>
       <p>👤 Oleh: ${m.PIC || 'N/A'}</p>
