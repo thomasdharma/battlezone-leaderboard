@@ -180,7 +180,13 @@
       <small>${error.message}</small>
     `;
   });
-
+ }
+  // Pertama kali load
+  fetchMerchantData();
+  
+  // Auto-reload setiap 1 menit ✅ TAMBAHKAN DI SINI
+  setInterval(fetchMerchantData, 60000);
+    
       fetch("https://opensheet.elk.sh/1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII/iseng")
         .then(res => res.json())
         .then(data => {
