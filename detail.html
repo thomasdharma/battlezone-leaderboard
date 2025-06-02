@@ -113,7 +113,7 @@
 
         members.forEach(a => {
           let isi = '';
-          ['Livin','KOPRA','EDC/LVM','Tabnow','TabBisnis','Visit Point'].forEach(p => {
+          ['Livin ETB','KOPRA','EDC/LVM','Tabnow','TabBisnis','Visit Point'].forEach(p => {
             if (a[p] && parseFloat(a[p]) > 0) isi += `<p>${p}: ${a[p]}</p>`;
           });
           const update = a['Last Update'] || 'Belum update';
