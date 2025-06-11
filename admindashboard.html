@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      table { border-collapse: collapse; width:100% }
+      th,td { border:1px solid #ccc; padding:4px }
+      button { margin:0 2px }
+    </style>
+  </head>
+  <body>
+    <h2>Pending Approvals</h2>
+    <div id="list"></div>
+    <script>
+      // load data
+      google.script.run
+        .withSuccessHandler(render)
+        .getPendingData();
+
+      function render(rows) {
+        if (!rows.length) {
+          document.getElementById('list').innerHTML = '<i>Tidak ada pending.</i>';
+          return;
+        }
+        let html = '<table><thead><tr>'
+                 + rows[0].values.map((_,i)=>`<th>Col${i+1}</th>`).join('')
+                 + '<th>Action</th></tr></thead><tbody>';
+        rows.forEach(r=>{
+          html += '<tr>'
+               + r.values.map(c=>`<td>${c||''}</td>`).join('')
+               + `<td>
+                    <button onclick="approve(${r.row})">✔️</button>
+                    <button onclick="reject(${r.row})">✖️</button>
+                  </td>`
+               + '</tr>';
+        });
+        html += '</tbody></table>';
+        document.getElementById('list').innerHTML = html;
+      }
+
+      function approve(row) {
+        google.script.run
+          .withSuccessHandler(()=>google.script.run.getPendingData().withSuccessHandler(render))
+          .approveRow(row);
+      }
+      function reject(row) {
+        google.script.run
+          .withSuccessHandler(()=>google.script.run.getPendingData().withSuccessHandler(render))
+          .rejectRow(row);
+      }
+    </script>
+  </body>
+</html>
