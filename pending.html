@@ -5,49 +5,47 @@
   <title>Pending Approval</title>
   <style>
     body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #1a1a1a;
-      color: #eee;
       display: flex;
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      background: #1f1f1f;
+      color: #eee;
       justify-content: center;
       align-items: center;
-      height: 100vh;
     }
-    #container {
-      width: 90%;
-      height: 90%;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      border-radius: 6px;
-      overflow: hidden;
-      background: #fff;
+    #msg {
+      text-align: center;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
+    button {
+      margin-top: 1rem;
+      padding: .5rem 1rem;
+      background: #007bff;
       border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div id="container"></div>
+  <div id="msg"></div>
 
   <script>
-    (function() {
-      const ADMIN_PW = '123';  // ganti password di sini
+    (function(){
+      const ADMIN_PW   = 'MasukkanPasswordKuatDiSini';  // <— ganti sesuai script-mu
       const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwpcY4S_Foez05wecGA1rzuIYWti2PV8HjIroqjd2_wTARxqVR6UK0rQog3idY27zOgZA/exec';
 
-      // Minta password
-      const pw = prompt('🔒 Masukkan password admin untuk melihat pending list:');
+      const pw = prompt('🔒 Masukkan password admin:');
       if (pw === ADMIN_PW) {
-        // Tampilkan dashboard via iframe, sertakan pw sebagai param agar Apps Script mengenali
-        document.getElementById('container').innerHTML =
-          `<iframe src="${WEBAPP_URL}?pw=${encodeURIComponent(pw)}"></iframe>`;
+        // Redirect ke Web App dengan pw sebagai param
+        window.location.href = WEBAPP_URL + '?pw=' + encodeURIComponent(pw);
       } else {
-        alert('❌ Password salah. Anda tidak dapat mengakses halaman ini.');
-        // redirect atau keluar
-        document.body.innerHTML = '<p style="text-align:center;">Access denied.</p>';
+        // Gagal: tampilkan pesan dan tombol reload
+        document.getElementById('msg').innerHTML = `
+          <p>❌ Password salah atau dibatalkan.</p>
+          <button onclick="location.reload()">Coba Lagi</button>
+        `;
       }
     })();
   </script>
