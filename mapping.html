@@ -79,12 +79,14 @@
     const teamColors = {
       'Tim Alpha':   '#0066cc',
       'Tim Bravo':   '#cc0000',
-      'Tim Charlie': '#00cc44'
+      'Tim Charlie': '#00cc44',
+      'Tim Delta':   '#ffaa00'
     };
     const teamGradients = {
       'Tim Alpha':   ['rgba(0,0,0,0)','rgba(0,102,204,0.4)','rgba(0,102,204,1)'],
       'Tim Bravo':   ['rgba(0,0,0,0)','rgba(204,0,0,0.4)','rgba(204,0,0,1)'],
-      'Tim Charlie': ['rgba(0,0,0,0)','rgba(0,204,68,0.4)','rgba(0,204,68,1)']
+      'Tim Charlie': ['rgba(0,0,0,0)','rgba(0,204,68,0.4)','rgba(0,204,68,1)'],
+      'Tim Delta':   ['rgba(0,0,0,0)','rgba(255,170,0,0.4)','rgba(255,170,0,1)']
     };
     const darkMapStyle = [
       /* …paste array darkMapStyle-mu di sini persis seperti sebelumnya… */
@@ -184,12 +186,14 @@
           const perTeamHeat  = {
             'Tim Alpha':   [],
             'Tim Bravo':   [],
-            'Tim Charlie': []
+            'Tim Charlie': [],
+            'Tim Delta':   []
           };
           const markerCount = {
             'Tim Alpha': 0,
             'Tim Bravo': 0,
-            'Tim Charlie': 0
+            'Tim Charlie': 0,
+            'Tim Delta': 0
           };
 
           data.forEach(item => {
