@@ -112,23 +112,37 @@
       });
     }
 
-    function loadMerchantData(){
-      // 1) Hapus semua marker & heatmap lama
-      markers.forEach(m => m.setMap(null));
-      markers = [];
-      heatmaps.forEach(h => h.setMap(null));
-      heatmaps = [];
+    function loadMerchantData() {
+  // 1) Hapus marker & heatmap lama …
+  markers.forEach(m=>m.setMap(null));
+  heatmaps.forEach(h=>h.setMap(null));
+  markers = [];
+  heatmaps = [];
 
-      // 2) Fetch data terbaru (dengan cacheBust untuk mem-bypass cache)
-      const ssId  = '1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII';
-      const sheet = encodeURIComponent('Akuisisi Merchant');
-      const url   = `https://opensheet.elk.sh/${ssId}/${sheet}?cacheBust=${Date.now()}`;
+  // 2) Buat URL Opensheet
+  const ssId  = '1Cxpf0WMF0IPlNbhaQHjh6cetou73JnJWxN1etdNkIII';
+  const sheet = encodeURIComponent('Akuisisi Merchant');
+  const url   = `https://opensheet.elk.sh/${ssId}/${sheet}?cacheBust=${Date.now()}`;
 
-      fetch(url)
-        .then(r=>r.json())
-        .then(data=>{
+  // **LOGGING**
+  console.log('🔍 loadMerchantData() – fetch URL:', url);
+
+  fetch(url)
+    .then(r => {
+      console.log('📥 fetch returned status', r.status);
+      return r.json();
+    })
+    .then(data => {
+      console.log('✅ data diterima:', data.length, 'baris');
           const perTeamHeat = {'Tim Alpha':[],'Tim Bravo':[],'Tim Charlie':[]};
           const markerCount = {'Tim Alpha':0,'Tim Bravo':0,'Tim Charlie':0};
+       })
+    .catch(e => {
+      console.error('❌ Gagal load data akuisisi:', e);
+      document.getElementById('summary-text')
+              .textContent = 'Gagal memuat data: ' + e.message;
+    });
+}
 
           data.forEach(item=>{
             const lat  = parseFloat(item.Lat),
